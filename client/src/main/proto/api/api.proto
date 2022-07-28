@@ -1,7 +1,7 @@
 syntax = "proto3";
 package protocol;
 
-option java_package = "org.tron.tronj.api";
+option java_package = "com.github.comrada.tron4j.api";
 option java_outer_classname = "GrpcAPI";
 
 
