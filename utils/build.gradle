@@ -28,7 +28,7 @@ publishing {
             from components.java
             groupId 'com.github.comrada.tron4j'
             artifactId 'utils'
-            version '1.0.0'
+            version '1.0.1'
         }
     }
 }
