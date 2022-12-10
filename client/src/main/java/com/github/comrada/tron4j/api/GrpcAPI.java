@@ -45,45 +45,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private EmptyMessage(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_EmptyMessage_descriptor;
@@ -111,7 +72,7 @@ public final class GrpcAPI {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -120,7 +81,7 @@ public final class GrpcAPI {
       if (size != -1) return size;
 
       size = 0;
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -135,7 +96,7 @@ public final class GrpcAPI {
       }
       com.github.comrada.tron4j.api.GrpcAPI.EmptyMessage other = (com.github.comrada.tron4j.api.GrpcAPI.EmptyMessage) obj;
 
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -146,7 +107,7 @@ public final class GrpcAPI {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -263,18 +224,13 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.EmptyMessage.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
@@ -353,7 +309,7 @@ public final class GrpcAPI {
 
       public Builder mergeFrom(com.github.comrada.tron4j.api.GrpcAPI.EmptyMessage other) {
         if (other == com.github.comrada.tron4j.api.GrpcAPI.EmptyMessage.getDefaultInstance()) return this;
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -368,17 +324,30 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.EmptyMessage parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.EmptyMessage) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
       @java.lang.Override
@@ -414,7 +383,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new EmptyMessage(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -471,50 +451,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private NumberMessage(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-
-              num_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_NumberMessage_descriptor;
@@ -529,7 +465,7 @@ public final class GrpcAPI {
     }
 
     public static final int NUM_FIELD_NUMBER = 1;
-    private long num_;
+    private long num_ = 0L;
     /**
      * <code>int64 num = 1;</code>
      * @return The num.
@@ -556,7 +492,7 @@ public final class GrpcAPI {
       if (num_ != 0L) {
         output.writeInt64(1, num_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -569,7 +505,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(1, num_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -586,7 +522,7 @@ public final class GrpcAPI {
 
       if (getNum()
           != other.getNum()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -600,7 +536,7 @@ public final class GrpcAPI {
       hash = (37 * hash) + NUM_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getNum());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -717,24 +653,19 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.NumberMessage.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         num_ = 0L;
-
         return this;
       }
 
@@ -761,9 +692,16 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.NumberMessage buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.NumberMessage result = new com.github.comrada.tron4j.api.GrpcAPI.NumberMessage(this);
-        result.num_ = num_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.NumberMessage result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.num_ = num_;
+        }
       }
 
       @java.lang.Override
@@ -813,7 +751,7 @@ public final class GrpcAPI {
         if (other.getNum() != 0L) {
           setNum(other.getNum());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -828,19 +766,38 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.NumberMessage parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 8: {
+                num_ = input.readInt64();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 8
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.NumberMessage) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private long num_ ;
       /**
@@ -859,6 +816,7 @@ public final class GrpcAPI {
       public Builder setNum(long value) {
         
         num_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -867,7 +825,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearNum() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         num_ = 0L;
         onChanged();
         return this;
@@ -905,7 +863,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new NumberMessage(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -963,50 +932,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private BytesMessage(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              value_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_BytesMessage_descriptor;
@@ -1021,7 +946,7 @@ public final class GrpcAPI {
     }
 
     public static final int VALUE_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString value_;
+    private com.google.protobuf.ByteString value_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes value = 1;</code>
      * @return The value.
@@ -1048,7 +973,7 @@ public final class GrpcAPI {
       if (!value_.isEmpty()) {
         output.writeBytes(1, value_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -1061,7 +986,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(1, value_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -1078,7 +1003,7 @@ public final class GrpcAPI {
 
       if (!getValue()
           .equals(other.getValue())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -1091,7 +1016,7 @@ public final class GrpcAPI {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + VALUE_FIELD_NUMBER;
       hash = (53 * hash) + getValue().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -1208,24 +1133,19 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.BytesMessage.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         value_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -1252,9 +1172,16 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.BytesMessage buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.BytesMessage result = new com.github.comrada.tron4j.api.GrpcAPI.BytesMessage(this);
-        result.value_ = value_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.BytesMessage result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.value_ = value_;
+        }
       }
 
       @java.lang.Override
@@ -1304,7 +1231,7 @@ public final class GrpcAPI {
         if (other.getValue() != com.google.protobuf.ByteString.EMPTY) {
           setValue(other.getValue());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -1319,19 +1246,38 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.BytesMessage parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                value_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.BytesMessage) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString value_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -1348,11 +1294,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setValue(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         value_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -1361,7 +1305,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearValue() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         value_ = getDefaultInstance().getValue();
         onChanged();
         return this;
@@ -1399,7 +1343,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new BytesMessage(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -1462,55 +1417,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private BlockLimit(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-
-              startNum_ = input.readInt64();
-              break;
-            }
-            case 16: {
-
-              endNum_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_BlockLimit_descriptor;
@@ -1525,7 +1431,7 @@ public final class GrpcAPI {
     }
 
     public static final int STARTNUM_FIELD_NUMBER = 1;
-    private long startNum_;
+    private long startNum_ = 0L;
     /**
      * <code>int64 startNum = 1;</code>
      * @return The startNum.
@@ -1536,7 +1442,7 @@ public final class GrpcAPI {
     }
 
     public static final int ENDNUM_FIELD_NUMBER = 2;
-    private long endNum_;
+    private long endNum_ = 0L;
     /**
      * <code>int64 endNum = 2;</code>
      * @return The endNum.
@@ -1566,7 +1472,7 @@ public final class GrpcAPI {
       if (endNum_ != 0L) {
         output.writeInt64(2, endNum_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -1583,7 +1489,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(2, endNum_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -1602,7 +1508,7 @@ public final class GrpcAPI {
           != other.getStartNum()) return false;
       if (getEndNum()
           != other.getEndNum()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -1619,7 +1525,7 @@ public final class GrpcAPI {
       hash = (37 * hash) + ENDNUM_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getEndNum());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -1736,26 +1642,20 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.BlockLimit.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         startNum_ = 0L;
-
         endNum_ = 0L;
-
         return this;
       }
 
@@ -1782,10 +1682,19 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.BlockLimit buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.BlockLimit result = new com.github.comrada.tron4j.api.GrpcAPI.BlockLimit(this);
-        result.startNum_ = startNum_;
-        result.endNum_ = endNum_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.BlockLimit result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.startNum_ = startNum_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.endNum_ = endNum_;
+        }
       }
 
       @java.lang.Override
@@ -1838,7 +1747,7 @@ public final class GrpcAPI {
         if (other.getEndNum() != 0L) {
           setEndNum(other.getEndNum());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -1853,19 +1762,43 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.BlockLimit parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 8: {
+                startNum_ = input.readInt64();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 8
+              case 16: {
+                endNum_ = input.readInt64();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.BlockLimit) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private long startNum_ ;
       /**
@@ -1884,6 +1817,7 @@ public final class GrpcAPI {
       public Builder setStartNum(long value) {
         
         startNum_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -1892,7 +1826,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearStartNum() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         startNum_ = 0L;
         onChanged();
         return this;
@@ -1915,6 +1849,7 @@ public final class GrpcAPI {
       public Builder setEndNum(long value) {
         
         endNum_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -1923,7 +1858,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearEndNum() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         endNum_ = 0L;
         onChanged();
         return this;
@@ -1961,7 +1896,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new BlockLimit(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -2023,50 +1969,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private AccountAddressMessage(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 26: {
-
-              address_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_AccountAddressMessage_descriptor;
@@ -2081,7 +1983,7 @@ public final class GrpcAPI {
     }
 
     public static final int ADDRESS_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString address_;
+    private com.google.protobuf.ByteString address_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes address = 3;</code>
      * @return The address.
@@ -2108,7 +2010,7 @@ public final class GrpcAPI {
       if (!address_.isEmpty()) {
         output.writeBytes(3, address_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -2121,7 +2023,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, address_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -2138,7 +2040,7 @@ public final class GrpcAPI {
 
       if (!getAddress()
           .equals(other.getAddress())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -2151,7 +2053,7 @@ public final class GrpcAPI {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ADDRESS_FIELD_NUMBER;
       hash = (53 * hash) + getAddress().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -2272,24 +2174,19 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.AccountAddressMessage.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         address_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -2316,9 +2213,16 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.AccountAddressMessage buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.AccountAddressMessage result = new com.github.comrada.tron4j.api.GrpcAPI.AccountAddressMessage(this);
-        result.address_ = address_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.AccountAddressMessage result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.address_ = address_;
+        }
       }
 
       @java.lang.Override
@@ -2368,7 +2272,7 @@ public final class GrpcAPI {
         if (other.getAddress() != com.google.protobuf.ByteString.EMPTY) {
           setAddress(other.getAddress());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -2383,19 +2287,38 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.AccountAddressMessage parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 26: {
+                address_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 26
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.AccountAddressMessage) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString address_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -2412,11 +2335,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         address_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -2425,7 +2346,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         address_ = getDefaultInstance().getAddress();
         onChanged();
         return this;
@@ -2463,7 +2384,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new AccountAddressMessage(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -2521,50 +2453,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private AccountIdMessage(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 186: {
-
-              id_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_AccountIdMessage_descriptor;
@@ -2579,7 +2467,7 @@ public final class GrpcAPI {
     }
 
     public static final int ID_FIELD_NUMBER = 23;
-    private com.google.protobuf.ByteString id_;
+    private com.google.protobuf.ByteString id_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes id = 23;</code>
      * @return The id.
@@ -2606,7 +2494,7 @@ public final class GrpcAPI {
       if (!id_.isEmpty()) {
         output.writeBytes(23, id_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -2619,7 +2507,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(23, id_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -2636,7 +2524,7 @@ public final class GrpcAPI {
 
       if (!getId()
           .equals(other.getId())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -2649,7 +2537,7 @@ public final class GrpcAPI {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ID_FIELD_NUMBER;
       hash = (53 * hash) + getId().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -2766,24 +2654,19 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.AccountIdMessage.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         id_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -2810,9 +2693,16 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.AccountIdMessage buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.AccountIdMessage result = new com.github.comrada.tron4j.api.GrpcAPI.AccountIdMessage(this);
-        result.id_ = id_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.AccountIdMessage result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.id_ = id_;
+        }
       }
 
       @java.lang.Override
@@ -2862,7 +2752,7 @@ public final class GrpcAPI {
         if (other.getId() != com.google.protobuf.ByteString.EMPTY) {
           setId(other.getId());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -2877,19 +2767,38 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.AccountIdMessage parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 186: {
+                id_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 186
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.AccountIdMessage) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString id_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -2906,11 +2815,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setId(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         id_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -2919,7 +2826,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearId() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         id_ = getDefaultInstance().getId();
         onChanged();
         return this;
@@ -2957,7 +2864,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new AccountIdMessage(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -3024,55 +2942,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private PaginatedMessage(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-
-              offset_ = input.readInt64();
-              break;
-            }
-            case 16: {
-
-              limit_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_PaginatedMessage_descriptor;
@@ -3087,7 +2956,7 @@ public final class GrpcAPI {
     }
 
     public static final int OFFSET_FIELD_NUMBER = 1;
-    private long offset_;
+    private long offset_ = 0L;
     /**
      * <code>int64 offset = 1;</code>
      * @return The offset.
@@ -3098,7 +2967,7 @@ public final class GrpcAPI {
     }
 
     public static final int LIMIT_FIELD_NUMBER = 2;
-    private long limit_;
+    private long limit_ = 0L;
     /**
      * <code>int64 limit = 2;</code>
      * @return The limit.
@@ -3128,7 +2997,7 @@ public final class GrpcAPI {
       if (limit_ != 0L) {
         output.writeInt64(2, limit_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -3145,7 +3014,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(2, limit_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -3164,7 +3033,7 @@ public final class GrpcAPI {
           != other.getOffset()) return false;
       if (getLimit()
           != other.getLimit()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -3181,7 +3050,7 @@ public final class GrpcAPI {
       hash = (37 * hash) + LIMIT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getLimit());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -3302,26 +3171,20 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.PaginatedMessage.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         offset_ = 0L;
-
         limit_ = 0L;
-
         return this;
       }
 
@@ -3348,10 +3211,19 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.PaginatedMessage buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.PaginatedMessage result = new com.github.comrada.tron4j.api.GrpcAPI.PaginatedMessage(this);
-        result.offset_ = offset_;
-        result.limit_ = limit_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.PaginatedMessage result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.offset_ = offset_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.limit_ = limit_;
+        }
       }
 
       @java.lang.Override
@@ -3404,7 +3276,7 @@ public final class GrpcAPI {
         if (other.getLimit() != 0L) {
           setLimit(other.getLimit());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -3419,19 +3291,43 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.PaginatedMessage parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 8: {
+                offset_ = input.readInt64();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 8
+              case 16: {
+                limit_ = input.readInt64();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.PaginatedMessage) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private long offset_ ;
       /**
@@ -3450,6 +3346,7 @@ public final class GrpcAPI {
       public Builder setOffset(long value) {
         
         offset_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -3458,7 +3355,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearOffset() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         offset_ = 0L;
         onChanged();
         return this;
@@ -3481,6 +3378,7 @@ public final class GrpcAPI {
       public Builder setLimit(long value) {
         
         limit_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -3489,7 +3387,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearLimit() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         limit_ = 0L;
         onChanged();
         return this;
@@ -3527,7 +3425,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new PaginatedMessage(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -3598,60 +3507,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private EasyTransferMessage(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              passPhrase_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              toAddress_ = input.readBytes();
-              break;
-            }
-            case 24: {
-
-              amount_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_EasyTransferMessage_descriptor;
@@ -3666,7 +3521,7 @@ public final class GrpcAPI {
     }
 
     public static final int PASSPHRASE_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString passPhrase_;
+    private com.google.protobuf.ByteString passPhrase_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes passPhrase = 1;</code>
      * @return The passPhrase.
@@ -3677,7 +3532,7 @@ public final class GrpcAPI {
     }
 
     public static final int TOADDRESS_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString toAddress_;
+    private com.google.protobuf.ByteString toAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes toAddress = 2;</code>
      * @return The toAddress.
@@ -3688,7 +3543,7 @@ public final class GrpcAPI {
     }
 
     public static final int AMOUNT_FIELD_NUMBER = 3;
-    private long amount_;
+    private long amount_ = 0L;
     /**
      * <code>int64 amount = 3;</code>
      * @return The amount.
@@ -3721,7 +3576,7 @@ public final class GrpcAPI {
       if (amount_ != 0L) {
         output.writeInt64(3, amount_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -3742,7 +3597,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(3, amount_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -3763,7 +3618,7 @@ public final class GrpcAPI {
           .equals(other.getToAddress())) return false;
       if (getAmount()
           != other.getAmount()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -3781,7 +3636,7 @@ public final class GrpcAPI {
       hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getAmount());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -3898,28 +3753,21 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.EasyTransferMessage.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         passPhrase_ = com.google.protobuf.ByteString.EMPTY;
-
         toAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         amount_ = 0L;
-
         return this;
       }
 
@@ -3946,11 +3794,22 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.EasyTransferMessage buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.EasyTransferMessage result = new com.github.comrada.tron4j.api.GrpcAPI.EasyTransferMessage(this);
-        result.passPhrase_ = passPhrase_;
-        result.toAddress_ = toAddress_;
-        result.amount_ = amount_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.EasyTransferMessage result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.passPhrase_ = passPhrase_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.toAddress_ = toAddress_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.amount_ = amount_;
+        }
       }
 
       @java.lang.Override
@@ -4006,7 +3865,7 @@ public final class GrpcAPI {
         if (other.getAmount() != 0L) {
           setAmount(other.getAmount());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -4021,19 +3880,48 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.EasyTransferMessage parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                passPhrase_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                toAddress_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 24: {
+                amount_ = input.readInt64();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.EasyTransferMessage) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString passPhrase_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -4050,11 +3938,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setPassPhrase(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         passPhrase_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -4063,7 +3949,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearPassPhrase() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         passPhrase_ = getDefaultInstance().getPassPhrase();
         onChanged();
         return this;
@@ -4084,11 +3970,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setToAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         toAddress_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -4097,7 +3981,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearToAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         toAddress_ = getDefaultInstance().getToAddress();
         onChanged();
         return this;
@@ -4120,6 +4004,7 @@ public final class GrpcAPI {
       public Builder setAmount(long value) {
         
         amount_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -4128,7 +4013,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearAmount() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         amount_ = 0L;
         onChanged();
         return this;
@@ -4166,7 +4051,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new EasyTransferMessage(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -4250,66 +4146,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private EasyTransferAssetMessage(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              passPhrase_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              toAddress_ = input.readBytes();
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              assetId_ = s;
-              break;
-            }
-            case 32: {
-
-              amount_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_EasyTransferAssetMessage_descriptor;
@@ -4324,7 +4160,7 @@ public final class GrpcAPI {
     }
 
     public static final int PASSPHRASE_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString passPhrase_;
+    private com.google.protobuf.ByteString passPhrase_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes passPhrase = 1;</code>
      * @return The passPhrase.
@@ -4335,7 +4171,7 @@ public final class GrpcAPI {
     }
 
     public static final int TOADDRESS_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString toAddress_;
+    private com.google.protobuf.ByteString toAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes toAddress = 2;</code>
      * @return The toAddress.
@@ -4346,7 +4182,8 @@ public final class GrpcAPI {
     }
 
     public static final int ASSETID_FIELD_NUMBER = 3;
-    private volatile java.lang.Object assetId_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object assetId_ = "";
     /**
      * <code>string assetId = 3;</code>
      * @return The assetId.
@@ -4384,7 +4221,7 @@ public final class GrpcAPI {
     }
 
     public static final int AMOUNT_FIELD_NUMBER = 4;
-    private long amount_;
+    private long amount_ = 0L;
     /**
      * <code>int64 amount = 4;</code>
      * @return The amount.
@@ -4420,7 +4257,7 @@ public final class GrpcAPI {
       if (amount_ != 0L) {
         output.writeInt64(4, amount_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -4444,7 +4281,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(4, amount_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -4467,7 +4304,7 @@ public final class GrpcAPI {
           .equals(other.getAssetId())) return false;
       if (getAmount()
           != other.getAmount()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -4487,7 +4324,7 @@ public final class GrpcAPI {
       hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getAmount());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -4604,30 +4441,22 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.EasyTransferAssetMessage.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         passPhrase_ = com.google.protobuf.ByteString.EMPTY;
-
         toAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         assetId_ = "";
-
         amount_ = 0L;
-
         return this;
       }
 
@@ -4654,12 +4483,25 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.EasyTransferAssetMessage buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.EasyTransferAssetMessage result = new com.github.comrada.tron4j.api.GrpcAPI.EasyTransferAssetMessage(this);
-        result.passPhrase_ = passPhrase_;
-        result.toAddress_ = toAddress_;
-        result.assetId_ = assetId_;
-        result.amount_ = amount_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.EasyTransferAssetMessage result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.passPhrase_ = passPhrase_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.toAddress_ = toAddress_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.assetId_ = assetId_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.amount_ = amount_;
+        }
       }
 
       @java.lang.Override
@@ -4714,12 +4556,13 @@ public final class GrpcAPI {
         }
         if (!other.getAssetId().isEmpty()) {
           assetId_ = other.assetId_;
+          bitField0_ |= 0x00000004;
           onChanged();
         }
         if (other.getAmount() != 0L) {
           setAmount(other.getAmount());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -4734,19 +4577,53 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.EasyTransferAssetMessage parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                passPhrase_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                toAddress_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                assetId_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 32: {
+                amount_ = input.readInt64();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 32
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.EasyTransferAssetMessage) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString passPhrase_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -4763,11 +4640,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setPassPhrase(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         passPhrase_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -4776,7 +4651,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearPassPhrase() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         passPhrase_ = getDefaultInstance().getPassPhrase();
         onChanged();
         return this;
@@ -4797,11 +4672,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setToAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         toAddress_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -4810,7 +4683,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearToAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         toAddress_ = getDefaultInstance().getToAddress();
         onChanged();
         return this;
@@ -4857,11 +4730,9 @@ public final class GrpcAPI {
        */
       public Builder setAssetId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         assetId_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -4870,8 +4741,8 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearAssetId() {
-        
         assetId_ = getDefaultInstance().getAssetId();
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
@@ -4882,12 +4753,10 @@ public final class GrpcAPI {
        */
       public Builder setAssetIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         assetId_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -4909,6 +4778,7 @@ public final class GrpcAPI {
       public Builder setAmount(long value) {
         
         amount_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -4917,7 +4787,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearAmount() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         amount_ = 0L;
         onChanged();
         return this;
@@ -4955,7 +4825,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new EasyTransferAssetMessage(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -5026,60 +4907,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private EasyTransferByPrivateMessage(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              privateKey_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              toAddress_ = input.readBytes();
-              break;
-            }
-            case 24: {
-
-              amount_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_EasyTransferByPrivateMessage_descriptor;
@@ -5094,7 +4921,7 @@ public final class GrpcAPI {
     }
 
     public static final int PRIVATEKEY_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString privateKey_;
+    private com.google.protobuf.ByteString privateKey_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes privateKey = 1;</code>
      * @return The privateKey.
@@ -5105,7 +4932,7 @@ public final class GrpcAPI {
     }
 
     public static final int TOADDRESS_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString toAddress_;
+    private com.google.protobuf.ByteString toAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes toAddress = 2;</code>
      * @return The toAddress.
@@ -5116,7 +4943,7 @@ public final class GrpcAPI {
     }
 
     public static final int AMOUNT_FIELD_NUMBER = 3;
-    private long amount_;
+    private long amount_ = 0L;
     /**
      * <code>int64 amount = 3;</code>
      * @return The amount.
@@ -5149,7 +4976,7 @@ public final class GrpcAPI {
       if (amount_ != 0L) {
         output.writeInt64(3, amount_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -5170,7 +4997,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(3, amount_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -5191,7 +5018,7 @@ public final class GrpcAPI {
           .equals(other.getToAddress())) return false;
       if (getAmount()
           != other.getAmount()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -5209,7 +5036,7 @@ public final class GrpcAPI {
       hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getAmount());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -5326,28 +5153,21 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.EasyTransferByPrivateMessage.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         privateKey_ = com.google.protobuf.ByteString.EMPTY;
-
         toAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         amount_ = 0L;
-
         return this;
       }
 
@@ -5374,11 +5194,22 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.EasyTransferByPrivateMessage buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.EasyTransferByPrivateMessage result = new com.github.comrada.tron4j.api.GrpcAPI.EasyTransferByPrivateMessage(this);
-        result.privateKey_ = privateKey_;
-        result.toAddress_ = toAddress_;
-        result.amount_ = amount_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.EasyTransferByPrivateMessage result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.privateKey_ = privateKey_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.toAddress_ = toAddress_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.amount_ = amount_;
+        }
       }
 
       @java.lang.Override
@@ -5434,7 +5265,7 @@ public final class GrpcAPI {
         if (other.getAmount() != 0L) {
           setAmount(other.getAmount());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -5449,19 +5280,48 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.EasyTransferByPrivateMessage parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                privateKey_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                toAddress_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 24: {
+                amount_ = input.readInt64();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.EasyTransferByPrivateMessage) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString privateKey_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -5478,11 +5338,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setPrivateKey(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         privateKey_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -5491,7 +5349,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearPrivateKey() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         privateKey_ = getDefaultInstance().getPrivateKey();
         onChanged();
         return this;
@@ -5512,11 +5370,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setToAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         toAddress_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -5525,7 +5381,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearToAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         toAddress_ = getDefaultInstance().getToAddress();
         onChanged();
         return this;
@@ -5548,6 +5404,7 @@ public final class GrpcAPI {
       public Builder setAmount(long value) {
         
         amount_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -5556,7 +5413,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearAmount() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         amount_ = 0L;
         onChanged();
         return this;
@@ -5594,7 +5451,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new EasyTransferByPrivateMessage(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -5678,66 +5546,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private EasyTransferAssetByPrivateMessage(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              privateKey_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              toAddress_ = input.readBytes();
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              assetId_ = s;
-              break;
-            }
-            case 32: {
-
-              amount_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_EasyTransferAssetByPrivateMessage_descriptor;
@@ -5752,7 +5560,7 @@ public final class GrpcAPI {
     }
 
     public static final int PRIVATEKEY_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString privateKey_;
+    private com.google.protobuf.ByteString privateKey_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes privateKey = 1;</code>
      * @return The privateKey.
@@ -5763,7 +5571,7 @@ public final class GrpcAPI {
     }
 
     public static final int TOADDRESS_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString toAddress_;
+    private com.google.protobuf.ByteString toAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes toAddress = 2;</code>
      * @return The toAddress.
@@ -5774,7 +5582,8 @@ public final class GrpcAPI {
     }
 
     public static final int ASSETID_FIELD_NUMBER = 3;
-    private volatile java.lang.Object assetId_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object assetId_ = "";
     /**
      * <code>string assetId = 3;</code>
      * @return The assetId.
@@ -5812,7 +5621,7 @@ public final class GrpcAPI {
     }
 
     public static final int AMOUNT_FIELD_NUMBER = 4;
-    private long amount_;
+    private long amount_ = 0L;
     /**
      * <code>int64 amount = 4;</code>
      * @return The amount.
@@ -5848,7 +5657,7 @@ public final class GrpcAPI {
       if (amount_ != 0L) {
         output.writeInt64(4, amount_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -5872,7 +5681,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(4, amount_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -5895,7 +5704,7 @@ public final class GrpcAPI {
           .equals(other.getAssetId())) return false;
       if (getAmount()
           != other.getAmount()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -5915,7 +5724,7 @@ public final class GrpcAPI {
       hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getAmount());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -6032,30 +5841,22 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.EasyTransferAssetByPrivateMessage.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         privateKey_ = com.google.protobuf.ByteString.EMPTY;
-
         toAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         assetId_ = "";
-
         amount_ = 0L;
-
         return this;
       }
 
@@ -6082,12 +5883,25 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.EasyTransferAssetByPrivateMessage buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.EasyTransferAssetByPrivateMessage result = new com.github.comrada.tron4j.api.GrpcAPI.EasyTransferAssetByPrivateMessage(this);
-        result.privateKey_ = privateKey_;
-        result.toAddress_ = toAddress_;
-        result.assetId_ = assetId_;
-        result.amount_ = amount_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.EasyTransferAssetByPrivateMessage result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.privateKey_ = privateKey_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.toAddress_ = toAddress_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.assetId_ = assetId_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.amount_ = amount_;
+        }
       }
 
       @java.lang.Override
@@ -6142,12 +5956,13 @@ public final class GrpcAPI {
         }
         if (!other.getAssetId().isEmpty()) {
           assetId_ = other.assetId_;
+          bitField0_ |= 0x00000004;
           onChanged();
         }
         if (other.getAmount() != 0L) {
           setAmount(other.getAmount());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -6162,19 +5977,53 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.EasyTransferAssetByPrivateMessage parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                privateKey_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                toAddress_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                assetId_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 32: {
+                amount_ = input.readInt64();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 32
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.EasyTransferAssetByPrivateMessage) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString privateKey_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -6191,11 +6040,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setPrivateKey(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         privateKey_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -6204,7 +6051,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearPrivateKey() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         privateKey_ = getDefaultInstance().getPrivateKey();
         onChanged();
         return this;
@@ -6225,11 +6072,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setToAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         toAddress_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -6238,7 +6083,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearToAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         toAddress_ = getDefaultInstance().getToAddress();
         onChanged();
         return this;
@@ -6285,11 +6130,9 @@ public final class GrpcAPI {
        */
       public Builder setAssetId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         assetId_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -6298,8 +6141,8 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearAssetId() {
-        
         assetId_ = getDefaultInstance().getAssetId();
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
@@ -6310,12 +6153,10 @@ public final class GrpcAPI {
        */
       public Builder setAssetIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         assetId_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -6337,6 +6178,7 @@ public final class GrpcAPI {
       public Builder setAmount(long value) {
         
         amount_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -6345,7 +6187,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearAmount() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         amount_ = 0L;
         onChanged();
         return this;
@@ -6383,7 +6225,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new EasyTransferAssetByPrivateMessage(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -6452,55 +6305,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ViewingKeyMessage(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ak_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              nk_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_ViewingKeyMessage_descriptor;
@@ -6515,7 +6319,7 @@ public final class GrpcAPI {
     }
 
     public static final int AK_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ak_;
+    private com.google.protobuf.ByteString ak_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes ak = 1;</code>
      * @return The ak.
@@ -6526,7 +6330,7 @@ public final class GrpcAPI {
     }
 
     public static final int NK_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString nk_;
+    private com.google.protobuf.ByteString nk_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes nk = 2;</code>
      * @return The nk.
@@ -6556,7 +6360,7 @@ public final class GrpcAPI {
       if (!nk_.isEmpty()) {
         output.writeBytes(2, nk_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -6573,7 +6377,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, nk_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -6592,7 +6396,7 @@ public final class GrpcAPI {
           .equals(other.getAk())) return false;
       if (!getNk()
           .equals(other.getNk())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -6607,7 +6411,7 @@ public final class GrpcAPI {
       hash = (53 * hash) + getAk().hashCode();
       hash = (37 * hash) + NK_FIELD_NUMBER;
       hash = (53 * hash) + getNk().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -6728,26 +6532,20 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.ViewingKeyMessage.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ak_ = com.google.protobuf.ByteString.EMPTY;
-
         nk_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -6774,10 +6572,19 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.ViewingKeyMessage buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.ViewingKeyMessage result = new com.github.comrada.tron4j.api.GrpcAPI.ViewingKeyMessage(this);
-        result.ak_ = ak_;
-        result.nk_ = nk_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.ViewingKeyMessage result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ak_ = ak_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.nk_ = nk_;
+        }
       }
 
       @java.lang.Override
@@ -6830,7 +6637,7 @@ public final class GrpcAPI {
         if (other.getNk() != com.google.protobuf.ByteString.EMPTY) {
           setNk(other.getNk());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -6845,19 +6652,43 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.ViewingKeyMessage parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ak_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                nk_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.ViewingKeyMessage) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ak_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -6874,11 +6705,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setAk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ak_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -6887,7 +6716,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearAk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ak_ = getDefaultInstance().getAk();
         onChanged();
         return this;
@@ -6908,11 +6737,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setNk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         nk_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -6921,7 +6748,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearNk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         nk_ = getDefaultInstance().getNk();
         onChanged();
         return this;
@@ -6959,7 +6786,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ViewingKeyMessage(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -7086,96 +6924,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ShieldedAddressInfo(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              sk_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              ask_ = input.readBytes();
-              break;
-            }
-            case 26: {
-
-              nsk_ = input.readBytes();
-              break;
-            }
-            case 34: {
-
-              ovk_ = input.readBytes();
-              break;
-            }
-            case 42: {
-
-              ak_ = input.readBytes();
-              break;
-            }
-            case 50: {
-
-              nk_ = input.readBytes();
-              break;
-            }
-            case 58: {
-
-              ivk_ = input.readBytes();
-              break;
-            }
-            case 66: {
-
-              d_ = input.readBytes();
-              break;
-            }
-            case 74: {
-
-              pkD_ = input.readBytes();
-              break;
-            }
-            case 82: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              paymentAddress_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_ShieldedAddressInfo_descriptor;
@@ -7190,7 +6938,7 @@ public final class GrpcAPI {
     }
 
     public static final int SK_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString sk_;
+    private com.google.protobuf.ByteString sk_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes sk = 1;</code>
      * @return The sk.
@@ -7201,7 +6949,7 @@ public final class GrpcAPI {
     }
 
     public static final int ASK_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString ask_;
+    private com.google.protobuf.ByteString ask_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes ask = 2;</code>
      * @return The ask.
@@ -7212,7 +6960,7 @@ public final class GrpcAPI {
     }
 
     public static final int NSK_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString nsk_;
+    private com.google.protobuf.ByteString nsk_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes nsk = 3;</code>
      * @return The nsk.
@@ -7223,7 +6971,7 @@ public final class GrpcAPI {
     }
 
     public static final int OVK_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString ovk_;
+    private com.google.protobuf.ByteString ovk_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes ovk = 4;</code>
      * @return The ovk.
@@ -7234,7 +6982,7 @@ public final class GrpcAPI {
     }
 
     public static final int AK_FIELD_NUMBER = 5;
-    private com.google.protobuf.ByteString ak_;
+    private com.google.protobuf.ByteString ak_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes ak = 5;</code>
      * @return The ak.
@@ -7245,7 +6993,7 @@ public final class GrpcAPI {
     }
 
     public static final int NK_FIELD_NUMBER = 6;
-    private com.google.protobuf.ByteString nk_;
+    private com.google.protobuf.ByteString nk_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes nk = 6;</code>
      * @return The nk.
@@ -7256,7 +7004,7 @@ public final class GrpcAPI {
     }
 
     public static final int IVK_FIELD_NUMBER = 7;
-    private com.google.protobuf.ByteString ivk_;
+    private com.google.protobuf.ByteString ivk_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes ivk = 7;</code>
      * @return The ivk.
@@ -7267,7 +7015,7 @@ public final class GrpcAPI {
     }
 
     public static final int D_FIELD_NUMBER = 8;
-    private com.google.protobuf.ByteString d_;
+    private com.google.protobuf.ByteString d_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes d = 8;</code>
      * @return The d.
@@ -7278,7 +7026,7 @@ public final class GrpcAPI {
     }
 
     public static final int PKD_FIELD_NUMBER = 9;
-    private com.google.protobuf.ByteString pkD_;
+    private com.google.protobuf.ByteString pkD_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes pkD = 9;</code>
      * @return The pkD.
@@ -7289,7 +7037,8 @@ public final class GrpcAPI {
     }
 
     public static final int PAYMENT_ADDRESS_FIELD_NUMBER = 10;
-    private volatile java.lang.Object paymentAddress_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object paymentAddress_ = "";
     /**
      * <code>string payment_address = 10;</code>
      * @return The paymentAddress.
@@ -7370,7 +7119,7 @@ public final class GrpcAPI {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(paymentAddress_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 10, paymentAddress_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -7418,7 +7167,7 @@ public final class GrpcAPI {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(paymentAddress_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, paymentAddress_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -7453,7 +7202,7 @@ public final class GrpcAPI {
           .equals(other.getPkD())) return false;
       if (!getPaymentAddress()
           .equals(other.getPaymentAddress())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -7484,7 +7233,7 @@ public final class GrpcAPI {
       hash = (53 * hash) + getPkD().hashCode();
       hash = (37 * hash) + PAYMENT_ADDRESS_FIELD_NUMBER;
       hash = (53 * hash) + getPaymentAddress().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -7601,42 +7350,28 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.ShieldedAddressInfo.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         sk_ = com.google.protobuf.ByteString.EMPTY;
-
         ask_ = com.google.protobuf.ByteString.EMPTY;
-
         nsk_ = com.google.protobuf.ByteString.EMPTY;
-
         ovk_ = com.google.protobuf.ByteString.EMPTY;
-
         ak_ = com.google.protobuf.ByteString.EMPTY;
-
         nk_ = com.google.protobuf.ByteString.EMPTY;
-
         ivk_ = com.google.protobuf.ByteString.EMPTY;
-
         d_ = com.google.protobuf.ByteString.EMPTY;
-
         pkD_ = com.google.protobuf.ByteString.EMPTY;
-
         paymentAddress_ = "";
-
         return this;
       }
 
@@ -7663,18 +7398,43 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.ShieldedAddressInfo buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.ShieldedAddressInfo result = new com.github.comrada.tron4j.api.GrpcAPI.ShieldedAddressInfo(this);
-        result.sk_ = sk_;
-        result.ask_ = ask_;
-        result.nsk_ = nsk_;
-        result.ovk_ = ovk_;
-        result.ak_ = ak_;
-        result.nk_ = nk_;
-        result.ivk_ = ivk_;
-        result.d_ = d_;
-        result.pkD_ = pkD_;
-        result.paymentAddress_ = paymentAddress_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.ShieldedAddressInfo result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.sk_ = sk_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.ask_ = ask_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.nsk_ = nsk_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.ovk_ = ovk_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.ak_ = ak_;
+        }
+        if (((from_bitField0_ & 0x00000020) != 0)) {
+          result.nk_ = nk_;
+        }
+        if (((from_bitField0_ & 0x00000040) != 0)) {
+          result.ivk_ = ivk_;
+        }
+        if (((from_bitField0_ & 0x00000080) != 0)) {
+          result.d_ = d_;
+        }
+        if (((from_bitField0_ & 0x00000100) != 0)) {
+          result.pkD_ = pkD_;
+        }
+        if (((from_bitField0_ & 0x00000200) != 0)) {
+          result.paymentAddress_ = paymentAddress_;
+        }
       }
 
       @java.lang.Override
@@ -7750,9 +7510,10 @@ public final class GrpcAPI {
         }
         if (!other.getPaymentAddress().isEmpty()) {
           paymentAddress_ = other.paymentAddress_;
+          bitField0_ |= 0x00000200;
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -7767,19 +7528,83 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.ShieldedAddressInfo parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                sk_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                ask_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                nsk_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 34: {
+                ovk_ = input.readBytes();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              case 42: {
+                ak_ = input.readBytes();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 42
+              case 50: {
+                nk_ = input.readBytes();
+                bitField0_ |= 0x00000020;
+                break;
+              } // case 50
+              case 58: {
+                ivk_ = input.readBytes();
+                bitField0_ |= 0x00000040;
+                break;
+              } // case 58
+              case 66: {
+                d_ = input.readBytes();
+                bitField0_ |= 0x00000080;
+                break;
+              } // case 66
+              case 74: {
+                pkD_ = input.readBytes();
+                bitField0_ |= 0x00000100;
+                break;
+              } // case 74
+              case 82: {
+                paymentAddress_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000200;
+                break;
+              } // case 82
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.ShieldedAddressInfo) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString sk_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -7796,11 +7621,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setSk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         sk_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -7809,7 +7632,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearSk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         sk_ = getDefaultInstance().getSk();
         onChanged();
         return this;
@@ -7830,11 +7653,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setAsk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ask_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -7843,7 +7664,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearAsk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         ask_ = getDefaultInstance().getAsk();
         onChanged();
         return this;
@@ -7864,11 +7685,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setNsk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         nsk_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -7877,7 +7696,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearNsk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         nsk_ = getDefaultInstance().getNsk();
         onChanged();
         return this;
@@ -7898,11 +7717,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setOvk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ovk_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -7911,7 +7728,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearOvk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         ovk_ = getDefaultInstance().getOvk();
         onChanged();
         return this;
@@ -7932,11 +7749,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setAk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ak_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -7945,7 +7760,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearAk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000010);
         ak_ = getDefaultInstance().getAk();
         onChanged();
         return this;
@@ -7966,11 +7781,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setNk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         nk_ = value;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
@@ -7979,7 +7792,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearNk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000020);
         nk_ = getDefaultInstance().getNk();
         onChanged();
         return this;
@@ -8000,11 +7813,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setIvk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ivk_ = value;
+        bitField0_ |= 0x00000040;
         onChanged();
         return this;
       }
@@ -8013,7 +7824,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearIvk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000040);
         ivk_ = getDefaultInstance().getIvk();
         onChanged();
         return this;
@@ -8034,11 +7845,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setD(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         d_ = value;
+        bitField0_ |= 0x00000080;
         onChanged();
         return this;
       }
@@ -8047,7 +7856,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearD() {
-        
+        bitField0_ = (bitField0_ & ~0x00000080);
         d_ = getDefaultInstance().getD();
         onChanged();
         return this;
@@ -8068,11 +7877,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setPkD(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         pkD_ = value;
+        bitField0_ |= 0x00000100;
         onChanged();
         return this;
       }
@@ -8081,7 +7888,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearPkD() {
-        
+        bitField0_ = (bitField0_ & ~0x00000100);
         pkD_ = getDefaultInstance().getPkD();
         onChanged();
         return this;
@@ -8128,11 +7935,9 @@ public final class GrpcAPI {
        */
       public Builder setPaymentAddress(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         paymentAddress_ = value;
+        bitField0_ |= 0x00000200;
         onChanged();
         return this;
       }
@@ -8141,8 +7946,8 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearPaymentAddress() {
-        
         paymentAddress_ = getDefaultInstance().getPaymentAddress();
+        bitField0_ = (bitField0_ & ~0x00000200);
         onChanged();
         return this;
       }
@@ -8153,12 +7958,10 @@ public final class GrpcAPI {
        */
       public Builder setPaymentAddressBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         paymentAddress_ = value;
+        bitField0_ |= 0x00000200;
         onChanged();
         return this;
       }
@@ -8195,7 +7998,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ShieldedAddressInfo(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -8281,69 +8095,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private PaymentAddressMessage(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage.Builder subBuilder = null;
-              if (d_ != null) {
-                subBuilder = d_.toBuilder();
-              }
-              d_ = input.readMessage(com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(d_);
-                d_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 18: {
-
-              pkD_ = input.readBytes();
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              paymentAddress_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_PaymentAddressMessage_descriptor;
@@ -8380,11 +8131,11 @@ public final class GrpcAPI {
      */
     @java.lang.Override
     public com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessageOrBuilder getDOrBuilder() {
-      return getD();
+      return d_ == null ? com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage.getDefaultInstance() : d_;
     }
 
     public static final int PKD_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString pkD_;
+    private com.google.protobuf.ByteString pkD_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes pkD = 2;</code>
      * @return The pkD.
@@ -8395,7 +8146,8 @@ public final class GrpcAPI {
     }
 
     public static final int PAYMENT_ADDRESS_FIELD_NUMBER = 3;
-    private volatile java.lang.Object paymentAddress_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object paymentAddress_ = "";
     /**
      * <code>string payment_address = 3;</code>
      * @return The paymentAddress.
@@ -8455,7 +8207,7 @@ public final class GrpcAPI {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(paymentAddress_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, paymentAddress_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -8475,7 +8227,7 @@ public final class GrpcAPI {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(paymentAddress_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, paymentAddress_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -8499,7 +8251,7 @@ public final class GrpcAPI {
           .equals(other.getPkD())) return false;
       if (!getPaymentAddress()
           .equals(other.getPaymentAddress())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -8518,7 +8270,7 @@ public final class GrpcAPI {
       hash = (53 * hash) + getPkD().hashCode();
       hash = (37 * hash) + PAYMENT_ADDRESS_FIELD_NUMBER;
       hash = (53 * hash) + getPaymentAddress().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -8635,32 +8387,25 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.PaymentAddressMessage.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (dBuilder_ == null) {
-          d_ = null;
-        } else {
-          d_ = null;
+        bitField0_ = 0;
+        d_ = null;
+        if (dBuilder_ != null) {
+          dBuilder_.dispose();
           dBuilder_ = null;
         }
         pkD_ = com.google.protobuf.ByteString.EMPTY;
-
         paymentAddress_ = "";
-
         return this;
       }
 
@@ -8687,15 +8432,24 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.PaymentAddressMessage buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.PaymentAddressMessage result = new com.github.comrada.tron4j.api.GrpcAPI.PaymentAddressMessage(this);
-        if (dBuilder_ == null) {
-          result.d_ = d_;
-        } else {
-          result.d_ = dBuilder_.build();
-        }
-        result.pkD_ = pkD_;
-        result.paymentAddress_ = paymentAddress_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.PaymentAddressMessage result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.d_ = dBuilder_ == null
+              ? d_
+              : dBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.pkD_ = pkD_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.paymentAddress_ = paymentAddress_;
+        }
       }
 
       @java.lang.Override
@@ -8750,9 +8504,10 @@ public final class GrpcAPI {
         }
         if (!other.getPaymentAddress().isEmpty()) {
           paymentAddress_ = other.paymentAddress_;
+          bitField0_ |= 0x00000004;
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -8767,19 +8522,50 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.PaymentAddressMessage parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                input.readMessage(
+                    getDFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                pkD_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                paymentAddress_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.PaymentAddressMessage) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage d_;
       private com.google.protobuf.SingleFieldBuilderV3<
@@ -8789,7 +8575,7 @@ public final class GrpcAPI {
        * @return Whether the d field is set.
        */
       public boolean hasD() {
-        return dBuilder_ != null || d_ != null;
+        return ((bitField0_ & 0x00000001) != 0);
       }
       /**
        * <code>.protocol.DiversifierMessage d = 1;</code>
@@ -8811,11 +8597,11 @@ public final class GrpcAPI {
             throw new NullPointerException();
           }
           d_ = value;
-          onChanged();
         } else {
           dBuilder_.setMessage(value);
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
@@ -8825,11 +8611,11 @@ public final class GrpcAPI {
           com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage.Builder builderForValue) {
         if (dBuilder_ == null) {
           d_ = builderForValue.build();
-          onChanged();
         } else {
           dBuilder_.setMessage(builderForValue.build());
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
@@ -8837,38 +8623,38 @@ public final class GrpcAPI {
        */
       public Builder mergeD(com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage value) {
         if (dBuilder_ == null) {
-          if (d_ != null) {
-            d_ =
-              com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage.newBuilder(d_).mergeFrom(value).buildPartial();
+          if (((bitField0_ & 0x00000001) != 0) &&
+            d_ != null &&
+            d_ != com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage.getDefaultInstance()) {
+            getDBuilder().mergeFrom(value);
           } else {
             d_ = value;
           }
-          onChanged();
         } else {
           dBuilder_.mergeFrom(value);
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
        * <code>.protocol.DiversifierMessage d = 1;</code>
        */
       public Builder clearD() {
-        if (dBuilder_ == null) {
-          d_ = null;
-          onChanged();
-        } else {
-          d_ = null;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        d_ = null;
+        if (dBuilder_ != null) {
+          dBuilder_.dispose();
           dBuilder_ = null;
         }
-
+        onChanged();
         return this;
       }
       /**
        * <code>.protocol.DiversifierMessage d = 1;</code>
        */
       public com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage.Builder getDBuilder() {
-        
+        bitField0_ |= 0x00000001;
         onChanged();
         return getDFieldBuilder().getBuilder();
       }
@@ -8915,11 +8701,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setPkD(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         pkD_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -8928,7 +8712,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearPkD() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         pkD_ = getDefaultInstance().getPkD();
         onChanged();
         return this;
@@ -8975,11 +8759,9 @@ public final class GrpcAPI {
        */
       public Builder setPaymentAddress(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         paymentAddress_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -8988,8 +8770,8 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearPaymentAddress() {
-        
         paymentAddress_ = getDefaultInstance().getPaymentAddress();
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
@@ -9000,12 +8782,10 @@ public final class GrpcAPI {
        */
       public Builder setPaymentAddressBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         paymentAddress_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -9042,7 +8822,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new PaymentAddressMessage(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -9100,50 +8891,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private DiversifierMessage(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              d_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_DiversifierMessage_descriptor;
@@ -9158,7 +8905,7 @@ public final class GrpcAPI {
     }
 
     public static final int D_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString d_;
+    private com.google.protobuf.ByteString d_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes d = 1;</code>
      * @return The d.
@@ -9185,7 +8932,7 @@ public final class GrpcAPI {
       if (!d_.isEmpty()) {
         output.writeBytes(1, d_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -9198,7 +8945,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(1, d_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -9215,7 +8962,7 @@ public final class GrpcAPI {
 
       if (!getD()
           .equals(other.getD())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -9228,7 +8975,7 @@ public final class GrpcAPI {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + D_FIELD_NUMBER;
       hash = (53 * hash) + getD().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -9345,24 +9092,19 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         d_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -9389,9 +9131,16 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage result = new com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage(this);
-        result.d_ = d_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.d_ = d_;
+        }
       }
 
       @java.lang.Override
@@ -9441,7 +9190,7 @@ public final class GrpcAPI {
         if (other.getD() != com.google.protobuf.ByteString.EMPTY) {
           setD(other.getD());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -9456,19 +9205,38 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                d_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString d_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -9485,11 +9253,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setD(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         d_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -9498,7 +9264,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearD() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         d_ = getDefaultInstance().getD();
         onChanged();
         return this;
@@ -9536,7 +9302,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new DiversifierMessage(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -9608,60 +9385,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ExpandedSpendingKeyMessage(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ask_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              nsk_ = input.readBytes();
-              break;
-            }
-            case 26: {
-
-              ovk_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_ExpandedSpendingKeyMessage_descriptor;
@@ -9676,7 +9399,7 @@ public final class GrpcAPI {
     }
 
     public static final int ASK_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ask_;
+    private com.google.protobuf.ByteString ask_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes ask = 1;</code>
      * @return The ask.
@@ -9687,7 +9410,7 @@ public final class GrpcAPI {
     }
 
     public static final int NSK_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString nsk_;
+    private com.google.protobuf.ByteString nsk_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes nsk = 2;</code>
      * @return The nsk.
@@ -9698,7 +9421,7 @@ public final class GrpcAPI {
     }
 
     public static final int OVK_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString ovk_;
+    private com.google.protobuf.ByteString ovk_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes ovk = 3;</code>
      * @return The ovk.
@@ -9731,7 +9454,7 @@ public final class GrpcAPI {
       if (!ovk_.isEmpty()) {
         output.writeBytes(3, ovk_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -9752,7 +9475,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, ovk_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -9773,7 +9496,7 @@ public final class GrpcAPI {
           .equals(other.getNsk())) return false;
       if (!getOvk()
           .equals(other.getOvk())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -9790,7 +9513,7 @@ public final class GrpcAPI {
       hash = (53 * hash) + getNsk().hashCode();
       hash = (37 * hash) + OVK_FIELD_NUMBER;
       hash = (53 * hash) + getOvk().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -9907,28 +9630,21 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.ExpandedSpendingKeyMessage.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ask_ = com.google.protobuf.ByteString.EMPTY;
-
         nsk_ = com.google.protobuf.ByteString.EMPTY;
-
         ovk_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -9955,11 +9671,22 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.ExpandedSpendingKeyMessage buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.ExpandedSpendingKeyMessage result = new com.github.comrada.tron4j.api.GrpcAPI.ExpandedSpendingKeyMessage(this);
-        result.ask_ = ask_;
-        result.nsk_ = nsk_;
-        result.ovk_ = ovk_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.ExpandedSpendingKeyMessage result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ask_ = ask_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.nsk_ = nsk_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.ovk_ = ovk_;
+        }
       }
 
       @java.lang.Override
@@ -10015,7 +9742,7 @@ public final class GrpcAPI {
         if (other.getOvk() != com.google.protobuf.ByteString.EMPTY) {
           setOvk(other.getOvk());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -10030,19 +9757,48 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.ExpandedSpendingKeyMessage parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ask_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                nsk_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                ovk_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.ExpandedSpendingKeyMessage) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ask_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -10059,11 +9815,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setAsk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ask_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -10072,7 +9826,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearAsk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ask_ = getDefaultInstance().getAsk();
         onChanged();
         return this;
@@ -10093,11 +9847,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setNsk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         nsk_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -10106,7 +9858,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearNsk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         nsk_ = getDefaultInstance().getNsk();
         onChanged();
         return this;
@@ -10127,11 +9879,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setOvk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ovk_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -10140,7 +9890,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearOvk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         ovk_ = getDefaultInstance().getOvk();
         onChanged();
         return this;
@@ -10178,7 +9928,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ExpandedSpendingKeyMessage(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -10236,50 +9997,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private IncomingViewingKeyMessage(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ivk_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_IncomingViewingKeyMessage_descriptor;
@@ -10294,7 +10011,7 @@ public final class GrpcAPI {
     }
 
     public static final int IVK_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ivk_;
+    private com.google.protobuf.ByteString ivk_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes ivk = 1;</code>
      * @return The ivk.
@@ -10321,7 +10038,7 @@ public final class GrpcAPI {
       if (!ivk_.isEmpty()) {
         output.writeBytes(1, ivk_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -10334,7 +10051,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(1, ivk_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -10351,7 +10068,7 @@ public final class GrpcAPI {
 
       if (!getIvk()
           .equals(other.getIvk())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -10364,7 +10081,7 @@ public final class GrpcAPI {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + IVK_FIELD_NUMBER;
       hash = (53 * hash) + getIvk().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -10481,24 +10198,19 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyMessage.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ivk_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -10525,9 +10237,16 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyMessage buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyMessage result = new com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyMessage(this);
-        result.ivk_ = ivk_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyMessage result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ivk_ = ivk_;
+        }
       }
 
       @java.lang.Override
@@ -10577,7 +10296,7 @@ public final class GrpcAPI {
         if (other.getIvk() != com.google.protobuf.ByteString.EMPTY) {
           setIvk(other.getIvk());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -10592,19 +10311,38 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyMessage parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ivk_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyMessage) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ivk_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -10621,11 +10359,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setIvk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ivk_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -10634,7 +10370,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearIvk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ivk_ = getDefaultInstance().getIvk();
         onChanged();
         return this;
@@ -10672,7 +10408,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new IncomingViewingKeyMessage(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -10757,71 +10504,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private IncomingViewingKeyDiversifierMessage(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyMessage.Builder subBuilder = null;
-              if (ivk_ != null) {
-                subBuilder = ivk_.toBuilder();
-              }
-              ivk_ = input.readMessage(com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyMessage.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(ivk_);
-                ivk_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 18: {
-              com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage.Builder subBuilder = null;
-              if (d_ != null) {
-                subBuilder = d_.toBuilder();
-              }
-              d_ = input.readMessage(com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(d_);
-                d_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_IncomingViewingKeyDiversifierMessage_descriptor;
@@ -10858,7 +10540,7 @@ public final class GrpcAPI {
      */
     @java.lang.Override
     public com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyMessageOrBuilder getIvkOrBuilder() {
-      return getIvk();
+      return ivk_ == null ? com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyMessage.getDefaultInstance() : ivk_;
     }
 
     public static final int D_FIELD_NUMBER = 2;
@@ -10884,7 +10566,7 @@ public final class GrpcAPI {
      */
     @java.lang.Override
     public com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessageOrBuilder getDOrBuilder() {
-      return getD();
+      return d_ == null ? com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage.getDefaultInstance() : d_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -10907,7 +10589,7 @@ public final class GrpcAPI {
       if (d_ != null) {
         output.writeMessage(2, getD());
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -10924,7 +10606,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getD());
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -10949,7 +10631,7 @@ public final class GrpcAPI {
         if (!getD()
             .equals(other.getD())) return false;
       }
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -10968,7 +10650,7 @@ public final class GrpcAPI {
         hash = (37 * hash) + D_FIELD_NUMBER;
         hash = (53 * hash) + getD().hashCode();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -11089,32 +10771,26 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyDiversifierMessage.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (ivkBuilder_ == null) {
-          ivk_ = null;
-        } else {
-          ivk_ = null;
+        bitField0_ = 0;
+        ivk_ = null;
+        if (ivkBuilder_ != null) {
+          ivkBuilder_.dispose();
           ivkBuilder_ = null;
         }
-        if (dBuilder_ == null) {
-          d_ = null;
-        } else {
-          d_ = null;
+        d_ = null;
+        if (dBuilder_ != null) {
+          dBuilder_.dispose();
           dBuilder_ = null;
         }
         return this;
@@ -11143,18 +10819,23 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyDiversifierMessage buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyDiversifierMessage result = new com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyDiversifierMessage(this);
-        if (ivkBuilder_ == null) {
-          result.ivk_ = ivk_;
-        } else {
-          result.ivk_ = ivkBuilder_.build();
-        }
-        if (dBuilder_ == null) {
-          result.d_ = d_;
-        } else {
-          result.d_ = dBuilder_.build();
-        }
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyDiversifierMessage result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ivk_ = ivkBuilder_ == null
+              ? ivk_
+              : ivkBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.d_ = dBuilder_ == null
+              ? d_
+              : dBuilder_.build();
+        }
       }
 
       @java.lang.Override
@@ -11207,7 +10888,7 @@ public final class GrpcAPI {
         if (other.hasD()) {
           mergeD(other.getD());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -11222,19 +10903,47 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyDiversifierMessage parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                input.readMessage(
+                    getIvkFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                input.readMessage(
+                    getDFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyDiversifierMessage) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyMessage ivk_;
       private com.google.protobuf.SingleFieldBuilderV3<
@@ -11244,7 +10953,7 @@ public final class GrpcAPI {
        * @return Whether the ivk field is set.
        */
       public boolean hasIvk() {
-        return ivkBuilder_ != null || ivk_ != null;
+        return ((bitField0_ & 0x00000001) != 0);
       }
       /**
        * <code>.protocol.IncomingViewingKeyMessage ivk = 1;</code>
@@ -11266,11 +10975,11 @@ public final class GrpcAPI {
             throw new NullPointerException();
           }
           ivk_ = value;
-          onChanged();
         } else {
           ivkBuilder_.setMessage(value);
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
@@ -11280,11 +10989,11 @@ public final class GrpcAPI {
           com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyMessage.Builder builderForValue) {
         if (ivkBuilder_ == null) {
           ivk_ = builderForValue.build();
-          onChanged();
         } else {
           ivkBuilder_.setMessage(builderForValue.build());
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
@@ -11292,38 +11001,38 @@ public final class GrpcAPI {
        */
       public Builder mergeIvk(com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyMessage value) {
         if (ivkBuilder_ == null) {
-          if (ivk_ != null) {
-            ivk_ =
-              com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyMessage.newBuilder(ivk_).mergeFrom(value).buildPartial();
+          if (((bitField0_ & 0x00000001) != 0) &&
+            ivk_ != null &&
+            ivk_ != com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyMessage.getDefaultInstance()) {
+            getIvkBuilder().mergeFrom(value);
           } else {
             ivk_ = value;
           }
-          onChanged();
         } else {
           ivkBuilder_.mergeFrom(value);
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
        * <code>.protocol.IncomingViewingKeyMessage ivk = 1;</code>
        */
       public Builder clearIvk() {
-        if (ivkBuilder_ == null) {
-          ivk_ = null;
-          onChanged();
-        } else {
-          ivk_ = null;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        ivk_ = null;
+        if (ivkBuilder_ != null) {
+          ivkBuilder_.dispose();
           ivkBuilder_ = null;
         }
-
+        onChanged();
         return this;
       }
       /**
        * <code>.protocol.IncomingViewingKeyMessage ivk = 1;</code>
        */
       public com.github.comrada.tron4j.api.GrpcAPI.IncomingViewingKeyMessage.Builder getIvkBuilder() {
-        
+        bitField0_ |= 0x00000001;
         onChanged();
         return getIvkFieldBuilder().getBuilder();
       }
@@ -11363,7 +11072,7 @@ public final class GrpcAPI {
        * @return Whether the d field is set.
        */
       public boolean hasD() {
-        return dBuilder_ != null || d_ != null;
+        return ((bitField0_ & 0x00000002) != 0);
       }
       /**
        * <code>.protocol.DiversifierMessage d = 2;</code>
@@ -11385,11 +11094,11 @@ public final class GrpcAPI {
             throw new NullPointerException();
           }
           d_ = value;
-          onChanged();
         } else {
           dBuilder_.setMessage(value);
         }
-
+        bitField0_ |= 0x00000002;
+        onChanged();
         return this;
       }
       /**
@@ -11399,11 +11108,11 @@ public final class GrpcAPI {
           com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage.Builder builderForValue) {
         if (dBuilder_ == null) {
           d_ = builderForValue.build();
-          onChanged();
         } else {
           dBuilder_.setMessage(builderForValue.build());
         }
-
+        bitField0_ |= 0x00000002;
+        onChanged();
         return this;
       }
       /**
@@ -11411,38 +11120,38 @@ public final class GrpcAPI {
        */
       public Builder mergeD(com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage value) {
         if (dBuilder_ == null) {
-          if (d_ != null) {
-            d_ =
-              com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage.newBuilder(d_).mergeFrom(value).buildPartial();
+          if (((bitField0_ & 0x00000002) != 0) &&
+            d_ != null &&
+            d_ != com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage.getDefaultInstance()) {
+            getDBuilder().mergeFrom(value);
           } else {
             d_ = value;
           }
-          onChanged();
         } else {
           dBuilder_.mergeFrom(value);
         }
-
+        bitField0_ |= 0x00000002;
+        onChanged();
         return this;
       }
       /**
        * <code>.protocol.DiversifierMessage d = 2;</code>
        */
       public Builder clearD() {
-        if (dBuilder_ == null) {
-          d_ = null;
-          onChanged();
-        } else {
-          d_ = null;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        d_ = null;
+        if (dBuilder_ != null) {
+          dBuilder_.dispose();
           dBuilder_ = null;
         }
-
+        onChanged();
         return this;
       }
       /**
        * <code>.protocol.DiversifierMessage d = 2;</code>
        */
       public com.github.comrada.tron4j.api.GrpcAPI.DiversifierMessage.Builder getDBuilder() {
-        
+        bitField0_ |= 0x00000002;
         onChanged();
         return getDFieldBuilder().getBuilder();
       }
@@ -11506,7 +11215,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new IncomingViewingKeyDiversifierMessage(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -11572,58 +11292,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ReceiveNote(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              com.github.comrada.tron4j.proto.Common.Note.Builder subBuilder = null;
-              if (note_ != null) {
-                subBuilder = note_.toBuilder();
-              }
-              note_ = input.readMessage(com.github.comrada.tron4j.proto.Common.Note.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(note_);
-                note_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_ReceiveNote_descriptor;
@@ -11660,7 +11328,7 @@ public final class GrpcAPI {
      */
     @java.lang.Override
     public com.github.comrada.tron4j.proto.Common.NoteOrBuilder getNoteOrBuilder() {
-      return getNote();
+      return note_ == null ? com.github.comrada.tron4j.proto.Common.Note.getDefaultInstance() : note_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -11680,7 +11348,7 @@ public final class GrpcAPI {
       if (note_ != null) {
         output.writeMessage(1, getNote());
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -11693,7 +11361,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getNote());
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -11713,7 +11381,7 @@ public final class GrpcAPI {
         if (!getNote()
             .equals(other.getNote())) return false;
       }
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -11728,7 +11396,7 @@ public final class GrpcAPI {
         hash = (37 * hash) + NOTE_FIELD_NUMBER;
         hash = (53 * hash) + getNote().hashCode();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -11845,26 +11513,21 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (noteBuilder_ == null) {
-          note_ = null;
-        } else {
-          note_ = null;
+        bitField0_ = 0;
+        note_ = null;
+        if (noteBuilder_ != null) {
+          noteBuilder_.dispose();
           noteBuilder_ = null;
         }
         return this;
@@ -11893,13 +11556,18 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote result = new com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote(this);
-        if (noteBuilder_ == null) {
-          result.note_ = note_;
-        } else {
-          result.note_ = noteBuilder_.build();
-        }
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.note_ = noteBuilder_ == null
+              ? note_
+              : noteBuilder_.build();
+        }
       }
 
       @java.lang.Override
@@ -11949,7 +11617,7 @@ public final class GrpcAPI {
         if (other.hasNote()) {
           mergeNote(other.getNote());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -11964,19 +11632,40 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                input.readMessage(
+                    getNoteFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.github.comrada.tron4j.proto.Common.Note note_;
       private com.google.protobuf.SingleFieldBuilderV3<
@@ -11986,7 +11675,7 @@ public final class GrpcAPI {
        * @return Whether the note field is set.
        */
       public boolean hasNote() {
-        return noteBuilder_ != null || note_ != null;
+        return ((bitField0_ & 0x00000001) != 0);
       }
       /**
        * <code>.protocol.Note note = 1;</code>
@@ -12008,11 +11697,11 @@ public final class GrpcAPI {
             throw new NullPointerException();
           }
           note_ = value;
-          onChanged();
         } else {
           noteBuilder_.setMessage(value);
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
@@ -12022,11 +11711,11 @@ public final class GrpcAPI {
           com.github.comrada.tron4j.proto.Common.Note.Builder builderForValue) {
         if (noteBuilder_ == null) {
           note_ = builderForValue.build();
-          onChanged();
         } else {
           noteBuilder_.setMessage(builderForValue.build());
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
@@ -12034,38 +11723,38 @@ public final class GrpcAPI {
        */
       public Builder mergeNote(com.github.comrada.tron4j.proto.Common.Note value) {
         if (noteBuilder_ == null) {
-          if (note_ != null) {
-            note_ =
-              com.github.comrada.tron4j.proto.Common.Note.newBuilder(note_).mergeFrom(value).buildPartial();
+          if (((bitField0_ & 0x00000001) != 0) &&
+            note_ != null &&
+            note_ != com.github.comrada.tron4j.proto.Common.Note.getDefaultInstance()) {
+            getNoteBuilder().mergeFrom(value);
           } else {
             note_ = value;
           }
-          onChanged();
         } else {
           noteBuilder_.mergeFrom(value);
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
        * <code>.protocol.Note note = 1;</code>
        */
       public Builder clearNote() {
-        if (noteBuilder_ == null) {
-          note_ = null;
-          onChanged();
-        } else {
-          note_ = null;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        note_ = null;
+        if (noteBuilder_ != null) {
+          noteBuilder_.dispose();
           noteBuilder_ = null;
         }
-
+        onChanged();
         return this;
       }
       /**
        * <code>.protocol.Note note = 1;</code>
        */
       public com.github.comrada.tron4j.proto.Common.Note.Builder getNoteBuilder() {
-        
+        bitField0_ |= 0x00000001;
         onChanged();
         return getNoteFieldBuilder().getBuilder();
       }
@@ -12129,7 +11818,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ReceiveNote(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -12222,78 +11922,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private SpendNoteTRC20(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              com.github.comrada.tron4j.proto.Common.Note.Builder subBuilder = null;
-              if (note_ != null) {
-                subBuilder = note_.toBuilder();
-              }
-              note_ = input.readMessage(com.github.comrada.tron4j.proto.Common.Note.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(note_);
-                note_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 18: {
-
-              alpha_ = input.readBytes();
-              break;
-            }
-            case 26: {
-
-              root_ = input.readBytes();
-              break;
-            }
-            case 34: {
-
-              path_ = input.readBytes();
-              break;
-            }
-            case 40: {
-
-              pos_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_SpendNoteTRC20_descriptor;
@@ -12330,11 +11958,11 @@ public final class GrpcAPI {
      */
     @java.lang.Override
     public com.github.comrada.tron4j.proto.Common.NoteOrBuilder getNoteOrBuilder() {
-      return getNote();
+      return note_ == null ? com.github.comrada.tron4j.proto.Common.Note.getDefaultInstance() : note_;
     }
 
     public static final int ALPHA_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString alpha_;
+    private com.google.protobuf.ByteString alpha_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes alpha = 2;</code>
      * @return The alpha.
@@ -12345,7 +11973,7 @@ public final class GrpcAPI {
     }
 
     public static final int ROOT_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString root_;
+    private com.google.protobuf.ByteString root_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes root = 3;</code>
      * @return The root.
@@ -12356,7 +11984,7 @@ public final class GrpcAPI {
     }
 
     public static final int PATH_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString path_;
+    private com.google.protobuf.ByteString path_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes path = 4;</code>
      * @return The path.
@@ -12367,7 +11995,7 @@ public final class GrpcAPI {
     }
 
     public static final int POS_FIELD_NUMBER = 5;
-    private long pos_;
+    private long pos_ = 0L;
     /**
      * <code>int64 pos = 5;</code>
      * @return The pos.
@@ -12406,7 +12034,7 @@ public final class GrpcAPI {
       if (pos_ != 0L) {
         output.writeInt64(5, pos_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -12435,7 +12063,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(5, pos_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -12463,7 +12091,7 @@ public final class GrpcAPI {
           .equals(other.getPath())) return false;
       if (getPos()
           != other.getPos()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -12487,7 +12115,7 @@ public final class GrpcAPI {
       hash = (37 * hash) + POS_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getPos());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -12604,36 +12232,27 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (noteBuilder_ == null) {
-          note_ = null;
-        } else {
-          note_ = null;
+        bitField0_ = 0;
+        note_ = null;
+        if (noteBuilder_ != null) {
+          noteBuilder_.dispose();
           noteBuilder_ = null;
         }
         alpha_ = com.google.protobuf.ByteString.EMPTY;
-
         root_ = com.google.protobuf.ByteString.EMPTY;
-
         path_ = com.google.protobuf.ByteString.EMPTY;
-
         pos_ = 0L;
-
         return this;
       }
 
@@ -12660,17 +12279,30 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20 buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20 result = new com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20(this);
-        if (noteBuilder_ == null) {
-          result.note_ = note_;
-        } else {
-          result.note_ = noteBuilder_.build();
-        }
-        result.alpha_ = alpha_;
-        result.root_ = root_;
-        result.path_ = path_;
-        result.pos_ = pos_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20 result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.note_ = noteBuilder_ == null
+              ? note_
+              : noteBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.alpha_ = alpha_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.root_ = root_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.path_ = path_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.pos_ = pos_;
+        }
       }
 
       @java.lang.Override
@@ -12732,7 +12364,7 @@ public final class GrpcAPI {
         if (other.getPos() != 0L) {
           setPos(other.getPos());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -12747,19 +12379,60 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20 parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                input.readMessage(
+                    getNoteFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                alpha_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                root_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 34: {
+                path_ = input.readBytes();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              case 40: {
+                pos_ = input.readInt64();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 40
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.github.comrada.tron4j.proto.Common.Note note_;
       private com.google.protobuf.SingleFieldBuilderV3<
@@ -12769,7 +12442,7 @@ public final class GrpcAPI {
        * @return Whether the note field is set.
        */
       public boolean hasNote() {
-        return noteBuilder_ != null || note_ != null;
+        return ((bitField0_ & 0x00000001) != 0);
       }
       /**
        * <code>.protocol.Note note = 1;</code>
@@ -12791,11 +12464,11 @@ public final class GrpcAPI {
             throw new NullPointerException();
           }
           note_ = value;
-          onChanged();
         } else {
           noteBuilder_.setMessage(value);
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
@@ -12805,11 +12478,11 @@ public final class GrpcAPI {
           com.github.comrada.tron4j.proto.Common.Note.Builder builderForValue) {
         if (noteBuilder_ == null) {
           note_ = builderForValue.build();
-          onChanged();
         } else {
           noteBuilder_.setMessage(builderForValue.build());
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
@@ -12817,38 +12490,38 @@ public final class GrpcAPI {
        */
       public Builder mergeNote(com.github.comrada.tron4j.proto.Common.Note value) {
         if (noteBuilder_ == null) {
-          if (note_ != null) {
-            note_ =
-              com.github.comrada.tron4j.proto.Common.Note.newBuilder(note_).mergeFrom(value).buildPartial();
+          if (((bitField0_ & 0x00000001) != 0) &&
+            note_ != null &&
+            note_ != com.github.comrada.tron4j.proto.Common.Note.getDefaultInstance()) {
+            getNoteBuilder().mergeFrom(value);
           } else {
             note_ = value;
           }
-          onChanged();
         } else {
           noteBuilder_.mergeFrom(value);
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
        * <code>.protocol.Note note = 1;</code>
        */
       public Builder clearNote() {
-        if (noteBuilder_ == null) {
-          note_ = null;
-          onChanged();
-        } else {
-          note_ = null;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        note_ = null;
+        if (noteBuilder_ != null) {
+          noteBuilder_.dispose();
           noteBuilder_ = null;
         }
-
+        onChanged();
         return this;
       }
       /**
        * <code>.protocol.Note note = 1;</code>
        */
       public com.github.comrada.tron4j.proto.Common.Note.Builder getNoteBuilder() {
-        
+        bitField0_ |= 0x00000001;
         onChanged();
         return getNoteFieldBuilder().getBuilder();
       }
@@ -12895,11 +12568,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setAlpha(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         alpha_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -12908,7 +12579,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearAlpha() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         alpha_ = getDefaultInstance().getAlpha();
         onChanged();
         return this;
@@ -12929,11 +12600,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setRoot(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         root_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -12942,7 +12611,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearRoot() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         root_ = getDefaultInstance().getRoot();
         onChanged();
         return this;
@@ -12963,11 +12632,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setPath(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         path_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -12976,7 +12643,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearPath() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         path_ = getDefaultInstance().getPath();
         onChanged();
         return this;
@@ -12999,6 +12666,7 @@ public final class GrpcAPI {
       public Builder setPos(long value) {
         
         pos_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -13007,7 +12675,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearPos() {
-        
+        bitField0_ = (bitField0_ & ~0x00000010);
         pos_ = 0L;
         onChanged();
         return this;
@@ -13045,7 +12713,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new SpendNoteTRC20(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -13207,107 +12886,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private PrivateShieldedTRC20Parameters(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ask_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              nsk_ = input.readBytes();
-              break;
-            }
-            case 26: {
-
-              ovk_ = input.readBytes();
-              break;
-            }
-            case 34: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              fromAmount_ = s;
-              break;
-            }
-            case 42: {
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                shieldedSpends_ = new java.util.ArrayList<com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              shieldedSpends_.add(
-                  input.readMessage(com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20.parser(), extensionRegistry));
-              break;
-            }
-            case 50: {
-              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
-                shieldedReceives_ = new java.util.ArrayList<com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              shieldedReceives_.add(
-                  input.readMessage(com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote.parser(), extensionRegistry));
-              break;
-            }
-            case 58: {
-
-              transparentToAddress_ = input.readBytes();
-              break;
-            }
-            case 66: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              toAmount_ = s;
-              break;
-            }
-            case 74: {
-
-              shieldedTRC20ContractAddress_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          shieldedSpends_ = java.util.Collections.unmodifiableList(shieldedSpends_);
-        }
-        if (((mutable_bitField0_ & 0x00000002) != 0)) {
-          shieldedReceives_ = java.util.Collections.unmodifiableList(shieldedReceives_);
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_PrivateShieldedTRC20Parameters_descriptor;
@@ -13322,7 +12900,7 @@ public final class GrpcAPI {
     }
 
     public static final int ASK_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ask_;
+    private com.google.protobuf.ByteString ask_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes ask = 1;</code>
      * @return The ask.
@@ -13333,7 +12911,7 @@ public final class GrpcAPI {
     }
 
     public static final int NSK_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString nsk_;
+    private com.google.protobuf.ByteString nsk_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes nsk = 2;</code>
      * @return The nsk.
@@ -13344,7 +12922,7 @@ public final class GrpcAPI {
     }
 
     public static final int OVK_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString ovk_;
+    private com.google.protobuf.ByteString ovk_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes ovk = 3;</code>
      * @return The ovk.
@@ -13355,7 +12933,8 @@ public final class GrpcAPI {
     }
 
     public static final int FROM_AMOUNT_FIELD_NUMBER = 4;
-    private volatile java.lang.Object fromAmount_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object fromAmount_ = "";
     /**
      * <code>string from_amount = 4;</code>
      * @return The fromAmount.
@@ -13393,6 +12972,7 @@ public final class GrpcAPI {
     }
 
     public static final int SHIELDED_SPENDS_FIELD_NUMBER = 5;
+    @SuppressWarnings("serial")
     private java.util.List<com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20> shieldedSpends_;
     /**
      * <code>repeated .protocol.SpendNoteTRC20 shielded_spends = 5;</code>
@@ -13433,6 +13013,7 @@ public final class GrpcAPI {
     }
 
     public static final int SHIELDED_RECEIVES_FIELD_NUMBER = 6;
+    @SuppressWarnings("serial")
     private java.util.List<com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote> shieldedReceives_;
     /**
      * <code>repeated .protocol.ReceiveNote shielded_receives = 6;</code>
@@ -13473,7 +13054,7 @@ public final class GrpcAPI {
     }
 
     public static final int TRANSPARENT_TO_ADDRESS_FIELD_NUMBER = 7;
-    private com.google.protobuf.ByteString transparentToAddress_;
+    private com.google.protobuf.ByteString transparentToAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes transparent_to_address = 7;</code>
      * @return The transparentToAddress.
@@ -13484,7 +13065,8 @@ public final class GrpcAPI {
     }
 
     public static final int TO_AMOUNT_FIELD_NUMBER = 8;
-    private volatile java.lang.Object toAmount_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object toAmount_ = "";
     /**
      * <code>string to_amount = 8;</code>
      * @return The toAmount.
@@ -13522,7 +13104,7 @@ public final class GrpcAPI {
     }
 
     public static final int SHIELDED_TRC20_CONTRACT_ADDRESS_FIELD_NUMBER = 9;
-    private com.google.protobuf.ByteString shieldedTRC20ContractAddress_;
+    private com.google.protobuf.ByteString shieldedTRC20ContractAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes shielded_TRC20_contract_address = 9;</code>
      * @return The shieldedTRC20ContractAddress.
@@ -13573,7 +13155,7 @@ public final class GrpcAPI {
       if (!shieldedTRC20ContractAddress_.isEmpty()) {
         output.writeBytes(9, shieldedTRC20ContractAddress_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -13616,7 +13198,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(9, shieldedTRC20ContractAddress_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -13649,7 +13231,7 @@ public final class GrpcAPI {
           .equals(other.getToAmount())) return false;
       if (!getShieldedTRC20ContractAddress()
           .equals(other.getShieldedTRC20ContractAddress())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -13682,7 +13264,7 @@ public final class GrpcAPI {
       hash = (53 * hash) + getToAmount().hashCode();
       hash = (37 * hash) + SHIELDED_TRC20_CONTRACT_ADDRESS_FIELD_NUMBER;
       hash = (53 * hash) + getShieldedTRC20ContractAddress().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -13799,50 +13381,39 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.PrivateShieldedTRC20Parameters.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-          getShieldedSpendsFieldBuilder();
-          getShieldedReceivesFieldBuilder();
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ask_ = com.google.protobuf.ByteString.EMPTY;
-
         nsk_ = com.google.protobuf.ByteString.EMPTY;
-
         ovk_ = com.google.protobuf.ByteString.EMPTY;
-
         fromAmount_ = "";
-
         if (shieldedSpendsBuilder_ == null) {
           shieldedSpends_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
+          shieldedSpends_ = null;
           shieldedSpendsBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000010);
         if (shieldedReceivesBuilder_ == null) {
           shieldedReceives_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
+          shieldedReceives_ = null;
           shieldedReceivesBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000020);
         transparentToAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         toAmount_ = "";
-
         shieldedTRC20ContractAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -13869,34 +13440,56 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.PrivateShieldedTRC20Parameters buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.PrivateShieldedTRC20Parameters result = new com.github.comrada.tron4j.api.GrpcAPI.PrivateShieldedTRC20Parameters(this);
-        int from_bitField0_ = bitField0_;
-        result.ask_ = ask_;
-        result.nsk_ = nsk_;
-        result.ovk_ = ovk_;
-        result.fromAmount_ = fromAmount_;
+        buildPartialRepeatedFields(result);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartialRepeatedFields(com.github.comrada.tron4j.api.GrpcAPI.PrivateShieldedTRC20Parameters result) {
         if (shieldedSpendsBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) != 0)) {
+          if (((bitField0_ & 0x00000010) != 0)) {
             shieldedSpends_ = java.util.Collections.unmodifiableList(shieldedSpends_);
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000010);
           }
           result.shieldedSpends_ = shieldedSpends_;
         } else {
           result.shieldedSpends_ = shieldedSpendsBuilder_.build();
         }
         if (shieldedReceivesBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) != 0)) {
+          if (((bitField0_ & 0x00000020) != 0)) {
             shieldedReceives_ = java.util.Collections.unmodifiableList(shieldedReceives_);
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000020);
           }
           result.shieldedReceives_ = shieldedReceives_;
         } else {
           result.shieldedReceives_ = shieldedReceivesBuilder_.build();
         }
-        result.transparentToAddress_ = transparentToAddress_;
-        result.toAmount_ = toAmount_;
-        result.shieldedTRC20ContractAddress_ = shieldedTRC20ContractAddress_;
-        onBuilt();
-        return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.PrivateShieldedTRC20Parameters result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ask_ = ask_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.nsk_ = nsk_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.ovk_ = ovk_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.fromAmount_ = fromAmount_;
+        }
+        if (((from_bitField0_ & 0x00000040) != 0)) {
+          result.transparentToAddress_ = transparentToAddress_;
+        }
+        if (((from_bitField0_ & 0x00000080) != 0)) {
+          result.toAmount_ = toAmount_;
+        }
+        if (((from_bitField0_ & 0x00000100) != 0)) {
+          result.shieldedTRC20ContractAddress_ = shieldedTRC20ContractAddress_;
+        }
       }
 
       @java.lang.Override
@@ -13954,13 +13547,14 @@ public final class GrpcAPI {
         }
         if (!other.getFromAmount().isEmpty()) {
           fromAmount_ = other.fromAmount_;
+          bitField0_ |= 0x00000008;
           onChanged();
         }
         if (shieldedSpendsBuilder_ == null) {
           if (!other.shieldedSpends_.isEmpty()) {
             if (shieldedSpends_.isEmpty()) {
               shieldedSpends_ = other.shieldedSpends_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000010);
             } else {
               ensureShieldedSpendsIsMutable();
               shieldedSpends_.addAll(other.shieldedSpends_);
@@ -13973,7 +13567,7 @@ public final class GrpcAPI {
               shieldedSpendsBuilder_.dispose();
               shieldedSpendsBuilder_ = null;
               shieldedSpends_ = other.shieldedSpends_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000010);
               shieldedSpendsBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getShieldedSpendsFieldBuilder() : null;
@@ -13986,7 +13580,7 @@ public final class GrpcAPI {
           if (!other.shieldedReceives_.isEmpty()) {
             if (shieldedReceives_.isEmpty()) {
               shieldedReceives_ = other.shieldedReceives_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000020);
             } else {
               ensureShieldedReceivesIsMutable();
               shieldedReceives_.addAll(other.shieldedReceives_);
@@ -13999,7 +13593,7 @@ public final class GrpcAPI {
               shieldedReceivesBuilder_.dispose();
               shieldedReceivesBuilder_ = null;
               shieldedReceives_ = other.shieldedReceives_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000020);
               shieldedReceivesBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getShieldedReceivesFieldBuilder() : null;
@@ -14013,12 +13607,13 @@ public final class GrpcAPI {
         }
         if (!other.getToAmount().isEmpty()) {
           toAmount_ = other.toAmount_;
+          bitField0_ |= 0x00000080;
           onChanged();
         }
         if (other.getShieldedTRC20ContractAddress() != com.google.protobuf.ByteString.EMPTY) {
           setShieldedTRC20ContractAddress(other.getShieldedTRC20ContractAddress());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -14033,17 +13628,91 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.PrivateShieldedTRC20Parameters parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ask_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                nsk_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                ovk_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 34: {
+                fromAmount_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              case 42: {
+                com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20 m =
+                    input.readMessage(
+                        com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20.parser(),
+                        extensionRegistry);
+                if (shieldedSpendsBuilder_ == null) {
+                  ensureShieldedSpendsIsMutable();
+                  shieldedSpends_.add(m);
+                } else {
+                  shieldedSpendsBuilder_.addMessage(m);
+                }
+                break;
+              } // case 42
+              case 50: {
+                com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote m =
+                    input.readMessage(
+                        com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote.parser(),
+                        extensionRegistry);
+                if (shieldedReceivesBuilder_ == null) {
+                  ensureShieldedReceivesIsMutable();
+                  shieldedReceives_.add(m);
+                } else {
+                  shieldedReceivesBuilder_.addMessage(m);
+                }
+                break;
+              } // case 50
+              case 58: {
+                transparentToAddress_ = input.readBytes();
+                bitField0_ |= 0x00000040;
+                break;
+              } // case 58
+              case 66: {
+                toAmount_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000080;
+                break;
+              } // case 66
+              case 74: {
+                shieldedTRC20ContractAddress_ = input.readBytes();
+                bitField0_ |= 0x00000100;
+                break;
+              } // case 74
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.PrivateShieldedTRC20Parameters) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
       private int bitField0_;
@@ -14063,11 +13732,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setAsk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ask_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -14076,7 +13743,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearAsk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ask_ = getDefaultInstance().getAsk();
         onChanged();
         return this;
@@ -14097,11 +13764,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setNsk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         nsk_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -14110,7 +13775,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearNsk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         nsk_ = getDefaultInstance().getNsk();
         onChanged();
         return this;
@@ -14131,11 +13796,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setOvk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ovk_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -14144,7 +13807,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearOvk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         ovk_ = getDefaultInstance().getOvk();
         onChanged();
         return this;
@@ -14191,11 +13854,9 @@ public final class GrpcAPI {
        */
       public Builder setFromAmount(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         fromAmount_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -14204,8 +13865,8 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearFromAmount() {
-        
         fromAmount_ = getDefaultInstance().getFromAmount();
+        bitField0_ = (bitField0_ & ~0x00000008);
         onChanged();
         return this;
       }
@@ -14216,12 +13877,10 @@ public final class GrpcAPI {
        */
       public Builder setFromAmountBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         fromAmount_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -14229,9 +13888,9 @@ public final class GrpcAPI {
       private java.util.List<com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20> shieldedSpends_ =
         java.util.Collections.emptyList();
       private void ensureShieldedSpendsIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
+        if (!((bitField0_ & 0x00000010) != 0)) {
           shieldedSpends_ = new java.util.ArrayList<com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20>(shieldedSpends_);
-          bitField0_ |= 0x00000001;
+          bitField0_ |= 0x00000010;
          }
       }
 
@@ -14381,7 +14040,7 @@ public final class GrpcAPI {
       public Builder clearShieldedSpends() {
         if (shieldedSpendsBuilder_ == null) {
           shieldedSpends_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+          bitField0_ = (bitField0_ & ~0x00000010);
           onChanged();
         } else {
           shieldedSpendsBuilder_.clear();
@@ -14458,7 +14117,7 @@ public final class GrpcAPI {
           shieldedSpendsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20, com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20.Builder, com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20OrBuilder>(
                   shieldedSpends_,
-                  ((bitField0_ & 0x00000001) != 0),
+                  ((bitField0_ & 0x00000010) != 0),
                   getParentForChildren(),
                   isClean());
           shieldedSpends_ = null;
@@ -14469,9 +14128,9 @@ public final class GrpcAPI {
       private java.util.List<com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote> shieldedReceives_ =
         java.util.Collections.emptyList();
       private void ensureShieldedReceivesIsMutable() {
-        if (!((bitField0_ & 0x00000002) != 0)) {
+        if (!((bitField0_ & 0x00000020) != 0)) {
           shieldedReceives_ = new java.util.ArrayList<com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote>(shieldedReceives_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000020;
          }
       }
 
@@ -14621,7 +14280,7 @@ public final class GrpcAPI {
       public Builder clearShieldedReceives() {
         if (shieldedReceivesBuilder_ == null) {
           shieldedReceives_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000020);
           onChanged();
         } else {
           shieldedReceivesBuilder_.clear();
@@ -14698,7 +14357,7 @@ public final class GrpcAPI {
           shieldedReceivesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote, com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote.Builder, com.github.comrada.tron4j.api.GrpcAPI.ReceiveNoteOrBuilder>(
                   shieldedReceives_,
-                  ((bitField0_ & 0x00000002) != 0),
+                  ((bitField0_ & 0x00000020) != 0),
                   getParentForChildren(),
                   isClean());
           shieldedReceives_ = null;
@@ -14721,11 +14380,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setTransparentToAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         transparentToAddress_ = value;
+        bitField0_ |= 0x00000040;
         onChanged();
         return this;
       }
@@ -14734,7 +14391,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearTransparentToAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000040);
         transparentToAddress_ = getDefaultInstance().getTransparentToAddress();
         onChanged();
         return this;
@@ -14781,11 +14438,9 @@ public final class GrpcAPI {
        */
       public Builder setToAmount(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         toAmount_ = value;
+        bitField0_ |= 0x00000080;
         onChanged();
         return this;
       }
@@ -14794,8 +14449,8 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearToAmount() {
-        
         toAmount_ = getDefaultInstance().getToAmount();
+        bitField0_ = (bitField0_ & ~0x00000080);
         onChanged();
         return this;
       }
@@ -14806,12 +14461,10 @@ public final class GrpcAPI {
        */
       public Builder setToAmountBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         toAmount_ = value;
+        bitField0_ |= 0x00000080;
         onChanged();
         return this;
       }
@@ -14831,11 +14484,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setShieldedTRC20ContractAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         shieldedTRC20ContractAddress_ = value;
+        bitField0_ |= 0x00000100;
         onChanged();
         return this;
       }
@@ -14844,7 +14495,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearShieldedTRC20ContractAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000100);
         shieldedTRC20ContractAddress_ = getDefaultInstance().getShieldedTRC20ContractAddress();
         onChanged();
         return this;
@@ -14882,7 +14533,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new PrivateShieldedTRC20Parameters(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -15044,107 +14706,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private PrivateShieldedTRC20ParametersWithoutAsk(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ak_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              nsk_ = input.readBytes();
-              break;
-            }
-            case 26: {
-
-              ovk_ = input.readBytes();
-              break;
-            }
-            case 34: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              fromAmount_ = s;
-              break;
-            }
-            case 42: {
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                shieldedSpends_ = new java.util.ArrayList<com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              shieldedSpends_.add(
-                  input.readMessage(com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20.parser(), extensionRegistry));
-              break;
-            }
-            case 50: {
-              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
-                shieldedReceives_ = new java.util.ArrayList<com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              shieldedReceives_.add(
-                  input.readMessage(com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote.parser(), extensionRegistry));
-              break;
-            }
-            case 58: {
-
-              transparentToAddress_ = input.readBytes();
-              break;
-            }
-            case 66: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              toAmount_ = s;
-              break;
-            }
-            case 74: {
-
-              shieldedTRC20ContractAddress_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          shieldedSpends_ = java.util.Collections.unmodifiableList(shieldedSpends_);
-        }
-        if (((mutable_bitField0_ & 0x00000002) != 0)) {
-          shieldedReceives_ = java.util.Collections.unmodifiableList(shieldedReceives_);
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_PrivateShieldedTRC20ParametersWithoutAsk_descriptor;
@@ -15159,7 +14720,7 @@ public final class GrpcAPI {
     }
 
     public static final int AK_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ak_;
+    private com.google.protobuf.ByteString ak_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes ak = 1;</code>
      * @return The ak.
@@ -15170,7 +14731,7 @@ public final class GrpcAPI {
     }
 
     public static final int NSK_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString nsk_;
+    private com.google.protobuf.ByteString nsk_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes nsk = 2;</code>
      * @return The nsk.
@@ -15181,7 +14742,7 @@ public final class GrpcAPI {
     }
 
     public static final int OVK_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString ovk_;
+    private com.google.protobuf.ByteString ovk_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes ovk = 3;</code>
      * @return The ovk.
@@ -15192,7 +14753,8 @@ public final class GrpcAPI {
     }
 
     public static final int FROM_AMOUNT_FIELD_NUMBER = 4;
-    private volatile java.lang.Object fromAmount_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object fromAmount_ = "";
     /**
      * <code>string from_amount = 4;</code>
      * @return The fromAmount.
@@ -15230,6 +14792,7 @@ public final class GrpcAPI {
     }
 
     public static final int SHIELDED_SPENDS_FIELD_NUMBER = 5;
+    @SuppressWarnings("serial")
     private java.util.List<com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20> shieldedSpends_;
     /**
      * <code>repeated .protocol.SpendNoteTRC20 shielded_spends = 5;</code>
@@ -15270,6 +14833,7 @@ public final class GrpcAPI {
     }
 
     public static final int SHIELDED_RECEIVES_FIELD_NUMBER = 6;
+    @SuppressWarnings("serial")
     private java.util.List<com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote> shieldedReceives_;
     /**
      * <code>repeated .protocol.ReceiveNote shielded_receives = 6;</code>
@@ -15310,7 +14874,7 @@ public final class GrpcAPI {
     }
 
     public static final int TRANSPARENT_TO_ADDRESS_FIELD_NUMBER = 7;
-    private com.google.protobuf.ByteString transparentToAddress_;
+    private com.google.protobuf.ByteString transparentToAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes transparent_to_address = 7;</code>
      * @return The transparentToAddress.
@@ -15321,7 +14885,8 @@ public final class GrpcAPI {
     }
 
     public static final int TO_AMOUNT_FIELD_NUMBER = 8;
-    private volatile java.lang.Object toAmount_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object toAmount_ = "";
     /**
      * <code>string to_amount = 8;</code>
      * @return The toAmount.
@@ -15359,7 +14924,7 @@ public final class GrpcAPI {
     }
 
     public static final int SHIELDED_TRC20_CONTRACT_ADDRESS_FIELD_NUMBER = 9;
-    private com.google.protobuf.ByteString shieldedTRC20ContractAddress_;
+    private com.google.protobuf.ByteString shieldedTRC20ContractAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes shielded_TRC20_contract_address = 9;</code>
      * @return The shieldedTRC20ContractAddress.
@@ -15410,7 +14975,7 @@ public final class GrpcAPI {
       if (!shieldedTRC20ContractAddress_.isEmpty()) {
         output.writeBytes(9, shieldedTRC20ContractAddress_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -15453,7 +15018,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(9, shieldedTRC20ContractAddress_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -15486,7 +15051,7 @@ public final class GrpcAPI {
           .equals(other.getToAmount())) return false;
       if (!getShieldedTRC20ContractAddress()
           .equals(other.getShieldedTRC20ContractAddress())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -15519,7 +15084,7 @@ public final class GrpcAPI {
       hash = (53 * hash) + getToAmount().hashCode();
       hash = (37 * hash) + SHIELDED_TRC20_CONTRACT_ADDRESS_FIELD_NUMBER;
       hash = (53 * hash) + getShieldedTRC20ContractAddress().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -15636,50 +15201,39 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.PrivateShieldedTRC20ParametersWithoutAsk.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-          getShieldedSpendsFieldBuilder();
-          getShieldedReceivesFieldBuilder();
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ak_ = com.google.protobuf.ByteString.EMPTY;
-
         nsk_ = com.google.protobuf.ByteString.EMPTY;
-
         ovk_ = com.google.protobuf.ByteString.EMPTY;
-
         fromAmount_ = "";
-
         if (shieldedSpendsBuilder_ == null) {
           shieldedSpends_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
+          shieldedSpends_ = null;
           shieldedSpendsBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000010);
         if (shieldedReceivesBuilder_ == null) {
           shieldedReceives_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
+          shieldedReceives_ = null;
           shieldedReceivesBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000020);
         transparentToAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         toAmount_ = "";
-
         shieldedTRC20ContractAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -15706,34 +15260,56 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.PrivateShieldedTRC20ParametersWithoutAsk buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.PrivateShieldedTRC20ParametersWithoutAsk result = new com.github.comrada.tron4j.api.GrpcAPI.PrivateShieldedTRC20ParametersWithoutAsk(this);
-        int from_bitField0_ = bitField0_;
-        result.ak_ = ak_;
-        result.nsk_ = nsk_;
-        result.ovk_ = ovk_;
-        result.fromAmount_ = fromAmount_;
+        buildPartialRepeatedFields(result);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartialRepeatedFields(com.github.comrada.tron4j.api.GrpcAPI.PrivateShieldedTRC20ParametersWithoutAsk result) {
         if (shieldedSpendsBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) != 0)) {
+          if (((bitField0_ & 0x00000010) != 0)) {
             shieldedSpends_ = java.util.Collections.unmodifiableList(shieldedSpends_);
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000010);
           }
           result.shieldedSpends_ = shieldedSpends_;
         } else {
           result.shieldedSpends_ = shieldedSpendsBuilder_.build();
         }
         if (shieldedReceivesBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) != 0)) {
+          if (((bitField0_ & 0x00000020) != 0)) {
             shieldedReceives_ = java.util.Collections.unmodifiableList(shieldedReceives_);
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000020);
           }
           result.shieldedReceives_ = shieldedReceives_;
         } else {
           result.shieldedReceives_ = shieldedReceivesBuilder_.build();
         }
-        result.transparentToAddress_ = transparentToAddress_;
-        result.toAmount_ = toAmount_;
-        result.shieldedTRC20ContractAddress_ = shieldedTRC20ContractAddress_;
-        onBuilt();
-        return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.PrivateShieldedTRC20ParametersWithoutAsk result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ak_ = ak_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.nsk_ = nsk_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.ovk_ = ovk_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.fromAmount_ = fromAmount_;
+        }
+        if (((from_bitField0_ & 0x00000040) != 0)) {
+          result.transparentToAddress_ = transparentToAddress_;
+        }
+        if (((from_bitField0_ & 0x00000080) != 0)) {
+          result.toAmount_ = toAmount_;
+        }
+        if (((from_bitField0_ & 0x00000100) != 0)) {
+          result.shieldedTRC20ContractAddress_ = shieldedTRC20ContractAddress_;
+        }
       }
 
       @java.lang.Override
@@ -15791,13 +15367,14 @@ public final class GrpcAPI {
         }
         if (!other.getFromAmount().isEmpty()) {
           fromAmount_ = other.fromAmount_;
+          bitField0_ |= 0x00000008;
           onChanged();
         }
         if (shieldedSpendsBuilder_ == null) {
           if (!other.shieldedSpends_.isEmpty()) {
             if (shieldedSpends_.isEmpty()) {
               shieldedSpends_ = other.shieldedSpends_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000010);
             } else {
               ensureShieldedSpendsIsMutable();
               shieldedSpends_.addAll(other.shieldedSpends_);
@@ -15810,7 +15387,7 @@ public final class GrpcAPI {
               shieldedSpendsBuilder_.dispose();
               shieldedSpendsBuilder_ = null;
               shieldedSpends_ = other.shieldedSpends_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000010);
               shieldedSpendsBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getShieldedSpendsFieldBuilder() : null;
@@ -15823,7 +15400,7 @@ public final class GrpcAPI {
           if (!other.shieldedReceives_.isEmpty()) {
             if (shieldedReceives_.isEmpty()) {
               shieldedReceives_ = other.shieldedReceives_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000020);
             } else {
               ensureShieldedReceivesIsMutable();
               shieldedReceives_.addAll(other.shieldedReceives_);
@@ -15836,7 +15413,7 @@ public final class GrpcAPI {
               shieldedReceivesBuilder_.dispose();
               shieldedReceivesBuilder_ = null;
               shieldedReceives_ = other.shieldedReceives_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000020);
               shieldedReceivesBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getShieldedReceivesFieldBuilder() : null;
@@ -15850,12 +15427,13 @@ public final class GrpcAPI {
         }
         if (!other.getToAmount().isEmpty()) {
           toAmount_ = other.toAmount_;
+          bitField0_ |= 0x00000080;
           onChanged();
         }
         if (other.getShieldedTRC20ContractAddress() != com.google.protobuf.ByteString.EMPTY) {
           setShieldedTRC20ContractAddress(other.getShieldedTRC20ContractAddress());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -15870,17 +15448,91 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.PrivateShieldedTRC20ParametersWithoutAsk parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ak_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                nsk_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                ovk_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 34: {
+                fromAmount_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              case 42: {
+                com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20 m =
+                    input.readMessage(
+                        com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20.parser(),
+                        extensionRegistry);
+                if (shieldedSpendsBuilder_ == null) {
+                  ensureShieldedSpendsIsMutable();
+                  shieldedSpends_.add(m);
+                } else {
+                  shieldedSpendsBuilder_.addMessage(m);
+                }
+                break;
+              } // case 42
+              case 50: {
+                com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote m =
+                    input.readMessage(
+                        com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote.parser(),
+                        extensionRegistry);
+                if (shieldedReceivesBuilder_ == null) {
+                  ensureShieldedReceivesIsMutable();
+                  shieldedReceives_.add(m);
+                } else {
+                  shieldedReceivesBuilder_.addMessage(m);
+                }
+                break;
+              } // case 50
+              case 58: {
+                transparentToAddress_ = input.readBytes();
+                bitField0_ |= 0x00000040;
+                break;
+              } // case 58
+              case 66: {
+                toAmount_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000080;
+                break;
+              } // case 66
+              case 74: {
+                shieldedTRC20ContractAddress_ = input.readBytes();
+                bitField0_ |= 0x00000100;
+                break;
+              } // case 74
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.PrivateShieldedTRC20ParametersWithoutAsk) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
       private int bitField0_;
@@ -15900,11 +15552,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setAk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ak_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -15913,7 +15563,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearAk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ak_ = getDefaultInstance().getAk();
         onChanged();
         return this;
@@ -15934,11 +15584,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setNsk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         nsk_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -15947,7 +15595,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearNsk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         nsk_ = getDefaultInstance().getNsk();
         onChanged();
         return this;
@@ -15968,11 +15616,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setOvk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ovk_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -15981,7 +15627,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearOvk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         ovk_ = getDefaultInstance().getOvk();
         onChanged();
         return this;
@@ -16028,11 +15674,9 @@ public final class GrpcAPI {
        */
       public Builder setFromAmount(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         fromAmount_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -16041,8 +15685,8 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearFromAmount() {
-        
         fromAmount_ = getDefaultInstance().getFromAmount();
+        bitField0_ = (bitField0_ & ~0x00000008);
         onChanged();
         return this;
       }
@@ -16053,12 +15697,10 @@ public final class GrpcAPI {
        */
       public Builder setFromAmountBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         fromAmount_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -16066,9 +15708,9 @@ public final class GrpcAPI {
       private java.util.List<com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20> shieldedSpends_ =
         java.util.Collections.emptyList();
       private void ensureShieldedSpendsIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
+        if (!((bitField0_ & 0x00000010) != 0)) {
           shieldedSpends_ = new java.util.ArrayList<com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20>(shieldedSpends_);
-          bitField0_ |= 0x00000001;
+          bitField0_ |= 0x00000010;
          }
       }
 
@@ -16218,7 +15860,7 @@ public final class GrpcAPI {
       public Builder clearShieldedSpends() {
         if (shieldedSpendsBuilder_ == null) {
           shieldedSpends_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+          bitField0_ = (bitField0_ & ~0x00000010);
           onChanged();
         } else {
           shieldedSpendsBuilder_.clear();
@@ -16295,7 +15937,7 @@ public final class GrpcAPI {
           shieldedSpendsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20, com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20.Builder, com.github.comrada.tron4j.api.GrpcAPI.SpendNoteTRC20OrBuilder>(
                   shieldedSpends_,
-                  ((bitField0_ & 0x00000001) != 0),
+                  ((bitField0_ & 0x00000010) != 0),
                   getParentForChildren(),
                   isClean());
           shieldedSpends_ = null;
@@ -16306,9 +15948,9 @@ public final class GrpcAPI {
       private java.util.List<com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote> shieldedReceives_ =
         java.util.Collections.emptyList();
       private void ensureShieldedReceivesIsMutable() {
-        if (!((bitField0_ & 0x00000002) != 0)) {
+        if (!((bitField0_ & 0x00000020) != 0)) {
           shieldedReceives_ = new java.util.ArrayList<com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote>(shieldedReceives_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000020;
          }
       }
 
@@ -16458,7 +16100,7 @@ public final class GrpcAPI {
       public Builder clearShieldedReceives() {
         if (shieldedReceivesBuilder_ == null) {
           shieldedReceives_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000020);
           onChanged();
         } else {
           shieldedReceivesBuilder_.clear();
@@ -16535,7 +16177,7 @@ public final class GrpcAPI {
           shieldedReceivesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote, com.github.comrada.tron4j.api.GrpcAPI.ReceiveNote.Builder, com.github.comrada.tron4j.api.GrpcAPI.ReceiveNoteOrBuilder>(
                   shieldedReceives_,
-                  ((bitField0_ & 0x00000002) != 0),
+                  ((bitField0_ & 0x00000020) != 0),
                   getParentForChildren(),
                   isClean());
           shieldedReceives_ = null;
@@ -16558,11 +16200,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setTransparentToAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         transparentToAddress_ = value;
+        bitField0_ |= 0x00000040;
         onChanged();
         return this;
       }
@@ -16571,7 +16211,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearTransparentToAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000040);
         transparentToAddress_ = getDefaultInstance().getTransparentToAddress();
         onChanged();
         return this;
@@ -16618,11 +16258,9 @@ public final class GrpcAPI {
        */
       public Builder setToAmount(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         toAmount_ = value;
+        bitField0_ |= 0x00000080;
         onChanged();
         return this;
       }
@@ -16631,8 +16269,8 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearToAmount() {
-        
         toAmount_ = getDefaultInstance().getToAmount();
+        bitField0_ = (bitField0_ & ~0x00000080);
         onChanged();
         return this;
       }
@@ -16643,12 +16281,10 @@ public final class GrpcAPI {
        */
       public Builder setToAmountBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         toAmount_ = value;
+        bitField0_ |= 0x00000080;
         onChanged();
         return this;
       }
@@ -16668,11 +16304,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setShieldedTRC20ContractAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         shieldedTRC20ContractAddress_ = value;
+        bitField0_ |= 0x00000100;
         onChanged();
         return this;
       }
@@ -16681,7 +16315,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearShieldedTRC20ContractAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000100);
         shieldedTRC20ContractAddress_ = getDefaultInstance().getShieldedTRC20ContractAddress();
         onChanged();
         return this;
@@ -16719,7 +16353,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new PrivateShieldedTRC20ParametersWithoutAsk(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -16824,75 +16469,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private SpendDescription(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              valueCommitment_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              anchor_ = input.readBytes();
-              break;
-            }
-            case 26: {
-
-              nullifier_ = input.readBytes();
-              break;
-            }
-            case 34: {
-
-              rk_ = input.readBytes();
-              break;
-            }
-            case 42: {
-
-              zkproof_ = input.readBytes();
-              break;
-            }
-            case 50: {
-
-              spendAuthoritySignature_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_SpendDescription_descriptor;
@@ -16907,7 +16483,7 @@ public final class GrpcAPI {
     }
 
     public static final int VALUE_COMMITMENT_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString valueCommitment_;
+    private com.google.protobuf.ByteString valueCommitment_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes value_commitment = 1;</code>
      * @return The valueCommitment.
@@ -16918,7 +16494,7 @@ public final class GrpcAPI {
     }
 
     public static final int ANCHOR_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString anchor_;
+    private com.google.protobuf.ByteString anchor_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <pre>
      * merkle root
@@ -16933,7 +16509,7 @@ public final class GrpcAPI {
     }
 
     public static final int NULLIFIER_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString nullifier_;
+    private com.google.protobuf.ByteString nullifier_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <pre>
      * used for check double spend
@@ -16948,7 +16524,7 @@ public final class GrpcAPI {
     }
 
     public static final int RK_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString rk_;
+    private com.google.protobuf.ByteString rk_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <pre>
      * used for check spend authority signature
@@ -16963,7 +16539,7 @@ public final class GrpcAPI {
     }
 
     public static final int ZKPROOF_FIELD_NUMBER = 5;
-    private com.google.protobuf.ByteString zkproof_;
+    private com.google.protobuf.ByteString zkproof_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes zkproof = 5;</code>
      * @return The zkproof.
@@ -16974,7 +16550,7 @@ public final class GrpcAPI {
     }
 
     public static final int SPEND_AUTHORITY_SIGNATURE_FIELD_NUMBER = 6;
-    private com.google.protobuf.ByteString spendAuthoritySignature_;
+    private com.google.protobuf.ByteString spendAuthoritySignature_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes spend_authority_signature = 6;</code>
      * @return The spendAuthoritySignature.
@@ -17016,7 +16592,7 @@ public final class GrpcAPI {
       if (!spendAuthoritySignature_.isEmpty()) {
         output.writeBytes(6, spendAuthoritySignature_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -17049,7 +16625,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(6, spendAuthoritySignature_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -17076,7 +16652,7 @@ public final class GrpcAPI {
           .equals(other.getZkproof())) return false;
       if (!getSpendAuthoritySignature()
           .equals(other.getSpendAuthoritySignature())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -17099,7 +16675,7 @@ public final class GrpcAPI {
       hash = (53 * hash) + getZkproof().hashCode();
       hash = (37 * hash) + SPEND_AUTHORITY_SIGNATURE_FIELD_NUMBER;
       hash = (53 * hash) + getSpendAuthoritySignature().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -17216,34 +16792,24 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.SpendDescription.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         valueCommitment_ = com.google.protobuf.ByteString.EMPTY;
-
         anchor_ = com.google.protobuf.ByteString.EMPTY;
-
         nullifier_ = com.google.protobuf.ByteString.EMPTY;
-
         rk_ = com.google.protobuf.ByteString.EMPTY;
-
         zkproof_ = com.google.protobuf.ByteString.EMPTY;
-
         spendAuthoritySignature_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -17270,14 +16836,31 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.SpendDescription buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.SpendDescription result = new com.github.comrada.tron4j.api.GrpcAPI.SpendDescription(this);
-        result.valueCommitment_ = valueCommitment_;
-        result.anchor_ = anchor_;
-        result.nullifier_ = nullifier_;
-        result.rk_ = rk_;
-        result.zkproof_ = zkproof_;
-        result.spendAuthoritySignature_ = spendAuthoritySignature_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.SpendDescription result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.valueCommitment_ = valueCommitment_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.anchor_ = anchor_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.nullifier_ = nullifier_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.rk_ = rk_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.zkproof_ = zkproof_;
+        }
+        if (((from_bitField0_ & 0x00000020) != 0)) {
+          result.spendAuthoritySignature_ = spendAuthoritySignature_;
+        }
       }
 
       @java.lang.Override
@@ -17342,7 +16925,7 @@ public final class GrpcAPI {
         if (other.getSpendAuthoritySignature() != com.google.protobuf.ByteString.EMPTY) {
           setSpendAuthoritySignature(other.getSpendAuthoritySignature());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -17357,19 +16940,63 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.SpendDescription parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                valueCommitment_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                anchor_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                nullifier_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 34: {
+                rk_ = input.readBytes();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              case 42: {
+                zkproof_ = input.readBytes();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 42
+              case 50: {
+                spendAuthoritySignature_ = input.readBytes();
+                bitField0_ |= 0x00000020;
+                break;
+              } // case 50
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.SpendDescription) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString valueCommitment_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -17386,11 +17013,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setValueCommitment(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         valueCommitment_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -17399,7 +17024,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearValueCommitment() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         valueCommitment_ = getDefaultInstance().getValueCommitment();
         onChanged();
         return this;
@@ -17428,11 +17053,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setAnchor(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         anchor_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -17445,7 +17068,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearAnchor() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         anchor_ = getDefaultInstance().getAnchor();
         onChanged();
         return this;
@@ -17474,11 +17097,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setNullifier(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         nullifier_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -17491,7 +17112,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearNullifier() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         nullifier_ = getDefaultInstance().getNullifier();
         onChanged();
         return this;
@@ -17520,11 +17141,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setRk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         rk_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -17537,7 +17156,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearRk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         rk_ = getDefaultInstance().getRk();
         onChanged();
         return this;
@@ -17558,11 +17177,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setZkproof(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         zkproof_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -17571,7 +17188,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearZkproof() {
-        
+        bitField0_ = (bitField0_ & ~0x00000010);
         zkproof_ = getDefaultInstance().getZkproof();
         onChanged();
         return this;
@@ -17592,11 +17209,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setSpendAuthoritySignature(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         spendAuthoritySignature_ = value;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
@@ -17605,7 +17220,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearSpendAuthoritySignature() {
-        
+        bitField0_ = (bitField0_ & ~0x00000020);
         spendAuthoritySignature_ = getDefaultInstance().getSpendAuthoritySignature();
         onChanged();
         return this;
@@ -17643,7 +17258,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new SpendDescription(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -17748,75 +17374,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ReceiveDescription(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              valueCommitment_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              noteCommitment_ = input.readBytes();
-              break;
-            }
-            case 26: {
-
-              epk_ = input.readBytes();
-              break;
-            }
-            case 34: {
-
-              cEnc_ = input.readBytes();
-              break;
-            }
-            case 42: {
-
-              cOut_ = input.readBytes();
-              break;
-            }
-            case 50: {
-
-              zkproof_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_ReceiveDescription_descriptor;
@@ -17831,7 +17388,7 @@ public final class GrpcAPI {
     }
 
     public static final int VALUE_COMMITMENT_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString valueCommitment_;
+    private com.google.protobuf.ByteString valueCommitment_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes value_commitment = 1;</code>
      * @return The valueCommitment.
@@ -17842,7 +17399,7 @@ public final class GrpcAPI {
     }
 
     public static final int NOTE_COMMITMENT_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString noteCommitment_;
+    private com.google.protobuf.ByteString noteCommitment_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes note_commitment = 2;</code>
      * @return The noteCommitment.
@@ -17853,7 +17410,7 @@ public final class GrpcAPI {
     }
 
     public static final int EPK_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString epk_;
+    private com.google.protobuf.ByteString epk_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <pre>
      * for Encryption
@@ -17868,7 +17425,7 @@ public final class GrpcAPI {
     }
 
     public static final int C_ENC_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString cEnc_;
+    private com.google.protobuf.ByteString cEnc_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <pre>
      * Encryption for incoming, decrypt it with ivk
@@ -17883,7 +17440,7 @@ public final class GrpcAPI {
     }
 
     public static final int C_OUT_FIELD_NUMBER = 5;
-    private com.google.protobuf.ByteString cOut_;
+    private com.google.protobuf.ByteString cOut_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <pre>
      * Encryption for audit, decrypt it with ovk
@@ -17898,7 +17455,7 @@ public final class GrpcAPI {
     }
 
     public static final int ZKPROOF_FIELD_NUMBER = 6;
-    private com.google.protobuf.ByteString zkproof_;
+    private com.google.protobuf.ByteString zkproof_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes zkproof = 6;</code>
      * @return The zkproof.
@@ -17940,7 +17497,7 @@ public final class GrpcAPI {
       if (!zkproof_.isEmpty()) {
         output.writeBytes(6, zkproof_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -17973,7 +17530,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(6, zkproof_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -18000,7 +17557,7 @@ public final class GrpcAPI {
           .equals(other.getCOut())) return false;
       if (!getZkproof()
           .equals(other.getZkproof())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -18023,7 +17580,7 @@ public final class GrpcAPI {
       hash = (53 * hash) + getCOut().hashCode();
       hash = (37 * hash) + ZKPROOF_FIELD_NUMBER;
       hash = (53 * hash) + getZkproof().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -18140,34 +17697,24 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.ReceiveDescription.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         valueCommitment_ = com.google.protobuf.ByteString.EMPTY;
-
         noteCommitment_ = com.google.protobuf.ByteString.EMPTY;
-
         epk_ = com.google.protobuf.ByteString.EMPTY;
-
         cEnc_ = com.google.protobuf.ByteString.EMPTY;
-
         cOut_ = com.google.protobuf.ByteString.EMPTY;
-
         zkproof_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -18194,14 +17741,31 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.ReceiveDescription buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.ReceiveDescription result = new com.github.comrada.tron4j.api.GrpcAPI.ReceiveDescription(this);
-        result.valueCommitment_ = valueCommitment_;
-        result.noteCommitment_ = noteCommitment_;
-        result.epk_ = epk_;
-        result.cEnc_ = cEnc_;
-        result.cOut_ = cOut_;
-        result.zkproof_ = zkproof_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.ReceiveDescription result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.valueCommitment_ = valueCommitment_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.noteCommitment_ = noteCommitment_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.epk_ = epk_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.cEnc_ = cEnc_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.cOut_ = cOut_;
+        }
+        if (((from_bitField0_ & 0x00000020) != 0)) {
+          result.zkproof_ = zkproof_;
+        }
       }
 
       @java.lang.Override
@@ -18266,7 +17830,7 @@ public final class GrpcAPI {
         if (other.getZkproof() != com.google.protobuf.ByteString.EMPTY) {
           setZkproof(other.getZkproof());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -18281,19 +17845,63 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.ReceiveDescription parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                valueCommitment_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                noteCommitment_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                epk_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 34: {
+                cEnc_ = input.readBytes();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              case 42: {
+                cOut_ = input.readBytes();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 42
+              case 50: {
+                zkproof_ = input.readBytes();
+                bitField0_ |= 0x00000020;
+                break;
+              } // case 50
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.ReceiveDescription) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString valueCommitment_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -18310,11 +17918,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setValueCommitment(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         valueCommitment_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -18323,7 +17929,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearValueCommitment() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         valueCommitment_ = getDefaultInstance().getValueCommitment();
         onChanged();
         return this;
@@ -18344,11 +17950,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setNoteCommitment(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         noteCommitment_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -18357,7 +17961,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearNoteCommitment() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         noteCommitment_ = getDefaultInstance().getNoteCommitment();
         onChanged();
         return this;
@@ -18386,11 +17990,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setEpk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         epk_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -18403,7 +18005,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearEpk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         epk_ = getDefaultInstance().getEpk();
         onChanged();
         return this;
@@ -18432,11 +18034,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setCEnc(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         cEnc_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -18449,7 +18049,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearCEnc() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         cEnc_ = getDefaultInstance().getCEnc();
         onChanged();
         return this;
@@ -18478,11 +18078,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setCOut(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         cOut_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -18495,7 +18093,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearCOut() {
-        
+        bitField0_ = (bitField0_ & ~0x00000010);
         cOut_ = getDefaultInstance().getCOut();
         onChanged();
         return this;
@@ -18516,11 +18114,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setZkproof(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         zkproof_ = value;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
@@ -18529,7 +18125,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearZkproof() {
-        
+        bitField0_ = (bitField0_ & ~0x00000020);
         zkproof_ = getDefaultInstance().getZkproof();
         onChanged();
         return this;
@@ -18567,7 +18163,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ReceiveDescription(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -18708,92 +18315,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ShieldedTRC20Parameters(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                spendDescription_ = new java.util.ArrayList<com.github.comrada.tron4j.api.GrpcAPI.SpendDescription>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              spendDescription_.add(
-                  input.readMessage(com.github.comrada.tron4j.api.GrpcAPI.SpendDescription.parser(), extensionRegistry));
-              break;
-            }
-            case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
-                receiveDescription_ = new java.util.ArrayList<com.github.comrada.tron4j.api.GrpcAPI.ReceiveDescription>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              receiveDescription_.add(
-                  input.readMessage(com.github.comrada.tron4j.api.GrpcAPI.ReceiveDescription.parser(), extensionRegistry));
-              break;
-            }
-            case 26: {
-
-              bindingSignature_ = input.readBytes();
-              break;
-            }
-            case 34: {
-
-              messageHash_ = input.readBytes();
-              break;
-            }
-            case 42: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              triggerContractInput_ = s;
-              break;
-            }
-            case 50: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              parameterType_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          spendDescription_ = java.util.Collections.unmodifiableList(spendDescription_);
-        }
-        if (((mutable_bitField0_ & 0x00000002) != 0)) {
-          receiveDescription_ = java.util.Collections.unmodifiableList(receiveDescription_);
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_ShieldedTRC20Parameters_descriptor;
@@ -18808,6 +18329,7 @@ public final class GrpcAPI {
     }
 
     public static final int SPEND_DESCRIPTION_FIELD_NUMBER = 1;
+    @SuppressWarnings("serial")
     private java.util.List<com.github.comrada.tron4j.api.GrpcAPI.SpendDescription> spendDescription_;
     /**
      * <code>repeated .protocol.SpendDescription spend_description = 1;</code>
@@ -18848,6 +18370,7 @@ public final class GrpcAPI {
     }
 
     public static final int RECEIVE_DESCRIPTION_FIELD_NUMBER = 2;
+    @SuppressWarnings("serial")
     private java.util.List<com.github.comrada.tron4j.api.GrpcAPI.ReceiveDescription> receiveDescription_;
     /**
      * <code>repeated .protocol.ReceiveDescription receive_description = 2;</code>
@@ -18888,7 +18411,7 @@ public final class GrpcAPI {
     }
 
     public static final int BINDING_SIGNATURE_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString bindingSignature_;
+    private com.google.protobuf.ByteString bindingSignature_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes binding_signature = 3;</code>
      * @return The bindingSignature.
@@ -18899,7 +18422,7 @@ public final class GrpcAPI {
     }
 
     public static final int MESSAGE_HASH_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString messageHash_;
+    private com.google.protobuf.ByteString messageHash_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes message_hash = 4;</code>
      * @return The messageHash.
@@ -18910,7 +18433,8 @@ public final class GrpcAPI {
     }
 
     public static final int TRIGGER_CONTRACT_INPUT_FIELD_NUMBER = 5;
-    private volatile java.lang.Object triggerContractInput_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object triggerContractInput_ = "";
     /**
      * <code>string trigger_contract_input = 5;</code>
      * @return The triggerContractInput.
@@ -18948,7 +18472,8 @@ public final class GrpcAPI {
     }
 
     public static final int PARAMETER_TYPE_FIELD_NUMBER = 6;
-    private volatile java.lang.Object parameterType_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object parameterType_ = "";
     /**
      * <code>string parameter_type = 6;</code>
      * @return The parameterType.
@@ -19017,7 +18542,7 @@ public final class GrpcAPI {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(parameterType_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 6, parameterType_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -19048,7 +18573,7 @@ public final class GrpcAPI {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(parameterType_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, parameterType_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -19075,7 +18600,7 @@ public final class GrpcAPI {
           .equals(other.getTriggerContractInput())) return false;
       if (!getParameterType()
           .equals(other.getParameterType())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -19102,7 +18627,7 @@ public final class GrpcAPI {
       hash = (53 * hash) + getTriggerContractInput().hashCode();
       hash = (37 * hash) + PARAMETER_TYPE_FIELD_NUMBER;
       hash = (53 * hash) + getParameterType().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -19219,44 +18744,36 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20Parameters.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-          getSpendDescriptionFieldBuilder();
-          getReceiveDescriptionFieldBuilder();
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         if (spendDescriptionBuilder_ == null) {
           spendDescription_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
+          spendDescription_ = null;
           spendDescriptionBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000001);
         if (receiveDescriptionBuilder_ == null) {
           receiveDescription_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
+          receiveDescription_ = null;
           receiveDescriptionBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000002);
         bindingSignature_ = com.google.protobuf.ByteString.EMPTY;
-
         messageHash_ = com.google.protobuf.ByteString.EMPTY;
-
         triggerContractInput_ = "";
-
         parameterType_ = "";
-
         return this;
       }
 
@@ -19283,7 +18800,13 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20Parameters buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20Parameters result = new com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20Parameters(this);
-        int from_bitField0_ = bitField0_;
+        buildPartialRepeatedFields(result);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartialRepeatedFields(com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20Parameters result) {
         if (spendDescriptionBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0)) {
             spendDescription_ = java.util.Collections.unmodifiableList(spendDescription_);
@@ -19302,12 +18825,22 @@ public final class GrpcAPI {
         } else {
           result.receiveDescription_ = receiveDescriptionBuilder_.build();
         }
-        result.bindingSignature_ = bindingSignature_;
-        result.messageHash_ = messageHash_;
-        result.triggerContractInput_ = triggerContractInput_;
-        result.parameterType_ = parameterType_;
-        onBuilt();
-        return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20Parameters result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.bindingSignature_ = bindingSignature_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.messageHash_ = messageHash_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.triggerContractInput_ = triggerContractInput_;
+        }
+        if (((from_bitField0_ & 0x00000020) != 0)) {
+          result.parameterType_ = parameterType_;
+        }
       }
 
       @java.lang.Override
@@ -19414,13 +18947,15 @@ public final class GrpcAPI {
         }
         if (!other.getTriggerContractInput().isEmpty()) {
           triggerContractInput_ = other.triggerContractInput_;
+          bitField0_ |= 0x00000010;
           onChanged();
         }
         if (!other.getParameterType().isEmpty()) {
           parameterType_ = other.parameterType_;
+          bitField0_ |= 0x00000020;
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -19435,17 +18970,76 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20Parameters parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                com.github.comrada.tron4j.api.GrpcAPI.SpendDescription m =
+                    input.readMessage(
+                        com.github.comrada.tron4j.api.GrpcAPI.SpendDescription.parser(),
+                        extensionRegistry);
+                if (spendDescriptionBuilder_ == null) {
+                  ensureSpendDescriptionIsMutable();
+                  spendDescription_.add(m);
+                } else {
+                  spendDescriptionBuilder_.addMessage(m);
+                }
+                break;
+              } // case 10
+              case 18: {
+                com.github.comrada.tron4j.api.GrpcAPI.ReceiveDescription m =
+                    input.readMessage(
+                        com.github.comrada.tron4j.api.GrpcAPI.ReceiveDescription.parser(),
+                        extensionRegistry);
+                if (receiveDescriptionBuilder_ == null) {
+                  ensureReceiveDescriptionIsMutable();
+                  receiveDescription_.add(m);
+                } else {
+                  receiveDescriptionBuilder_.addMessage(m);
+                }
+                break;
+              } // case 18
+              case 26: {
+                bindingSignature_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 34: {
+                messageHash_ = input.readBytes();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              case 42: {
+                triggerContractInput_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 42
+              case 50: {
+                parameterType_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000020;
+                break;
+              } // case 50
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20Parameters) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
       private int bitField0_;
@@ -19945,11 +19539,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setBindingSignature(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         bindingSignature_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -19958,7 +19550,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearBindingSignature() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         bindingSignature_ = getDefaultInstance().getBindingSignature();
         onChanged();
         return this;
@@ -19979,11 +19571,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setMessageHash(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         messageHash_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -19992,7 +19582,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearMessageHash() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         messageHash_ = getDefaultInstance().getMessageHash();
         onChanged();
         return this;
@@ -20039,11 +19629,9 @@ public final class GrpcAPI {
        */
       public Builder setTriggerContractInput(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         triggerContractInput_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -20052,8 +19640,8 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearTriggerContractInput() {
-        
         triggerContractInput_ = getDefaultInstance().getTriggerContractInput();
+        bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
         return this;
       }
@@ -20064,12 +19652,10 @@ public final class GrpcAPI {
        */
       public Builder setTriggerContractInputBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         triggerContractInput_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -20115,11 +19701,9 @@ public final class GrpcAPI {
        */
       public Builder setParameterType(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         parameterType_ = value;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
@@ -20128,8 +19712,8 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearParameterType() {
-        
         parameterType_ = getDefaultInstance().getParameterType();
+        bitField0_ = (bitField0_ & ~0x00000020);
         onChanged();
         return this;
       }
@@ -20140,12 +19724,10 @@ public final class GrpcAPI {
        */
       public Builder setParameterTypeBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         parameterType_ = value;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
@@ -20182,7 +19764,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ShieldedTRC20Parameters(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -20299,88 +19892,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private IvkDecryptTRC20Parameters(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-
-              startBlockIndex_ = input.readInt64();
-              break;
-            }
-            case 16: {
-
-              endBlockIndex_ = input.readInt64();
-              break;
-            }
-            case 26: {
-
-              shieldedTRC20ContractAddress_ = input.readBytes();
-              break;
-            }
-            case 34: {
-
-              ivk_ = input.readBytes();
-              break;
-            }
-            case 42: {
-
-              ak_ = input.readBytes();
-              break;
-            }
-            case 50: {
-
-              nk_ = input.readBytes();
-              break;
-            }
-            case 58: {
-              java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                events_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              events_.add(s);
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          events_ = events_.getUnmodifiableView();
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_IvkDecryptTRC20Parameters_descriptor;
@@ -20395,7 +19906,7 @@ public final class GrpcAPI {
     }
 
     public static final int START_BLOCK_INDEX_FIELD_NUMBER = 1;
-    private long startBlockIndex_;
+    private long startBlockIndex_ = 0L;
     /**
      * <code>int64 start_block_index = 1;</code>
      * @return The startBlockIndex.
@@ -20406,7 +19917,7 @@ public final class GrpcAPI {
     }
 
     public static final int END_BLOCK_INDEX_FIELD_NUMBER = 2;
-    private long endBlockIndex_;
+    private long endBlockIndex_ = 0L;
     /**
      * <code>int64 end_block_index = 2;</code>
      * @return The endBlockIndex.
@@ -20417,7 +19928,7 @@ public final class GrpcAPI {
     }
 
     public static final int SHIELDED_TRC20_CONTRACT_ADDRESS_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString shieldedTRC20ContractAddress_;
+    private com.google.protobuf.ByteString shieldedTRC20ContractAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes shielded_TRC20_contract_address = 3;</code>
      * @return The shieldedTRC20ContractAddress.
@@ -20428,7 +19939,7 @@ public final class GrpcAPI {
     }
 
     public static final int IVK_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString ivk_;
+    private com.google.protobuf.ByteString ivk_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes ivk = 4;</code>
      * @return The ivk.
@@ -20439,7 +19950,7 @@ public final class GrpcAPI {
     }
 
     public static final int AK_FIELD_NUMBER = 5;
-    private com.google.protobuf.ByteString ak_;
+    private com.google.protobuf.ByteString ak_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes ak = 5;</code>
      * @return The ak.
@@ -20450,7 +19961,7 @@ public final class GrpcAPI {
     }
 
     public static final int NK_FIELD_NUMBER = 6;
-    private com.google.protobuf.ByteString nk_;
+    private com.google.protobuf.ByteString nk_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes nk = 6;</code>
      * @return The nk.
@@ -20461,6 +19972,7 @@ public final class GrpcAPI {
     }
 
     public static final int EVENTS_FIELD_NUMBER = 7;
+    @SuppressWarnings("serial")
     private com.google.protobuf.LazyStringList events_;
     /**
      * <code>repeated string events = 7;</code>
@@ -20530,7 +20042,7 @@ public final class GrpcAPI {
       for (int i = 0; i < events_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 7, events_.getRaw(i));
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -20571,7 +20083,7 @@ public final class GrpcAPI {
         size += dataSize;
         size += 1 * getEventsList().size();
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -20600,7 +20112,7 @@ public final class GrpcAPI {
           .equals(other.getNk())) return false;
       if (!getEventsList()
           .equals(other.getEventsList())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -20629,7 +20141,7 @@ public final class GrpcAPI {
         hash = (37 * hash) + EVENTS_FIELD_NUMBER;
         hash = (53 * hash) + getEventsList().hashCode();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -20746,36 +20258,26 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.IvkDecryptTRC20Parameters.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         startBlockIndex_ = 0L;
-
         endBlockIndex_ = 0L;
-
         shieldedTRC20ContractAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         ivk_ = com.google.protobuf.ByteString.EMPTY;
-
         ak_ = com.google.protobuf.ByteString.EMPTY;
-
         nk_ = com.google.protobuf.ByteString.EMPTY;
-
         events_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -20802,20 +20304,40 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.IvkDecryptTRC20Parameters buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.IvkDecryptTRC20Parameters result = new com.github.comrada.tron4j.api.GrpcAPI.IvkDecryptTRC20Parameters(this);
-        int from_bitField0_ = bitField0_;
-        result.startBlockIndex_ = startBlockIndex_;
-        result.endBlockIndex_ = endBlockIndex_;
-        result.shieldedTRC20ContractAddress_ = shieldedTRC20ContractAddress_;
-        result.ivk_ = ivk_;
-        result.ak_ = ak_;
-        result.nk_ = nk_;
-        if (((bitField0_ & 0x00000001) != 0)) {
-          events_ = events_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000001);
-        }
-        result.events_ = events_;
+        buildPartialRepeatedFields(result);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartialRepeatedFields(com.github.comrada.tron4j.api.GrpcAPI.IvkDecryptTRC20Parameters result) {
+        if (((bitField0_ & 0x00000040) != 0)) {
+          events_ = events_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000040);
+        }
+        result.events_ = events_;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.IvkDecryptTRC20Parameters result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.startBlockIndex_ = startBlockIndex_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.endBlockIndex_ = endBlockIndex_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.shieldedTRC20ContractAddress_ = shieldedTRC20ContractAddress_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.ivk_ = ivk_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.ak_ = ak_;
+        }
+        if (((from_bitField0_ & 0x00000020) != 0)) {
+          result.nk_ = nk_;
+        }
       }
 
       @java.lang.Override
@@ -20883,14 +20405,14 @@ public final class GrpcAPI {
         if (!other.events_.isEmpty()) {
           if (events_.isEmpty()) {
             events_ = other.events_;
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000040);
           } else {
             ensureEventsIsMutable();
             events_.addAll(other.events_);
           }
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -20905,17 +20427,66 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.IvkDecryptTRC20Parameters parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 8: {
+                startBlockIndex_ = input.readInt64();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 8
+              case 16: {
+                endBlockIndex_ = input.readInt64();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              case 26: {
+                shieldedTRC20ContractAddress_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 34: {
+                ivk_ = input.readBytes();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              case 42: {
+                ak_ = input.readBytes();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 42
+              case 50: {
+                nk_ = input.readBytes();
+                bitField0_ |= 0x00000020;
+                break;
+              } // case 50
+              case 58: {
+                java.lang.String s = input.readStringRequireUtf8();
+                ensureEventsIsMutable();
+                events_.add(s);
+                break;
+              } // case 58
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.IvkDecryptTRC20Parameters) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
       private int bitField0_;
@@ -20937,6 +20508,7 @@ public final class GrpcAPI {
       public Builder setStartBlockIndex(long value) {
         
         startBlockIndex_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -20945,7 +20517,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearStartBlockIndex() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         startBlockIndex_ = 0L;
         onChanged();
         return this;
@@ -20968,6 +20540,7 @@ public final class GrpcAPI {
       public Builder setEndBlockIndex(long value) {
         
         endBlockIndex_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -20976,7 +20549,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearEndBlockIndex() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         endBlockIndex_ = 0L;
         onChanged();
         return this;
@@ -20997,11 +20570,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setShieldedTRC20ContractAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         shieldedTRC20ContractAddress_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -21010,7 +20581,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearShieldedTRC20ContractAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         shieldedTRC20ContractAddress_ = getDefaultInstance().getShieldedTRC20ContractAddress();
         onChanged();
         return this;
@@ -21031,11 +20602,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setIvk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ivk_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -21044,7 +20613,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearIvk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         ivk_ = getDefaultInstance().getIvk();
         onChanged();
         return this;
@@ -21065,11 +20634,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setAk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ak_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -21078,7 +20645,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearAk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000010);
         ak_ = getDefaultInstance().getAk();
         onChanged();
         return this;
@@ -21099,11 +20666,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setNk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         nk_ = value;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
@@ -21112,7 +20677,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearNk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000020);
         nk_ = getDefaultInstance().getNk();
         onChanged();
         return this;
@@ -21120,9 +20685,9 @@ public final class GrpcAPI {
 
       private com.google.protobuf.LazyStringList events_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureEventsIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
+        if (!((bitField0_ & 0x00000040) != 0)) {
           events_ = new com.google.protobuf.LazyStringArrayList(events_);
-          bitField0_ |= 0x00000001;
+          bitField0_ |= 0x00000040;
          }
       }
       /**
@@ -21165,10 +20730,8 @@ public final class GrpcAPI {
        */
       public Builder setEvents(
           int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureEventsIsMutable();
+        if (value == null) { throw new NullPointerException(); }
+        ensureEventsIsMutable();
         events_.set(index, value);
         onChanged();
         return this;
@@ -21180,10 +20743,8 @@ public final class GrpcAPI {
        */
       public Builder addEvents(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureEventsIsMutable();
+        if (value == null) { throw new NullPointerException(); }
+        ensureEventsIsMutable();
         events_.add(value);
         onChanged();
         return this;
@@ -21207,7 +20768,7 @@ public final class GrpcAPI {
        */
       public Builder clearEvents() {
         events_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000040);
         onChanged();
         return this;
       }
@@ -21218,10 +20779,8 @@ public final class GrpcAPI {
        */
       public Builder addEventsBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         ensureEventsIsMutable();
         events_.add(value);
         onChanged();
@@ -21260,7 +20819,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new IvkDecryptTRC20Parameters(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -21363,78 +20933,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private OvkDecryptTRC20Parameters(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-
-              startBlockIndex_ = input.readInt64();
-              break;
-            }
-            case 16: {
-
-              endBlockIndex_ = input.readInt64();
-              break;
-            }
-            case 26: {
-
-              ovk_ = input.readBytes();
-              break;
-            }
-            case 34: {
-
-              shieldedTRC20ContractAddress_ = input.readBytes();
-              break;
-            }
-            case 42: {
-              java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                events_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              events_.add(s);
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          events_ = events_.getUnmodifiableView();
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_OvkDecryptTRC20Parameters_descriptor;
@@ -21449,7 +20947,7 @@ public final class GrpcAPI {
     }
 
     public static final int START_BLOCK_INDEX_FIELD_NUMBER = 1;
-    private long startBlockIndex_;
+    private long startBlockIndex_ = 0L;
     /**
      * <code>int64 start_block_index = 1;</code>
      * @return The startBlockIndex.
@@ -21460,7 +20958,7 @@ public final class GrpcAPI {
     }
 
     public static final int END_BLOCK_INDEX_FIELD_NUMBER = 2;
-    private long endBlockIndex_;
+    private long endBlockIndex_ = 0L;
     /**
      * <code>int64 end_block_index = 2;</code>
      * @return The endBlockIndex.
@@ -21471,7 +20969,7 @@ public final class GrpcAPI {
     }
 
     public static final int OVK_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString ovk_;
+    private com.google.protobuf.ByteString ovk_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes ovk = 3;</code>
      * @return The ovk.
@@ -21482,7 +20980,7 @@ public final class GrpcAPI {
     }
 
     public static final int SHIELDED_TRC20_CONTRACT_ADDRESS_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString shieldedTRC20ContractAddress_;
+    private com.google.protobuf.ByteString shieldedTRC20ContractAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes shielded_TRC20_contract_address = 4;</code>
      * @return The shieldedTRC20ContractAddress.
@@ -21493,6 +20991,7 @@ public final class GrpcAPI {
     }
 
     public static final int EVENTS_FIELD_NUMBER = 5;
+    @SuppressWarnings("serial")
     private com.google.protobuf.LazyStringList events_;
     /**
      * <code>repeated string events = 5;</code>
@@ -21556,7 +21055,7 @@ public final class GrpcAPI {
       for (int i = 0; i < events_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, events_.getRaw(i));
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -21589,7 +21088,7 @@ public final class GrpcAPI {
         size += dataSize;
         size += 1 * getEventsList().size();
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -21614,7 +21113,7 @@ public final class GrpcAPI {
           .equals(other.getShieldedTRC20ContractAddress())) return false;
       if (!getEventsList()
           .equals(other.getEventsList())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -21639,7 +21138,7 @@ public final class GrpcAPI {
         hash = (37 * hash) + EVENTS_FIELD_NUMBER;
         hash = (53 * hash) + getEventsList().hashCode();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -21756,32 +21255,24 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.OvkDecryptTRC20Parameters.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         startBlockIndex_ = 0L;
-
         endBlockIndex_ = 0L;
-
         ovk_ = com.google.protobuf.ByteString.EMPTY;
-
         shieldedTRC20ContractAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         events_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -21808,18 +21299,34 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.OvkDecryptTRC20Parameters buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.OvkDecryptTRC20Parameters result = new com.github.comrada.tron4j.api.GrpcAPI.OvkDecryptTRC20Parameters(this);
-        int from_bitField0_ = bitField0_;
-        result.startBlockIndex_ = startBlockIndex_;
-        result.endBlockIndex_ = endBlockIndex_;
-        result.ovk_ = ovk_;
-        result.shieldedTRC20ContractAddress_ = shieldedTRC20ContractAddress_;
-        if (((bitField0_ & 0x00000001) != 0)) {
-          events_ = events_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000001);
-        }
-        result.events_ = events_;
+        buildPartialRepeatedFields(result);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartialRepeatedFields(com.github.comrada.tron4j.api.GrpcAPI.OvkDecryptTRC20Parameters result) {
+        if (((bitField0_ & 0x00000010) != 0)) {
+          events_ = events_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000010);
+        }
+        result.events_ = events_;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.OvkDecryptTRC20Parameters result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.startBlockIndex_ = startBlockIndex_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.endBlockIndex_ = endBlockIndex_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.ovk_ = ovk_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.shieldedTRC20ContractAddress_ = shieldedTRC20ContractAddress_;
+        }
       }
 
       @java.lang.Override
@@ -21881,14 +21388,14 @@ public final class GrpcAPI {
         if (!other.events_.isEmpty()) {
           if (events_.isEmpty()) {
             events_ = other.events_;
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000010);
           } else {
             ensureEventsIsMutable();
             events_.addAll(other.events_);
           }
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -21903,17 +21410,56 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.OvkDecryptTRC20Parameters parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 8: {
+                startBlockIndex_ = input.readInt64();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 8
+              case 16: {
+                endBlockIndex_ = input.readInt64();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              case 26: {
+                ovk_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 34: {
+                shieldedTRC20ContractAddress_ = input.readBytes();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              case 42: {
+                java.lang.String s = input.readStringRequireUtf8();
+                ensureEventsIsMutable();
+                events_.add(s);
+                break;
+              } // case 42
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.OvkDecryptTRC20Parameters) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
       private int bitField0_;
@@ -21935,6 +21481,7 @@ public final class GrpcAPI {
       public Builder setStartBlockIndex(long value) {
         
         startBlockIndex_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -21943,7 +21490,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearStartBlockIndex() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         startBlockIndex_ = 0L;
         onChanged();
         return this;
@@ -21966,6 +21513,7 @@ public final class GrpcAPI {
       public Builder setEndBlockIndex(long value) {
         
         endBlockIndex_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -21974,7 +21522,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearEndBlockIndex() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         endBlockIndex_ = 0L;
         onChanged();
         return this;
@@ -21995,11 +21543,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setOvk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ovk_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -22008,7 +21554,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearOvk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         ovk_ = getDefaultInstance().getOvk();
         onChanged();
         return this;
@@ -22029,11 +21575,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setShieldedTRC20ContractAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         shieldedTRC20ContractAddress_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -22042,7 +21586,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearShieldedTRC20ContractAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         shieldedTRC20ContractAddress_ = getDefaultInstance().getShieldedTRC20ContractAddress();
         onChanged();
         return this;
@@ -22050,9 +21594,9 @@ public final class GrpcAPI {
 
       private com.google.protobuf.LazyStringList events_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureEventsIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
+        if (!((bitField0_ & 0x00000010) != 0)) {
           events_ = new com.google.protobuf.LazyStringArrayList(events_);
-          bitField0_ |= 0x00000001;
+          bitField0_ |= 0x00000010;
          }
       }
       /**
@@ -22095,10 +21639,8 @@ public final class GrpcAPI {
        */
       public Builder setEvents(
           int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureEventsIsMutable();
+        if (value == null) { throw new NullPointerException(); }
+        ensureEventsIsMutable();
         events_.set(index, value);
         onChanged();
         return this;
@@ -22110,10 +21652,8 @@ public final class GrpcAPI {
        */
       public Builder addEvents(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureEventsIsMutable();
+        if (value == null) { throw new NullPointerException(); }
+        ensureEventsIsMutable();
         events_.add(value);
         onChanged();
         return this;
@@ -22137,7 +21677,7 @@ public final class GrpcAPI {
        */
       public Builder clearEvents() {
         events_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
         return this;
       }
@@ -22148,10 +21688,8 @@ public final class GrpcAPI {
        */
       public Builder addEventsBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         ensureEventsIsMutable();
         events_.add(value);
         onChanged();
@@ -22190,7 +21728,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new OvkDecryptTRC20Parameters(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -22283,78 +21832,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private NfTRC20Parameters(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              com.github.comrada.tron4j.proto.Common.Note.Builder subBuilder = null;
-              if (note_ != null) {
-                subBuilder = note_.toBuilder();
-              }
-              note_ = input.readMessage(com.github.comrada.tron4j.proto.Common.Note.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(note_);
-                note_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 18: {
-
-              ak_ = input.readBytes();
-              break;
-            }
-            case 26: {
-
-              nk_ = input.readBytes();
-              break;
-            }
-            case 32: {
-
-              position_ = input.readInt64();
-              break;
-            }
-            case 42: {
-
-              shieldedTRC20ContractAddress_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_NfTRC20Parameters_descriptor;
@@ -22391,11 +21868,11 @@ public final class GrpcAPI {
      */
     @java.lang.Override
     public com.github.comrada.tron4j.proto.Common.NoteOrBuilder getNoteOrBuilder() {
-      return getNote();
+      return note_ == null ? com.github.comrada.tron4j.proto.Common.Note.getDefaultInstance() : note_;
     }
 
     public static final int AK_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString ak_;
+    private com.google.protobuf.ByteString ak_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes ak = 2;</code>
      * @return The ak.
@@ -22406,7 +21883,7 @@ public final class GrpcAPI {
     }
 
     public static final int NK_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString nk_;
+    private com.google.protobuf.ByteString nk_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes nk = 3;</code>
      * @return The nk.
@@ -22417,7 +21894,7 @@ public final class GrpcAPI {
     }
 
     public static final int POSITION_FIELD_NUMBER = 4;
-    private long position_;
+    private long position_ = 0L;
     /**
      * <code>int64 position = 4;</code>
      * @return The position.
@@ -22428,7 +21905,7 @@ public final class GrpcAPI {
     }
 
     public static final int SHIELDED_TRC20_CONTRACT_ADDRESS_FIELD_NUMBER = 5;
-    private com.google.protobuf.ByteString shieldedTRC20ContractAddress_;
+    private com.google.protobuf.ByteString shieldedTRC20ContractAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes shielded_TRC20_contract_address = 5;</code>
      * @return The shieldedTRC20ContractAddress.
@@ -22467,7 +21944,7 @@ public final class GrpcAPI {
       if (!shieldedTRC20ContractAddress_.isEmpty()) {
         output.writeBytes(5, shieldedTRC20ContractAddress_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -22496,7 +21973,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(5, shieldedTRC20ContractAddress_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -22524,7 +22001,7 @@ public final class GrpcAPI {
           != other.getPosition()) return false;
       if (!getShieldedTRC20ContractAddress()
           .equals(other.getShieldedTRC20ContractAddress())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -22548,7 +22025,7 @@ public final class GrpcAPI {
           getPosition());
       hash = (37 * hash) + SHIELDED_TRC20_CONTRACT_ADDRESS_FIELD_NUMBER;
       hash = (53 * hash) + getShieldedTRC20ContractAddress().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -22665,36 +22142,27 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.NfTRC20Parameters.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (noteBuilder_ == null) {
-          note_ = null;
-        } else {
-          note_ = null;
+        bitField0_ = 0;
+        note_ = null;
+        if (noteBuilder_ != null) {
+          noteBuilder_.dispose();
           noteBuilder_ = null;
         }
         ak_ = com.google.protobuf.ByteString.EMPTY;
-
         nk_ = com.google.protobuf.ByteString.EMPTY;
-
         position_ = 0L;
-
         shieldedTRC20ContractAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -22721,17 +22189,30 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.NfTRC20Parameters buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.NfTRC20Parameters result = new com.github.comrada.tron4j.api.GrpcAPI.NfTRC20Parameters(this);
-        if (noteBuilder_ == null) {
-          result.note_ = note_;
-        } else {
-          result.note_ = noteBuilder_.build();
-        }
-        result.ak_ = ak_;
-        result.nk_ = nk_;
-        result.position_ = position_;
-        result.shieldedTRC20ContractAddress_ = shieldedTRC20ContractAddress_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.NfTRC20Parameters result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.note_ = noteBuilder_ == null
+              ? note_
+              : noteBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.ak_ = ak_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.nk_ = nk_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.position_ = position_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.shieldedTRC20ContractAddress_ = shieldedTRC20ContractAddress_;
+        }
       }
 
       @java.lang.Override
@@ -22793,7 +22274,7 @@ public final class GrpcAPI {
         if (other.getShieldedTRC20ContractAddress() != com.google.protobuf.ByteString.EMPTY) {
           setShieldedTRC20ContractAddress(other.getShieldedTRC20ContractAddress());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -22808,19 +22289,60 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.NfTRC20Parameters parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                input.readMessage(
+                    getNoteFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                ak_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                nk_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 32: {
+                position_ = input.readInt64();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 32
+              case 42: {
+                shieldedTRC20ContractAddress_ = input.readBytes();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 42
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.NfTRC20Parameters) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.github.comrada.tron4j.proto.Common.Note note_;
       private com.google.protobuf.SingleFieldBuilderV3<
@@ -22830,7 +22352,7 @@ public final class GrpcAPI {
        * @return Whether the note field is set.
        */
       public boolean hasNote() {
-        return noteBuilder_ != null || note_ != null;
+        return ((bitField0_ & 0x00000001) != 0);
       }
       /**
        * <code>.protocol.Note note = 1;</code>
@@ -22852,11 +22374,11 @@ public final class GrpcAPI {
             throw new NullPointerException();
           }
           note_ = value;
-          onChanged();
         } else {
           noteBuilder_.setMessage(value);
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
@@ -22866,11 +22388,11 @@ public final class GrpcAPI {
           com.github.comrada.tron4j.proto.Common.Note.Builder builderForValue) {
         if (noteBuilder_ == null) {
           note_ = builderForValue.build();
-          onChanged();
         } else {
           noteBuilder_.setMessage(builderForValue.build());
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
@@ -22878,38 +22400,38 @@ public final class GrpcAPI {
        */
       public Builder mergeNote(com.github.comrada.tron4j.proto.Common.Note value) {
         if (noteBuilder_ == null) {
-          if (note_ != null) {
-            note_ =
-              com.github.comrada.tron4j.proto.Common.Note.newBuilder(note_).mergeFrom(value).buildPartial();
+          if (((bitField0_ & 0x00000001) != 0) &&
+            note_ != null &&
+            note_ != com.github.comrada.tron4j.proto.Common.Note.getDefaultInstance()) {
+            getNoteBuilder().mergeFrom(value);
           } else {
             note_ = value;
           }
-          onChanged();
         } else {
           noteBuilder_.mergeFrom(value);
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
        * <code>.protocol.Note note = 1;</code>
        */
       public Builder clearNote() {
-        if (noteBuilder_ == null) {
-          note_ = null;
-          onChanged();
-        } else {
-          note_ = null;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        note_ = null;
+        if (noteBuilder_ != null) {
+          noteBuilder_.dispose();
           noteBuilder_ = null;
         }
-
+        onChanged();
         return this;
       }
       /**
        * <code>.protocol.Note note = 1;</code>
        */
       public com.github.comrada.tron4j.proto.Common.Note.Builder getNoteBuilder() {
-        
+        bitField0_ |= 0x00000001;
         onChanged();
         return getNoteFieldBuilder().getBuilder();
       }
@@ -22956,11 +22478,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setAk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ak_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -22969,7 +22489,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearAk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         ak_ = getDefaultInstance().getAk();
         onChanged();
         return this;
@@ -22990,11 +22510,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setNk(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         nk_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -23003,7 +22521,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearNk() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         nk_ = getDefaultInstance().getNk();
         onChanged();
         return this;
@@ -23026,6 +22544,7 @@ public final class GrpcAPI {
       public Builder setPosition(long value) {
         
         position_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -23034,7 +22553,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearPosition() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         position_ = 0L;
         onChanged();
         return this;
@@ -23055,11 +22574,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setShieldedTRC20ContractAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         shieldedTRC20ContractAddress_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -23068,7 +22585,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearShieldedTRC20ContractAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000010);
         shieldedTRC20ContractAddress_ = getDefaultInstance().getShieldedTRC20ContractAddress();
         onChanged();
         return this;
@@ -23106,7 +22623,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new NfTRC20Parameters(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -23217,82 +22745,6 @@ public final class GrpcAPI {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ShieldedTRC20TriggerContractParameters(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20Parameters.Builder subBuilder = null;
-              if (shieldedTRC20Parameters_ != null) {
-                subBuilder = shieldedTRC20Parameters_.toBuilder();
-              }
-              shieldedTRC20Parameters_ = input.readMessage(com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20Parameters.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(shieldedTRC20Parameters_);
-                shieldedTRC20Parameters_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 18: {
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                spendAuthoritySignature_ = new java.util.ArrayList<com.github.comrada.tron4j.api.GrpcAPI.BytesMessage>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              spendAuthoritySignature_.add(
-                  input.readMessage(com.github.comrada.tron4j.api.GrpcAPI.BytesMessage.parser(), extensionRegistry));
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              amount_ = s;
-              break;
-            }
-            case 34: {
-
-              transparentToAddress_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          spendAuthoritySignature_ = java.util.Collections.unmodifiableList(spendAuthoritySignature_);
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.api.GrpcAPI.internal_static_protocol_ShieldedTRC20TriggerContractParameters_descriptor;
@@ -23329,10 +22781,11 @@ public final class GrpcAPI {
      */
     @java.lang.Override
     public com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20ParametersOrBuilder getShieldedTRC20ParametersOrBuilder() {
-      return getShieldedTRC20Parameters();
+      return shieldedTRC20Parameters_ == null ? com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20Parameters.getDefaultInstance() : shieldedTRC20Parameters_;
     }
 
     public static final int SPEND_AUTHORITY_SIGNATURE_FIELD_NUMBER = 2;
+    @SuppressWarnings("serial")
     private java.util.List<com.github.comrada.tron4j.api.GrpcAPI.BytesMessage> spendAuthoritySignature_;
     /**
      * <code>repeated .protocol.BytesMessage spend_authority_signature = 2;</code>
@@ -23373,7 +22826,8 @@ public final class GrpcAPI {
     }
 
     public static final int AMOUNT_FIELD_NUMBER = 3;
-    private volatile java.lang.Object amount_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object amount_ = "";
     /**
      * <code>string amount = 3;</code>
      * @return The amount.
@@ -23411,7 +22865,7 @@ public final class GrpcAPI {
     }
 
     public static final int TRANSPARENT_TO_ADDRESS_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString transparentToAddress_;
+    private com.google.protobuf.ByteString transparentToAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes transparent_to_address = 4;</code>
      * @return The transparentToAddress.
@@ -23447,7 +22901,7 @@ public final class GrpcAPI {
       if (!transparentToAddress_.isEmpty()) {
         output.writeBytes(4, transparentToAddress_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -23471,7 +22925,7 @@ public final class GrpcAPI {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(4, transparentToAddress_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -23497,7 +22951,7 @@ public final class GrpcAPI {
           .equals(other.getAmount())) return false;
       if (!getTransparentToAddress()
           .equals(other.getTransparentToAddress())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -23520,7 +22974,7 @@ public final class GrpcAPI {
       hash = (53 * hash) + getAmount().hashCode();
       hash = (37 * hash) + TRANSPARENT_TO_ADDRESS_FIELD_NUMBER;
       hash = (53 * hash) + getTransparentToAddress().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -23637,39 +23091,32 @@ public final class GrpcAPI {
 
       // Construct using com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20TriggerContractParameters.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-          getSpendAuthoritySignatureFieldBuilder();
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (shieldedTRC20ParametersBuilder_ == null) {
-          shieldedTRC20Parameters_ = null;
-        } else {
-          shieldedTRC20Parameters_ = null;
+        bitField0_ = 0;
+        shieldedTRC20Parameters_ = null;
+        if (shieldedTRC20ParametersBuilder_ != null) {
+          shieldedTRC20ParametersBuilder_.dispose();
           shieldedTRC20ParametersBuilder_ = null;
         }
         if (spendAuthoritySignatureBuilder_ == null) {
           spendAuthoritySignature_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
+          spendAuthoritySignature_ = null;
           spendAuthoritySignatureBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000002);
         amount_ = "";
-
         transparentToAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -23696,25 +23143,37 @@ public final class GrpcAPI {
       @java.lang.Override
       public com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20TriggerContractParameters buildPartial() {
         com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20TriggerContractParameters result = new com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20TriggerContractParameters(this);
-        int from_bitField0_ = bitField0_;
-        if (shieldedTRC20ParametersBuilder_ == null) {
-          result.shieldedTRC20Parameters_ = shieldedTRC20Parameters_;
-        } else {
-          result.shieldedTRC20Parameters_ = shieldedTRC20ParametersBuilder_.build();
-        }
+        buildPartialRepeatedFields(result);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartialRepeatedFields(com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20TriggerContractParameters result) {
         if (spendAuthoritySignatureBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) != 0)) {
+          if (((bitField0_ & 0x00000002) != 0)) {
             spendAuthoritySignature_ = java.util.Collections.unmodifiableList(spendAuthoritySignature_);
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.spendAuthoritySignature_ = spendAuthoritySignature_;
         } else {
           result.spendAuthoritySignature_ = spendAuthoritySignatureBuilder_.build();
         }
-        result.amount_ = amount_;
-        result.transparentToAddress_ = transparentToAddress_;
-        onBuilt();
-        return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20TriggerContractParameters result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.shieldedTRC20Parameters_ = shieldedTRC20ParametersBuilder_ == null
+              ? shieldedTRC20Parameters_
+              : shieldedTRC20ParametersBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.amount_ = amount_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.transparentToAddress_ = transparentToAddress_;
+        }
       }
 
       @java.lang.Override
@@ -23768,7 +23227,7 @@ public final class GrpcAPI {
           if (!other.spendAuthoritySignature_.isEmpty()) {
             if (spendAuthoritySignature_.isEmpty()) {
               spendAuthoritySignature_ = other.spendAuthoritySignature_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureSpendAuthoritySignatureIsMutable();
               spendAuthoritySignature_.addAll(other.spendAuthoritySignature_);
@@ -23781,7 +23240,7 @@ public final class GrpcAPI {
               spendAuthoritySignatureBuilder_.dispose();
               spendAuthoritySignatureBuilder_ = null;
               spendAuthoritySignature_ = other.spendAuthoritySignature_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000002);
               spendAuthoritySignatureBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getSpendAuthoritySignatureFieldBuilder() : null;
@@ -23792,12 +23251,13 @@ public final class GrpcAPI {
         }
         if (!other.getAmount().isEmpty()) {
           amount_ = other.amount_;
+          bitField0_ |= 0x00000004;
           onChanged();
         }
         if (other.getTransparentToAddress() != com.google.protobuf.ByteString.EMPTY) {
           setTransparentToAddress(other.getTransparentToAddress());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -23812,17 +23272,60 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20TriggerContractParameters parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                input.readMessage(
+                    getShieldedTRC20ParametersFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                com.github.comrada.tron4j.api.GrpcAPI.BytesMessage m =
+                    input.readMessage(
+                        com.github.comrada.tron4j.api.GrpcAPI.BytesMessage.parser(),
+                        extensionRegistry);
+                if (spendAuthoritySignatureBuilder_ == null) {
+                  ensureSpendAuthoritySignatureIsMutable();
+                  spendAuthoritySignature_.add(m);
+                } else {
+                  spendAuthoritySignatureBuilder_.addMessage(m);
+                }
+                break;
+              } // case 18
+              case 26: {
+                amount_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 34: {
+                transparentToAddress_ = input.readBytes();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20TriggerContractParameters) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
       private int bitField0_;
@@ -23835,7 +23338,7 @@ public final class GrpcAPI {
        * @return Whether the shieldedTRC20Parameters field is set.
        */
       public boolean hasShieldedTRC20Parameters() {
-        return shieldedTRC20ParametersBuilder_ != null || shieldedTRC20Parameters_ != null;
+        return ((bitField0_ & 0x00000001) != 0);
       }
       /**
        * <code>.protocol.ShieldedTRC20Parameters shielded_TRC20_Parameters = 1;</code>
@@ -23857,11 +23360,11 @@ public final class GrpcAPI {
             throw new NullPointerException();
           }
           shieldedTRC20Parameters_ = value;
-          onChanged();
         } else {
           shieldedTRC20ParametersBuilder_.setMessage(value);
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
@@ -23871,11 +23374,11 @@ public final class GrpcAPI {
           com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20Parameters.Builder builderForValue) {
         if (shieldedTRC20ParametersBuilder_ == null) {
           shieldedTRC20Parameters_ = builderForValue.build();
-          onChanged();
         } else {
           shieldedTRC20ParametersBuilder_.setMessage(builderForValue.build());
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
@@ -23883,38 +23386,38 @@ public final class GrpcAPI {
        */
       public Builder mergeShieldedTRC20Parameters(com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20Parameters value) {
         if (shieldedTRC20ParametersBuilder_ == null) {
-          if (shieldedTRC20Parameters_ != null) {
-            shieldedTRC20Parameters_ =
-              com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20Parameters.newBuilder(shieldedTRC20Parameters_).mergeFrom(value).buildPartial();
+          if (((bitField0_ & 0x00000001) != 0) &&
+            shieldedTRC20Parameters_ != null &&
+            shieldedTRC20Parameters_ != com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20Parameters.getDefaultInstance()) {
+            getShieldedTRC20ParametersBuilder().mergeFrom(value);
           } else {
             shieldedTRC20Parameters_ = value;
           }
-          onChanged();
         } else {
           shieldedTRC20ParametersBuilder_.mergeFrom(value);
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
        * <code>.protocol.ShieldedTRC20Parameters shielded_TRC20_Parameters = 1;</code>
        */
       public Builder clearShieldedTRC20Parameters() {
-        if (shieldedTRC20ParametersBuilder_ == null) {
-          shieldedTRC20Parameters_ = null;
-          onChanged();
-        } else {
-          shieldedTRC20Parameters_ = null;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        shieldedTRC20Parameters_ = null;
+        if (shieldedTRC20ParametersBuilder_ != null) {
+          shieldedTRC20ParametersBuilder_.dispose();
           shieldedTRC20ParametersBuilder_ = null;
         }
-
+        onChanged();
         return this;
       }
       /**
        * <code>.protocol.ShieldedTRC20Parameters shielded_TRC20_Parameters = 1;</code>
        */
       public com.github.comrada.tron4j.api.GrpcAPI.ShieldedTRC20Parameters.Builder getShieldedTRC20ParametersBuilder() {
-        
+        bitField0_ |= 0x00000001;
         onChanged();
         return getShieldedTRC20ParametersFieldBuilder().getBuilder();
       }
@@ -23949,9 +23452,9 @@ public final class GrpcAPI {
       private java.util.List<com.github.comrada.tron4j.api.GrpcAPI.BytesMessage> spendAuthoritySignature_ =
         java.util.Collections.emptyList();
       private void ensureSpendAuthoritySignatureIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
+        if (!((bitField0_ & 0x00000002) != 0)) {
           spendAuthoritySignature_ = new java.util.ArrayList<com.github.comrada.tron4j.api.GrpcAPI.BytesMessage>(spendAuthoritySignature_);
-          bitField0_ |= 0x00000001;
+          bitField0_ |= 0x00000002;
          }
       }
 
@@ -24101,7 +23604,7 @@ public final class GrpcAPI {
       public Builder clearSpendAuthoritySignature() {
         if (spendAuthoritySignatureBuilder_ == null) {
           spendAuthoritySignature_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           spendAuthoritySignatureBuilder_.clear();
@@ -24178,7 +23681,7 @@ public final class GrpcAPI {
           spendAuthoritySignatureBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.github.comrada.tron4j.api.GrpcAPI.BytesMessage, com.github.comrada.tron4j.api.GrpcAPI.BytesMessage.Builder, com.github.comrada.tron4j.api.GrpcAPI.BytesMessageOrBuilder>(
                   spendAuthoritySignature_,
-                  ((bitField0_ & 0x00000001) != 0),
+                  ((bitField0_ & 0x00000002) != 0),
                   getParentForChildren(),
                   isClean());
           spendAuthoritySignature_ = null;
@@ -24227,11 +23730,9 @@ public final class GrpcAPI {
        */
       public Builder setAmount(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         amount_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -24240,8 +23741,8 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearAmount() {
-        
         amount_ = getDefaultInstance().getAmount();
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
@@ -24252,12 +23753,10 @@ public final class GrpcAPI {
        */
       public Builder setAmountBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         amount_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -24277,11 +23776,9 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder setTransparentToAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         transparentToAddress_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -24290,7 +23787,7 @@ public final class GrpcAPI {
        * @return This builder for chaining.
        */
       public Builder clearTransparentToAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         transparentToAddress_ = getDefaultInstance().getTransparentToAddress();
         onChanged();
         return this;
@@ -24328,7 +23825,18 @@ public final class GrpcAPI {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ShieldedTRC20TriggerContractParameters(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 

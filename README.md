@@ -19,9 +19,9 @@ dependencies {
     // protobuf & grpc
     implementation 'com.google.protobuf:protobuf-java:3.21.3'
 
-    implementation 'com.github.comrada.tron4j:abi:1.0.1'
-    implementation 'com.github.comrada.tron4j:client:1.0.1'
-    implementation 'com.github.comrada.tron4j:utils:1.0.1'
+    implementation 'com.github.comrada.tron4j:abi:1.0.2'
+    implementation 'com.github.comrada.tron4j:client:1.0.2'
+    implementation 'com.github.comrada.tron4j:utils:1.0.2'
 
     implementation 'com.google.guava:guava:31.1-jre'
 }
@@ -33,19 +33,19 @@ dependencies {
 <dependency>
   <groupId>com.github.comrada.tron4j</groupId>
   <artifactId>abi</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <type>pom</type>
 </dependency>
 <dependency>
   <groupId>com.github.comrada.tron4j</groupId>
   <artifactId>utils</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <type>pom</type>
 </dependency>
 <dependency>
   <groupId>com.github.comrada.tron4j</groupId>
   <artifactId>client</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <type>pom</type>
 </dependency>
 ```

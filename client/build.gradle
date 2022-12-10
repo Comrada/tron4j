@@ -1,5 +1,5 @@
 plugins {
-    id 'com.google.protobuf' version '0.8.19'
+    id 'com.google.protobuf' version '0.9.1'
 }
 
 description 'Tronj gRPC client classes'
@@ -10,25 +10,25 @@ dependencies {
     implementation project(':utils')
     implementation project(':abi')
 
-    implementation 'io.grpc:grpc-netty-shaded:1.48.0'
-    implementation 'io.grpc:grpc-netty:1.48.0'
-    implementation 'io.grpc:grpc-okhttp:1.48.0'
-    implementation 'io.grpc:grpc-protobuf:1.48.0'
-    implementation 'io.grpc:grpc-stub:1.48.0'
+    implementation 'io.grpc:grpc-netty-shaded:1.51.0'
+    implementation 'io.grpc:grpc-netty:1.51.0'
+    implementation 'io.grpc:grpc-okhttp:1.51.0'
+    implementation 'io.grpc:grpc-protobuf:1.51.0'
+    implementation 'io.grpc:grpc-stub:1.51.0'
     compileOnly 'org.apache.tomcat:annotations-api:6.0.53' // necessary for Java 9+
     //json parsing
-    implementation 'com.google.protobuf:protobuf-java-util:3.21.3'
+    implementation 'com.google.protobuf:protobuf-java-util:3.21.11'
 
     implementation "org.bouncycastle:bcprov-jdk18on:$bouncycastleVersion"
 }
 
 protobuf {
     protoc {
-        artifact = 'com.google.protobuf:protoc:3.21.3'
+        artifact = 'com.google.protobuf:protoc:3.21.11'
     }
     plugins {
         grpc {
-            artifact = 'io.grpc:protoc-gen-grpc-java:1.48.0'
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.51.0'
         }
     }
     generateProtoTasks {
@@ -59,7 +59,7 @@ publishing {
             from components.java
             groupId 'com.github.comrada.tron4j'
             artifactId 'client'
-            version '1.0.1'
+            version '1.0.2'
         }
     }
 }

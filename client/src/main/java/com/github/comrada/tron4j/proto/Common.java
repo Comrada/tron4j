@@ -284,55 +284,6 @@ public final class Common {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private AccountId(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              name_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              address_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Common.internal_static_protocol_AccountId_descriptor;
@@ -347,7 +298,7 @@ public final class Common {
     }
 
     public static final int NAME_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString name_;
+    private com.google.protobuf.ByteString name_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes name = 1;</code>
      * @return The name.
@@ -358,7 +309,7 @@ public final class Common {
     }
 
     public static final int ADDRESS_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString address_;
+    private com.google.protobuf.ByteString address_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes address = 2;</code>
      * @return The address.
@@ -388,7 +339,7 @@ public final class Common {
       if (!address_.isEmpty()) {
         output.writeBytes(2, address_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -405,7 +356,7 @@ public final class Common {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, address_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -424,7 +375,7 @@ public final class Common {
           .equals(other.getName())) return false;
       if (!getAddress()
           .equals(other.getAddress())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -439,7 +390,7 @@ public final class Common {
       hash = (53 * hash) + getName().hashCode();
       hash = (37 * hash) + ADDRESS_FIELD_NUMBER;
       hash = (53 * hash) + getAddress().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -556,26 +507,20 @@ public final class Common {
 
       // Construct using com.github.comrada.tron4j.proto.Common.AccountId.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         name_ = com.google.protobuf.ByteString.EMPTY;
-
         address_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -602,10 +547,19 @@ public final class Common {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Common.AccountId buildPartial() {
         com.github.comrada.tron4j.proto.Common.AccountId result = new com.github.comrada.tron4j.proto.Common.AccountId(this);
-        result.name_ = name_;
-        result.address_ = address_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Common.AccountId result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.name_ = name_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.address_ = address_;
+        }
       }
 
       @java.lang.Override
@@ -658,7 +612,7 @@ public final class Common {
         if (other.getAddress() != com.google.protobuf.ByteString.EMPTY) {
           setAddress(other.getAddress());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -673,19 +627,43 @@ public final class Common {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Common.AccountId parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                name_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                address_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Common.AccountId) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString name_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -702,11 +680,9 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder setName(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         name_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -715,7 +691,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearName() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         name_ = getDefaultInstance().getName();
         onChanged();
         return this;
@@ -736,11 +712,9 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder setAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         address_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -749,7 +723,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         address_ = getDefaultInstance().getAddress();
         onChanged();
         return this;
@@ -787,7 +761,18 @@ public final class Common {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new AccountId(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -860,63 +845,6 @@ public final class Common {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private authority(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              com.github.comrada.tron4j.proto.Common.AccountId.Builder subBuilder = null;
-              if (account_ != null) {
-                subBuilder = account_.toBuilder();
-              }
-              account_ = input.readMessage(com.github.comrada.tron4j.proto.Common.AccountId.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(account_);
-                account_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 18: {
-
-              permissionName_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Common.internal_static_protocol_authority_descriptor;
@@ -953,11 +881,11 @@ public final class Common {
      */
     @java.lang.Override
     public com.github.comrada.tron4j.proto.Common.AccountIdOrBuilder getAccountOrBuilder() {
-      return getAccount();
+      return account_ == null ? com.github.comrada.tron4j.proto.Common.AccountId.getDefaultInstance() : account_;
     }
 
     public static final int PERMISSION_NAME_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString permissionName_;
+    private com.google.protobuf.ByteString permissionName_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes permission_name = 2;</code>
      * @return The permissionName.
@@ -987,7 +915,7 @@ public final class Common {
       if (!permissionName_.isEmpty()) {
         output.writeBytes(2, permissionName_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -1004,7 +932,7 @@ public final class Common {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, permissionName_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -1026,7 +954,7 @@ public final class Common {
       }
       if (!getPermissionName()
           .equals(other.getPermissionName())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -1043,7 +971,7 @@ public final class Common {
       }
       hash = (37 * hash) + PERMISSION_NAME_FIELD_NUMBER;
       hash = (53 * hash) + getPermissionName().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -1160,30 +1088,24 @@ public final class Common {
 
       // Construct using com.github.comrada.tron4j.proto.Common.authority.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (accountBuilder_ == null) {
-          account_ = null;
-        } else {
-          account_ = null;
+        bitField0_ = 0;
+        account_ = null;
+        if (accountBuilder_ != null) {
+          accountBuilder_.dispose();
           accountBuilder_ = null;
         }
         permissionName_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -1210,14 +1132,21 @@ public final class Common {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Common.authority buildPartial() {
         com.github.comrada.tron4j.proto.Common.authority result = new com.github.comrada.tron4j.proto.Common.authority(this);
-        if (accountBuilder_ == null) {
-          result.account_ = account_;
-        } else {
-          result.account_ = accountBuilder_.build();
-        }
-        result.permissionName_ = permissionName_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Common.authority result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.account_ = accountBuilder_ == null
+              ? account_
+              : accountBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.permissionName_ = permissionName_;
+        }
       }
 
       @java.lang.Override
@@ -1270,7 +1199,7 @@ public final class Common {
         if (other.getPermissionName() != com.google.protobuf.ByteString.EMPTY) {
           setPermissionName(other.getPermissionName());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -1285,19 +1214,45 @@ public final class Common {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Common.authority parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                input.readMessage(
+                    getAccountFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                permissionName_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Common.authority) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.github.comrada.tron4j.proto.Common.AccountId account_;
       private com.google.protobuf.SingleFieldBuilderV3<
@@ -1307,7 +1262,7 @@ public final class Common {
        * @return Whether the account field is set.
        */
       public boolean hasAccount() {
-        return accountBuilder_ != null || account_ != null;
+        return ((bitField0_ & 0x00000001) != 0);
       }
       /**
        * <code>.protocol.AccountId account = 1;</code>
@@ -1329,11 +1284,11 @@ public final class Common {
             throw new NullPointerException();
           }
           account_ = value;
-          onChanged();
         } else {
           accountBuilder_.setMessage(value);
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
@@ -1343,11 +1298,11 @@ public final class Common {
           com.github.comrada.tron4j.proto.Common.AccountId.Builder builderForValue) {
         if (accountBuilder_ == null) {
           account_ = builderForValue.build();
-          onChanged();
         } else {
           accountBuilder_.setMessage(builderForValue.build());
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
@@ -1355,38 +1310,38 @@ public final class Common {
        */
       public Builder mergeAccount(com.github.comrada.tron4j.proto.Common.AccountId value) {
         if (accountBuilder_ == null) {
-          if (account_ != null) {
-            account_ =
-              com.github.comrada.tron4j.proto.Common.AccountId.newBuilder(account_).mergeFrom(value).buildPartial();
+          if (((bitField0_ & 0x00000001) != 0) &&
+            account_ != null &&
+            account_ != com.github.comrada.tron4j.proto.Common.AccountId.getDefaultInstance()) {
+            getAccountBuilder().mergeFrom(value);
           } else {
             account_ = value;
           }
-          onChanged();
         } else {
           accountBuilder_.mergeFrom(value);
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
        * <code>.protocol.AccountId account = 1;</code>
        */
       public Builder clearAccount() {
-        if (accountBuilder_ == null) {
-          account_ = null;
-          onChanged();
-        } else {
-          account_ = null;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        account_ = null;
+        if (accountBuilder_ != null) {
+          accountBuilder_.dispose();
           accountBuilder_ = null;
         }
-
+        onChanged();
         return this;
       }
       /**
        * <code>.protocol.AccountId account = 1;</code>
        */
       public com.github.comrada.tron4j.proto.Common.AccountId.Builder getAccountBuilder() {
-        
+        bitField0_ |= 0x00000001;
         onChanged();
         return getAccountFieldBuilder().getBuilder();
       }
@@ -1433,11 +1388,9 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder setPermissionName(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         permissionName_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -1446,7 +1399,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearPermissionName() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         permissionName_ = getDefaultInstance().getPermissionName();
         onChanged();
         return this;
@@ -1484,7 +1437,18 @@ public final class Common {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new authority(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -1548,55 +1512,6 @@ public final class Common {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private Key(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              address_ = input.readBytes();
-              break;
-            }
-            case 16: {
-
-              weight_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Common.internal_static_protocol_Key_descriptor;
@@ -1611,7 +1526,7 @@ public final class Common {
     }
 
     public static final int ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString address_;
+    private com.google.protobuf.ByteString address_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes address = 1;</code>
      * @return The address.
@@ -1622,7 +1537,7 @@ public final class Common {
     }
 
     public static final int WEIGHT_FIELD_NUMBER = 2;
-    private long weight_;
+    private long weight_ = 0L;
     /**
      * <code>int64 weight = 2;</code>
      * @return The weight.
@@ -1652,7 +1567,7 @@ public final class Common {
       if (weight_ != 0L) {
         output.writeInt64(2, weight_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -1669,7 +1584,7 @@ public final class Common {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(2, weight_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -1688,7 +1603,7 @@ public final class Common {
           .equals(other.getAddress())) return false;
       if (getWeight()
           != other.getWeight()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -1704,7 +1619,7 @@ public final class Common {
       hash = (37 * hash) + WEIGHT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getWeight());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -1821,26 +1736,20 @@ public final class Common {
 
       // Construct using com.github.comrada.tron4j.proto.Common.Key.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         address_ = com.google.protobuf.ByteString.EMPTY;
-
         weight_ = 0L;
-
         return this;
       }
 
@@ -1867,10 +1776,19 @@ public final class Common {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Common.Key buildPartial() {
         com.github.comrada.tron4j.proto.Common.Key result = new com.github.comrada.tron4j.proto.Common.Key(this);
-        result.address_ = address_;
-        result.weight_ = weight_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Common.Key result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.address_ = address_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.weight_ = weight_;
+        }
       }
 
       @java.lang.Override
@@ -1923,7 +1841,7 @@ public final class Common {
         if (other.getWeight() != 0L) {
           setWeight(other.getWeight());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -1938,19 +1856,43 @@ public final class Common {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Common.Key parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                address_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 16: {
+                weight_ = input.readInt64();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Common.Key) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString address_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -1967,11 +1909,9 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder setAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         address_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -1980,7 +1920,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         address_ = getDefaultInstance().getAddress();
         onChanged();
         return this;
@@ -2003,6 +1943,7 @@ public final class Common {
       public Builder setWeight(long value) {
         
         weight_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -2011,7 +1952,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearWeight() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         weight_ = 0L;
         onChanged();
         return this;
@@ -2049,7 +1990,18 @@ public final class Common {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Key(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -2183,90 +2135,6 @@ public final class Common {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private Permission(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-              int rawValue = input.readEnum();
-
-              type_ = rawValue;
-              break;
-            }
-            case 16: {
-
-              id_ = input.readInt32();
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              permissionName_ = s;
-              break;
-            }
-            case 32: {
-
-              threshold_ = input.readInt64();
-              break;
-            }
-            case 40: {
-
-              parentId_ = input.readInt32();
-              break;
-            }
-            case 50: {
-
-              operations_ = input.readBytes();
-              break;
-            }
-            case 58: {
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                keys_ = new java.util.ArrayList<com.github.comrada.tron4j.proto.Common.Key>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              keys_.add(
-                  input.readMessage(com.github.comrada.tron4j.proto.Common.Key.parser(), extensionRegistry));
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          keys_ = java.util.Collections.unmodifiableList(keys_);
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Common.internal_static_protocol_Permission_descriptor;
@@ -2398,7 +2266,7 @@ public final class Common {
     }
 
     public static final int TYPE_FIELD_NUMBER = 1;
-    private int type_;
+    private int type_ = 0;
     /**
      * <code>.protocol.Permission.PermissionType type = 1;</code>
      * @return The enum numeric value on the wire for type.
@@ -2411,13 +2279,12 @@ public final class Common {
      * @return The type.
      */
     @java.lang.Override public com.github.comrada.tron4j.proto.Common.Permission.PermissionType getType() {
-      @SuppressWarnings("deprecation")
-      com.github.comrada.tron4j.proto.Common.Permission.PermissionType result = com.github.comrada.tron4j.proto.Common.Permission.PermissionType.valueOf(type_);
+      com.github.comrada.tron4j.proto.Common.Permission.PermissionType result = com.github.comrada.tron4j.proto.Common.Permission.PermissionType.forNumber(type_);
       return result == null ? com.github.comrada.tron4j.proto.Common.Permission.PermissionType.UNRECOGNIZED : result;
     }
 
     public static final int ID_FIELD_NUMBER = 2;
-    private int id_;
+    private int id_ = 0;
     /**
      * <pre>
      * Owner id=0, Witness id=1, Active id start by 2
@@ -2432,7 +2299,8 @@ public final class Common {
     }
 
     public static final int PERMISSION_NAME_FIELD_NUMBER = 3;
-    private volatile java.lang.Object permissionName_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object permissionName_ = "";
     /**
      * <code>string permission_name = 3;</code>
      * @return The permissionName.
@@ -2470,7 +2338,7 @@ public final class Common {
     }
 
     public static final int THRESHOLD_FIELD_NUMBER = 4;
-    private long threshold_;
+    private long threshold_ = 0L;
     /**
      * <code>int64 threshold = 4;</code>
      * @return The threshold.
@@ -2481,7 +2349,7 @@ public final class Common {
     }
 
     public static final int PARENT_ID_FIELD_NUMBER = 5;
-    private int parentId_;
+    private int parentId_ = 0;
     /**
      * <code>int32 parent_id = 5;</code>
      * @return The parentId.
@@ -2492,7 +2360,7 @@ public final class Common {
     }
 
     public static final int OPERATIONS_FIELD_NUMBER = 6;
-    private com.google.protobuf.ByteString operations_;
+    private com.google.protobuf.ByteString operations_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <pre>
      * 1 bit 1 contract
@@ -2507,6 +2375,7 @@ public final class Common {
     }
 
     public static final int KEYS_FIELD_NUMBER = 7;
+    @SuppressWarnings("serial")
     private java.util.List<com.github.comrada.tron4j.proto.Common.Key> keys_;
     /**
      * <code>repeated .protocol.Key keys = 7;</code>
@@ -2581,7 +2450,7 @@ public final class Common {
       for (int i = 0; i < keys_.size(); i++) {
         output.writeMessage(7, keys_.get(i));
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -2617,7 +2486,7 @@ public final class Common {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(7, keys_.get(i));
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -2645,7 +2514,7 @@ public final class Common {
           .equals(other.getOperations())) return false;
       if (!getKeysList()
           .equals(other.getKeysList())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -2673,7 +2542,7 @@ public final class Common {
         hash = (37 * hash) + KEYS_FIELD_NUMBER;
         hash = (53 * hash) + getKeysList().hashCode();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -2790,41 +2659,31 @@ public final class Common {
 
       // Construct using com.github.comrada.tron4j.proto.Common.Permission.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-          getKeysFieldBuilder();
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         type_ = 0;
-
         id_ = 0;
-
         permissionName_ = "";
-
         threshold_ = 0L;
-
         parentId_ = 0;
-
         operations_ = com.google.protobuf.ByteString.EMPTY;
-
         if (keysBuilder_ == null) {
           keys_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
+          keys_ = null;
           keysBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -2851,24 +2710,44 @@ public final class Common {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Common.Permission buildPartial() {
         com.github.comrada.tron4j.proto.Common.Permission result = new com.github.comrada.tron4j.proto.Common.Permission(this);
-        int from_bitField0_ = bitField0_;
-        result.type_ = type_;
-        result.id_ = id_;
-        result.permissionName_ = permissionName_;
-        result.threshold_ = threshold_;
-        result.parentId_ = parentId_;
-        result.operations_ = operations_;
+        buildPartialRepeatedFields(result);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartialRepeatedFields(com.github.comrada.tron4j.proto.Common.Permission result) {
         if (keysBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) != 0)) {
+          if (((bitField0_ & 0x00000040) != 0)) {
             keys_ = java.util.Collections.unmodifiableList(keys_);
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000040);
           }
           result.keys_ = keys_;
         } else {
           result.keys_ = keysBuilder_.build();
         }
-        onBuilt();
-        return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Common.Permission result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.type_ = type_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.id_ = id_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.permissionName_ = permissionName_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.threshold_ = threshold_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.parentId_ = parentId_;
+        }
+        if (((from_bitField0_ & 0x00000020) != 0)) {
+          result.operations_ = operations_;
+        }
       }
 
       @java.lang.Override
@@ -2923,6 +2802,7 @@ public final class Common {
         }
         if (!other.getPermissionName().isEmpty()) {
           permissionName_ = other.permissionName_;
+          bitField0_ |= 0x00000004;
           onChanged();
         }
         if (other.getThreshold() != 0L) {
@@ -2938,7 +2818,7 @@ public final class Common {
           if (!other.keys_.isEmpty()) {
             if (keys_.isEmpty()) {
               keys_ = other.keys_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000040);
             } else {
               ensureKeysIsMutable();
               keys_.addAll(other.keys_);
@@ -2951,7 +2831,7 @@ public final class Common {
               keysBuilder_.dispose();
               keysBuilder_ = null;
               keys_ = other.keys_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000040);
               keysBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getKeysFieldBuilder() : null;
@@ -2960,7 +2840,7 @@ public final class Common {
             }
           }
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -2975,17 +2855,73 @@ public final class Common {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Common.Permission parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 8: {
+                type_ = input.readEnum();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 8
+              case 16: {
+                id_ = input.readInt32();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              case 26: {
+                permissionName_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 32: {
+                threshold_ = input.readInt64();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 32
+              case 40: {
+                parentId_ = input.readInt32();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 40
+              case 50: {
+                operations_ = input.readBytes();
+                bitField0_ |= 0x00000020;
+                break;
+              } // case 50
+              case 58: {
+                com.github.comrada.tron4j.proto.Common.Key m =
+                    input.readMessage(
+                        com.github.comrada.tron4j.proto.Common.Key.parser(),
+                        extensionRegistry);
+                if (keysBuilder_ == null) {
+                  ensureKeysIsMutable();
+                  keys_.add(m);
+                } else {
+                  keysBuilder_.addMessage(m);
+                }
+                break;
+              } // case 58
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Common.Permission) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
       private int bitField0_;
@@ -3004,8 +2940,8 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder setTypeValue(int value) {
-        
         type_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -3015,8 +2951,7 @@ public final class Common {
        */
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Common.Permission.PermissionType getType() {
-        @SuppressWarnings("deprecation")
-        com.github.comrada.tron4j.proto.Common.Permission.PermissionType result = com.github.comrada.tron4j.proto.Common.Permission.PermissionType.valueOf(type_);
+        com.github.comrada.tron4j.proto.Common.Permission.PermissionType result = com.github.comrada.tron4j.proto.Common.Permission.PermissionType.forNumber(type_);
         return result == null ? com.github.comrada.tron4j.proto.Common.Permission.PermissionType.UNRECOGNIZED : result;
       }
       /**
@@ -3028,7 +2963,7 @@ public final class Common {
         if (value == null) {
           throw new NullPointerException();
         }
-        
+        bitField0_ |= 0x00000001;
         type_ = value.getNumber();
         onChanged();
         return this;
@@ -3038,7 +2973,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearType() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         type_ = 0;
         onChanged();
         return this;
@@ -3069,6 +3004,7 @@ public final class Common {
       public Builder setId(int value) {
         
         id_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -3081,7 +3017,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearId() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         id_ = 0;
         onChanged();
         return this;
@@ -3128,11 +3064,9 @@ public final class Common {
        */
       public Builder setPermissionName(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         permissionName_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -3141,8 +3075,8 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearPermissionName() {
-        
         permissionName_ = getDefaultInstance().getPermissionName();
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
@@ -3153,12 +3087,10 @@ public final class Common {
        */
       public Builder setPermissionNameBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         permissionName_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -3180,6 +3112,7 @@ public final class Common {
       public Builder setThreshold(long value) {
         
         threshold_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -3188,7 +3121,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearThreshold() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         threshold_ = 0L;
         onChanged();
         return this;
@@ -3211,6 +3144,7 @@ public final class Common {
       public Builder setParentId(int value) {
         
         parentId_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -3219,7 +3153,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearParentId() {
-        
+        bitField0_ = (bitField0_ & ~0x00000010);
         parentId_ = 0;
         onChanged();
         return this;
@@ -3248,11 +3182,9 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder setOperations(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         operations_ = value;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
@@ -3265,7 +3197,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearOperations() {
-        
+        bitField0_ = (bitField0_ & ~0x00000020);
         operations_ = getDefaultInstance().getOperations();
         onChanged();
         return this;
@@ -3274,9 +3206,9 @@ public final class Common {
       private java.util.List<com.github.comrada.tron4j.proto.Common.Key> keys_ =
         java.util.Collections.emptyList();
       private void ensureKeysIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
+        if (!((bitField0_ & 0x00000040) != 0)) {
           keys_ = new java.util.ArrayList<com.github.comrada.tron4j.proto.Common.Key>(keys_);
-          bitField0_ |= 0x00000001;
+          bitField0_ |= 0x00000040;
          }
       }
 
@@ -3426,7 +3358,7 @@ public final class Common {
       public Builder clearKeys() {
         if (keysBuilder_ == null) {
           keys_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+          bitField0_ = (bitField0_ & ~0x00000040);
           onChanged();
         } else {
           keysBuilder_.clear();
@@ -3503,7 +3435,7 @@ public final class Common {
           keysBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.github.comrada.tron4j.proto.Common.Key, com.github.comrada.tron4j.proto.Common.Key.Builder, com.github.comrada.tron4j.proto.Common.KeyOrBuilder>(
                   keys_,
-                  ((bitField0_ & 0x00000001) != 0),
+                  ((bitField0_ & 0x00000040) != 0),
                   getParentForChildren(),
                   isClean());
           keys_ = null;
@@ -3543,7 +3475,18 @@ public final class Common {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Permission(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -3675,104 +3618,6 @@ public final class Common {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private SmartContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              originAddress_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              contractAddress_ = input.readBytes();
-              break;
-            }
-            case 26: {
-              com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Builder subBuilder = null;
-              if (abi_ != null) {
-                subBuilder = abi_.toBuilder();
-              }
-              abi_ = input.readMessage(com.github.comrada.tron4j.proto.Common.SmartContract.ABI.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(abi_);
-                abi_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 34: {
-
-              bytecode_ = input.readBytes();
-              break;
-            }
-            case 40: {
-
-              callValue_ = input.readInt64();
-              break;
-            }
-            case 48: {
-
-              consumeUserResourcePercent_ = input.readInt64();
-              break;
-            }
-            case 58: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              name_ = s;
-              break;
-            }
-            case 64: {
-
-              originEnergyLimit_ = input.readInt64();
-              break;
-            }
-            case 74: {
-
-              codeHash_ = input.readBytes();
-              break;
-            }
-            case 82: {
-
-              trxHash_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Common.internal_static_protocol_SmartContract_descriptor;
@@ -3841,58 +3686,6 @@ public final class Common {
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
         return this.unknownFields;
-      }
-      private ABI(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        this();
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
-        int mutable_bitField0_ = 0;
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-            com.google.protobuf.UnknownFieldSet.newBuilder();
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 10: {
-                if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                  entrys_ = new java.util.ArrayList<com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry>();
-                  mutable_bitField0_ |= 0x00000001;
-                }
-                entrys_.add(
-                    input.readMessage(com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.parser(), extensionRegistry));
-                break;
-              }
-              default: {
-                if (!parseUnknownField(
-                    input, unknownFields, extensionRegistry, tag)) {
-                  done = true;
-                }
-                break;
-              }
-            }
-          }
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(this);
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(
-              e).setUnfinishedMessage(this);
-        } finally {
-          if (((mutable_bitField0_ & 0x00000001) != 0)) {
-            entrys_ = java.util.Collections.unmodifiableList(entrys_);
-          }
-          this.unknownFields = unknownFields.build();
-          makeExtensionsImmutable();
-        }
       }
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -4042,103 +3835,6 @@ public final class Common {
         public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
           return this.unknownFields;
-        }
-        private Entry(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          this();
-          if (extensionRegistry == null) {
-            throw new java.lang.NullPointerException();
-          }
-          int mutable_bitField0_ = 0;
-          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder();
-          try {
-            boolean done = false;
-            while (!done) {
-              int tag = input.readTag();
-              switch (tag) {
-                case 0:
-                  done = true;
-                  break;
-                case 8: {
-
-                  anonymous_ = input.readBool();
-                  break;
-                }
-                case 16: {
-
-                  constant_ = input.readBool();
-                  break;
-                }
-                case 26: {
-                  java.lang.String s = input.readStringRequireUtf8();
-
-                  name_ = s;
-                  break;
-                }
-                case 34: {
-                  if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                    inputs_ = new java.util.ArrayList<com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param>();
-                    mutable_bitField0_ |= 0x00000001;
-                  }
-                  inputs_.add(
-                      input.readMessage(com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param.parser(), extensionRegistry));
-                  break;
-                }
-                case 42: {
-                  if (!((mutable_bitField0_ & 0x00000002) != 0)) {
-                    outputs_ = new java.util.ArrayList<com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param>();
-                    mutable_bitField0_ |= 0x00000002;
-                  }
-                  outputs_.add(
-                      input.readMessage(com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param.parser(), extensionRegistry));
-                  break;
-                }
-                case 48: {
-                  int rawValue = input.readEnum();
-
-                  type_ = rawValue;
-                  break;
-                }
-                case 56: {
-
-                  payable_ = input.readBool();
-                  break;
-                }
-                case 64: {
-                  int rawValue = input.readEnum();
-
-                  stateMutability_ = rawValue;
-                  break;
-                }
-                default: {
-                  if (!parseUnknownField(
-                      input, unknownFields, extensionRegistry, tag)) {
-                    done = true;
-                  }
-                  break;
-                }
-              }
-            }
-          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-            throw e.setUnfinishedMessage(this);
-          } catch (com.google.protobuf.UninitializedMessageException e) {
-            throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-          } catch (java.io.IOException e) {
-            throw new com.google.protobuf.InvalidProtocolBufferException(
-                e).setUnfinishedMessage(this);
-          } finally {
-            if (((mutable_bitField0_ & 0x00000001) != 0)) {
-              inputs_ = java.util.Collections.unmodifiableList(inputs_);
-            }
-            if (((mutable_bitField0_ & 0x00000002) != 0)) {
-              outputs_ = java.util.Collections.unmodifiableList(outputs_);
-            }
-            this.unknownFields = unknownFields.build();
-            makeExtensionsImmutable();
-          }
         }
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
@@ -4494,62 +4190,6 @@ public final class Common {
           getUnknownFields() {
             return this.unknownFields;
           }
-          private Param(
-              com.google.protobuf.CodedInputStream input,
-              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-              throws com.google.protobuf.InvalidProtocolBufferException {
-            this();
-            if (extensionRegistry == null) {
-              throw new java.lang.NullPointerException();
-            }
-            com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-                com.google.protobuf.UnknownFieldSet.newBuilder();
-            try {
-              boolean done = false;
-              while (!done) {
-                int tag = input.readTag();
-                switch (tag) {
-                  case 0:
-                    done = true;
-                    break;
-                  case 8: {
-
-                    indexed_ = input.readBool();
-                    break;
-                  }
-                  case 18: {
-                    java.lang.String s = input.readStringRequireUtf8();
-
-                    name_ = s;
-                    break;
-                  }
-                  case 26: {
-                    java.lang.String s = input.readStringRequireUtf8();
-
-                    type_ = s;
-                    break;
-                  }
-                  default: {
-                    if (!parseUnknownField(
-                        input, unknownFields, extensionRegistry, tag)) {
-                      done = true;
-                    }
-                    break;
-                  }
-                }
-              }
-            } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-              throw e.setUnfinishedMessage(this);
-            } catch (com.google.protobuf.UninitializedMessageException e) {
-              throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-            } catch (java.io.IOException e) {
-              throw new com.google.protobuf.InvalidProtocolBufferException(
-                  e).setUnfinishedMessage(this);
-            } finally {
-              this.unknownFields = unknownFields.build();
-              makeExtensionsImmutable();
-            }
-          }
           public static final com.google.protobuf.Descriptors.Descriptor
               getDescriptor() {
             return com.github.comrada.tron4j.proto.Common.internal_static_protocol_SmartContract_ABI_Entry_Param_descriptor;
@@ -4564,7 +4204,7 @@ public final class Common {
           }
 
           public static final int INDEXED_FIELD_NUMBER = 1;
-          private boolean indexed_;
+          private boolean indexed_ = false;
           /**
            * <code>bool indexed = 1;</code>
            * @return The indexed.
@@ -4575,7 +4215,8 @@ public final class Common {
           }
 
           public static final int NAME_FIELD_NUMBER = 2;
-          private volatile java.lang.Object name_;
+          @SuppressWarnings("serial")
+          private volatile java.lang.Object name_ = "";
           /**
            * <code>string name = 2;</code>
            * @return The name.
@@ -4613,7 +4254,8 @@ public final class Common {
           }
 
           public static final int TYPE_FIELD_NUMBER = 3;
-          private volatile java.lang.Object type_;
+          @SuppressWarnings("serial")
+          private volatile java.lang.Object type_ = "";
           /**
            * <pre>
            * SolidityType type = 3;
@@ -4681,7 +4323,7 @@ public final class Common {
             if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(type_)) {
               com.google.protobuf.GeneratedMessageV3.writeString(output, 3, type_);
             }
-            unknownFields.writeTo(output);
+            getUnknownFields().writeTo(output);
           }
 
           @java.lang.Override
@@ -4700,7 +4342,7 @@ public final class Common {
             if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(type_)) {
               size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, type_);
             }
-            size += unknownFields.getSerializedSize();
+            size += getUnknownFields().getSerializedSize();
             memoizedSize = size;
             return size;
           }
@@ -4721,7 +4363,7 @@ public final class Common {
                 .equals(other.getName())) return false;
             if (!getType()
                 .equals(other.getType())) return false;
-            if (!unknownFields.equals(other.unknownFields)) return false;
+            if (!getUnknownFields().equals(other.getUnknownFields())) return false;
             return true;
           }
 
@@ -4739,7 +4381,7 @@ public final class Common {
             hash = (53 * hash) + getName().hashCode();
             hash = (37 * hash) + TYPE_FIELD_NUMBER;
             hash = (53 * hash) + getType().hashCode();
-            hash = (29 * hash) + unknownFields.hashCode();
+            hash = (29 * hash) + getUnknownFields().hashCode();
             memoizedHashCode = hash;
             return hash;
           }
@@ -4856,28 +4498,21 @@ public final class Common {
 
             // Construct using com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param.newBuilder()
             private Builder() {
-              maybeForceBuilderInitialization();
+
             }
 
             private Builder(
                 com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
               super(parent);
-              maybeForceBuilderInitialization();
-            }
-            private void maybeForceBuilderInitialization() {
-              if (com.google.protobuf.GeneratedMessageV3
-                      .alwaysUseFieldBuilders) {
-              }
+
             }
             @java.lang.Override
             public Builder clear() {
               super.clear();
+              bitField0_ = 0;
               indexed_ = false;
-
               name_ = "";
-
               type_ = "";
-
               return this;
             }
 
@@ -4904,11 +4539,22 @@ public final class Common {
             @java.lang.Override
             public com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param buildPartial() {
               com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param result = new com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param(this);
-              result.indexed_ = indexed_;
-              result.name_ = name_;
-              result.type_ = type_;
+              if (bitField0_ != 0) { buildPartial0(result); }
               onBuilt();
               return result;
+            }
+
+            private void buildPartial0(com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param result) {
+              int from_bitField0_ = bitField0_;
+              if (((from_bitField0_ & 0x00000001) != 0)) {
+                result.indexed_ = indexed_;
+              }
+              if (((from_bitField0_ & 0x00000002) != 0)) {
+                result.name_ = name_;
+              }
+              if (((from_bitField0_ & 0x00000004) != 0)) {
+                result.type_ = type_;
+              }
             }
 
             @java.lang.Override
@@ -4960,13 +4606,15 @@ public final class Common {
               }
               if (!other.getName().isEmpty()) {
                 name_ = other.name_;
+                bitField0_ |= 0x00000002;
                 onChanged();
               }
               if (!other.getType().isEmpty()) {
                 type_ = other.type_;
+                bitField0_ |= 0x00000004;
                 onChanged();
               }
-              this.mergeUnknownFields(other.unknownFields);
+              this.mergeUnknownFields(other.getUnknownFields());
               onChanged();
               return this;
             }
@@ -4981,19 +4629,48 @@ public final class Common {
                 com.google.protobuf.CodedInputStream input,
                 com.google.protobuf.ExtensionRegistryLite extensionRegistry)
                 throws java.io.IOException {
-              com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param parsedMessage = null;
+              if (extensionRegistry == null) {
+                throw new java.lang.NullPointerException();
+              }
               try {
-                parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+                boolean done = false;
+                while (!done) {
+                  int tag = input.readTag();
+                  switch (tag) {
+                    case 0:
+                      done = true;
+                      break;
+                    case 8: {
+                      indexed_ = input.readBool();
+                      bitField0_ |= 0x00000001;
+                      break;
+                    } // case 8
+                    case 18: {
+                      name_ = input.readStringRequireUtf8();
+                      bitField0_ |= 0x00000002;
+                      break;
+                    } // case 18
+                    case 26: {
+                      type_ = input.readStringRequireUtf8();
+                      bitField0_ |= 0x00000004;
+                      break;
+                    } // case 26
+                    default: {
+                      if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                        done = true; // was an endgroup tag
+                      }
+                      break;
+                    } // default:
+                  } // switch (tag)
+                } // while (!done)
               } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-                parsedMessage = (com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param) e.getUnfinishedMessage();
                 throw e.unwrapIOException();
               } finally {
-                if (parsedMessage != null) {
-                  mergeFrom(parsedMessage);
-                }
-              }
+                onChanged();
+              } // finally
               return this;
             }
+            private int bitField0_;
 
             private boolean indexed_ ;
             /**
@@ -5012,6 +4689,7 @@ public final class Common {
             public Builder setIndexed(boolean value) {
               
               indexed_ = value;
+              bitField0_ |= 0x00000001;
               onChanged();
               return this;
             }
@@ -5020,7 +4698,7 @@ public final class Common {
              * @return This builder for chaining.
              */
             public Builder clearIndexed() {
-              
+              bitField0_ = (bitField0_ & ~0x00000001);
               indexed_ = false;
               onChanged();
               return this;
@@ -5067,11 +4745,9 @@ public final class Common {
              */
             public Builder setName(
                 java.lang.String value) {
-              if (value == null) {
-    throw new NullPointerException();
-  }
-  
+              if (value == null) { throw new NullPointerException(); }
               name_ = value;
+              bitField0_ |= 0x00000002;
               onChanged();
               return this;
             }
@@ -5080,8 +4756,8 @@ public final class Common {
              * @return This builder for chaining.
              */
             public Builder clearName() {
-              
               name_ = getDefaultInstance().getName();
+              bitField0_ = (bitField0_ & ~0x00000002);
               onChanged();
               return this;
             }
@@ -5092,12 +4768,10 @@ public final class Common {
              */
             public Builder setNameBytes(
                 com.google.protobuf.ByteString value) {
-              if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-              
+              if (value == null) { throw new NullPointerException(); }
+              checkByteStringIsUtf8(value);
               name_ = value;
+              bitField0_ |= 0x00000002;
               onChanged();
               return this;
             }
@@ -5155,11 +4829,9 @@ public final class Common {
              */
             public Builder setType(
                 java.lang.String value) {
-              if (value == null) {
-    throw new NullPointerException();
-  }
-  
+              if (value == null) { throw new NullPointerException(); }
               type_ = value;
+              bitField0_ |= 0x00000004;
               onChanged();
               return this;
             }
@@ -5172,8 +4844,8 @@ public final class Common {
              * @return This builder for chaining.
              */
             public Builder clearType() {
-              
               type_ = getDefaultInstance().getType();
+              bitField0_ = (bitField0_ & ~0x00000004);
               onChanged();
               return this;
             }
@@ -5188,12 +4860,10 @@ public final class Common {
              */
             public Builder setTypeBytes(
                 com.google.protobuf.ByteString value) {
-              if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-              
+              if (value == null) { throw new NullPointerException(); }
+              checkByteStringIsUtf8(value);
               type_ = value;
+              bitField0_ |= 0x00000004;
               onChanged();
               return this;
             }
@@ -5230,7 +4900,18 @@ public final class Common {
                 com.google.protobuf.CodedInputStream input,
                 com.google.protobuf.ExtensionRegistryLite extensionRegistry)
                 throws com.google.protobuf.InvalidProtocolBufferException {
-              return new Param(input, extensionRegistry);
+              Builder builder = newBuilder();
+              try {
+                builder.mergeFrom(input, extensionRegistry);
+              } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+                throw e.setUnfinishedMessage(builder.buildPartial());
+              } catch (com.google.protobuf.UninitializedMessageException e) {
+                throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+              } catch (java.io.IOException e) {
+                throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                    .setUnfinishedMessage(builder.buildPartial());
+              }
+              return builder.buildPartial();
             }
           };
 
@@ -5251,7 +4932,7 @@ public final class Common {
         }
 
         public static final int ANONYMOUS_FIELD_NUMBER = 1;
-        private boolean anonymous_;
+        private boolean anonymous_ = false;
         /**
          * <code>bool anonymous = 1;</code>
          * @return The anonymous.
@@ -5262,7 +4943,7 @@ public final class Common {
         }
 
         public static final int CONSTANT_FIELD_NUMBER = 2;
-        private boolean constant_;
+        private boolean constant_ = false;
         /**
          * <code>bool constant = 2;</code>
          * @return The constant.
@@ -5273,7 +4954,8 @@ public final class Common {
         }
 
         public static final int NAME_FIELD_NUMBER = 3;
-        private volatile java.lang.Object name_;
+        @SuppressWarnings("serial")
+        private volatile java.lang.Object name_ = "";
         /**
          * <code>string name = 3;</code>
          * @return The name.
@@ -5311,6 +4993,7 @@ public final class Common {
         }
 
         public static final int INPUTS_FIELD_NUMBER = 4;
+        @SuppressWarnings("serial")
         private java.util.List<com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param> inputs_;
         /**
          * <code>repeated .protocol.SmartContract.ABI.Entry.Param inputs = 4;</code>
@@ -5351,6 +5034,7 @@ public final class Common {
         }
 
         public static final int OUTPUTS_FIELD_NUMBER = 5;
+        @SuppressWarnings("serial")
         private java.util.List<com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param> outputs_;
         /**
          * <code>repeated .protocol.SmartContract.ABI.Entry.Param outputs = 5;</code>
@@ -5391,7 +5075,7 @@ public final class Common {
         }
 
         public static final int TYPE_FIELD_NUMBER = 6;
-        private int type_;
+        private int type_ = 0;
         /**
          * <code>.protocol.SmartContract.ABI.Entry.EntryType type = 6;</code>
          * @return The enum numeric value on the wire for type.
@@ -5404,13 +5088,12 @@ public final class Common {
          * @return The type.
          */
         @java.lang.Override public com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.EntryType getType() {
-          @SuppressWarnings("deprecation")
-          com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.EntryType result = com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.EntryType.valueOf(type_);
+          com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.EntryType result = com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.EntryType.forNumber(type_);
           return result == null ? com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.EntryType.UNRECOGNIZED : result;
         }
 
         public static final int PAYABLE_FIELD_NUMBER = 7;
-        private boolean payable_;
+        private boolean payable_ = false;
         /**
          * <code>bool payable = 7;</code>
          * @return The payable.
@@ -5421,7 +5104,7 @@ public final class Common {
         }
 
         public static final int STATEMUTABILITY_FIELD_NUMBER = 8;
-        private int stateMutability_;
+        private int stateMutability_ = 0;
         /**
          * <code>.protocol.SmartContract.ABI.Entry.StateMutabilityType stateMutability = 8;</code>
          * @return The enum numeric value on the wire for stateMutability.
@@ -5434,8 +5117,7 @@ public final class Common {
          * @return The stateMutability.
          */
         @java.lang.Override public com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.StateMutabilityType getStateMutability() {
-          @SuppressWarnings("deprecation")
-          com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.StateMutabilityType result = com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.StateMutabilityType.valueOf(stateMutability_);
+          com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.StateMutabilityType result = com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.StateMutabilityType.forNumber(stateMutability_);
           return result == null ? com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.StateMutabilityType.UNRECOGNIZED : result;
         }
 
@@ -5477,7 +5159,7 @@ public final class Common {
           if (stateMutability_ != com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.StateMutabilityType.UnknownMutabilityType.getNumber()) {
             output.writeEnum(8, stateMutability_);
           }
-          unknownFields.writeTo(output);
+          getUnknownFields().writeTo(output);
         }
 
         @java.lang.Override
@@ -5517,7 +5199,7 @@ public final class Common {
             size += com.google.protobuf.CodedOutputStream
               .computeEnumSize(8, stateMutability_);
           }
-          size += unknownFields.getSerializedSize();
+          size += getUnknownFields().getSerializedSize();
           memoizedSize = size;
           return size;
         }
@@ -5546,7 +5228,7 @@ public final class Common {
           if (getPayable()
               != other.getPayable()) return false;
           if (stateMutability_ != other.stateMutability_) return false;
-          if (!unknownFields.equals(other.unknownFields)) return false;
+          if (!getUnknownFields().equals(other.getUnknownFields())) return false;
           return true;
         }
 
@@ -5580,7 +5262,7 @@ public final class Common {
               getPayable());
           hash = (37 * hash) + STATEMUTABILITY_FIELD_NUMBER;
           hash = (53 * hash) + stateMutability_;
-          hash = (29 * hash) + unknownFields.hashCode();
+          hash = (29 * hash) + getUnknownFields().hashCode();
           memoizedHashCode = hash;
           return hash;
         }
@@ -5697,48 +5379,38 @@ public final class Common {
 
           // Construct using com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.newBuilder()
           private Builder() {
-            maybeForceBuilderInitialization();
+
           }
 
           private Builder(
               com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
             super(parent);
-            maybeForceBuilderInitialization();
-          }
-          private void maybeForceBuilderInitialization() {
-            if (com.google.protobuf.GeneratedMessageV3
-                    .alwaysUseFieldBuilders) {
-              getInputsFieldBuilder();
-              getOutputsFieldBuilder();
-            }
+
           }
           @java.lang.Override
           public Builder clear() {
             super.clear();
+            bitField0_ = 0;
             anonymous_ = false;
-
             constant_ = false;
-
             name_ = "";
-
             if (inputsBuilder_ == null) {
               inputs_ = java.util.Collections.emptyList();
-              bitField0_ = (bitField0_ & ~0x00000001);
             } else {
+              inputs_ = null;
               inputsBuilder_.clear();
             }
+            bitField0_ = (bitField0_ & ~0x00000008);
             if (outputsBuilder_ == null) {
               outputs_ = java.util.Collections.emptyList();
-              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
+              outputs_ = null;
               outputsBuilder_.clear();
             }
+            bitField0_ = (bitField0_ & ~0x00000010);
             type_ = 0;
-
             payable_ = false;
-
             stateMutability_ = 0;
-
             return this;
           }
 
@@ -5765,33 +5437,53 @@ public final class Common {
           @java.lang.Override
           public com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry buildPartial() {
             com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry result = new com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry(this);
-            int from_bitField0_ = bitField0_;
-            result.anonymous_ = anonymous_;
-            result.constant_ = constant_;
-            result.name_ = name_;
+            buildPartialRepeatedFields(result);
+            if (bitField0_ != 0) { buildPartial0(result); }
+            onBuilt();
+            return result;
+          }
+
+          private void buildPartialRepeatedFields(com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry result) {
             if (inputsBuilder_ == null) {
-              if (((bitField0_ & 0x00000001) != 0)) {
+              if (((bitField0_ & 0x00000008) != 0)) {
                 inputs_ = java.util.Collections.unmodifiableList(inputs_);
-                bitField0_ = (bitField0_ & ~0x00000001);
+                bitField0_ = (bitField0_ & ~0x00000008);
               }
               result.inputs_ = inputs_;
             } else {
               result.inputs_ = inputsBuilder_.build();
             }
             if (outputsBuilder_ == null) {
-              if (((bitField0_ & 0x00000002) != 0)) {
+              if (((bitField0_ & 0x00000010) != 0)) {
                 outputs_ = java.util.Collections.unmodifiableList(outputs_);
-                bitField0_ = (bitField0_ & ~0x00000002);
+                bitField0_ = (bitField0_ & ~0x00000010);
               }
               result.outputs_ = outputs_;
             } else {
               result.outputs_ = outputsBuilder_.build();
             }
-            result.type_ = type_;
-            result.payable_ = payable_;
-            result.stateMutability_ = stateMutability_;
-            onBuilt();
-            return result;
+          }
+
+          private void buildPartial0(com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry result) {
+            int from_bitField0_ = bitField0_;
+            if (((from_bitField0_ & 0x00000001) != 0)) {
+              result.anonymous_ = anonymous_;
+            }
+            if (((from_bitField0_ & 0x00000002) != 0)) {
+              result.constant_ = constant_;
+            }
+            if (((from_bitField0_ & 0x00000004) != 0)) {
+              result.name_ = name_;
+            }
+            if (((from_bitField0_ & 0x00000020) != 0)) {
+              result.type_ = type_;
+            }
+            if (((from_bitField0_ & 0x00000040) != 0)) {
+              result.payable_ = payable_;
+            }
+            if (((from_bitField0_ & 0x00000080) != 0)) {
+              result.stateMutability_ = stateMutability_;
+            }
           }
 
           @java.lang.Override
@@ -5846,13 +5538,14 @@ public final class Common {
             }
             if (!other.getName().isEmpty()) {
               name_ = other.name_;
+              bitField0_ |= 0x00000004;
               onChanged();
             }
             if (inputsBuilder_ == null) {
               if (!other.inputs_.isEmpty()) {
                 if (inputs_.isEmpty()) {
                   inputs_ = other.inputs_;
-                  bitField0_ = (bitField0_ & ~0x00000001);
+                  bitField0_ = (bitField0_ & ~0x00000008);
                 } else {
                   ensureInputsIsMutable();
                   inputs_.addAll(other.inputs_);
@@ -5865,7 +5558,7 @@ public final class Common {
                   inputsBuilder_.dispose();
                   inputsBuilder_ = null;
                   inputs_ = other.inputs_;
-                  bitField0_ = (bitField0_ & ~0x00000001);
+                  bitField0_ = (bitField0_ & ~0x00000008);
                   inputsBuilder_ = 
                     com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                        getInputsFieldBuilder() : null;
@@ -5878,7 +5571,7 @@ public final class Common {
               if (!other.outputs_.isEmpty()) {
                 if (outputs_.isEmpty()) {
                   outputs_ = other.outputs_;
-                  bitField0_ = (bitField0_ & ~0x00000002);
+                  bitField0_ = (bitField0_ & ~0x00000010);
                 } else {
                   ensureOutputsIsMutable();
                   outputs_.addAll(other.outputs_);
@@ -5891,7 +5584,7 @@ public final class Common {
                   outputsBuilder_.dispose();
                   outputsBuilder_ = null;
                   outputs_ = other.outputs_;
-                  bitField0_ = (bitField0_ & ~0x00000002);
+                  bitField0_ = (bitField0_ & ~0x00000010);
                   outputsBuilder_ = 
                     com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                        getOutputsFieldBuilder() : null;
@@ -5909,7 +5602,7 @@ public final class Common {
             if (other.stateMutability_ != 0) {
               setStateMutabilityValue(other.getStateMutabilityValue());
             }
-            this.mergeUnknownFields(other.unknownFields);
+            this.mergeUnknownFields(other.getUnknownFields());
             onChanged();
             return this;
           }
@@ -5924,17 +5617,86 @@ public final class Common {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws java.io.IOException {
-            com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry parsedMessage = null;
+            if (extensionRegistry == null) {
+              throw new java.lang.NullPointerException();
+            }
             try {
-              parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+              boolean done = false;
+              while (!done) {
+                int tag = input.readTag();
+                switch (tag) {
+                  case 0:
+                    done = true;
+                    break;
+                  case 8: {
+                    anonymous_ = input.readBool();
+                    bitField0_ |= 0x00000001;
+                    break;
+                  } // case 8
+                  case 16: {
+                    constant_ = input.readBool();
+                    bitField0_ |= 0x00000002;
+                    break;
+                  } // case 16
+                  case 26: {
+                    name_ = input.readStringRequireUtf8();
+                    bitField0_ |= 0x00000004;
+                    break;
+                  } // case 26
+                  case 34: {
+                    com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param m =
+                        input.readMessage(
+                            com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param.parser(),
+                            extensionRegistry);
+                    if (inputsBuilder_ == null) {
+                      ensureInputsIsMutable();
+                      inputs_.add(m);
+                    } else {
+                      inputsBuilder_.addMessage(m);
+                    }
+                    break;
+                  } // case 34
+                  case 42: {
+                    com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param m =
+                        input.readMessage(
+                            com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param.parser(),
+                            extensionRegistry);
+                    if (outputsBuilder_ == null) {
+                      ensureOutputsIsMutable();
+                      outputs_.add(m);
+                    } else {
+                      outputsBuilder_.addMessage(m);
+                    }
+                    break;
+                  } // case 42
+                  case 48: {
+                    type_ = input.readEnum();
+                    bitField0_ |= 0x00000020;
+                    break;
+                  } // case 48
+                  case 56: {
+                    payable_ = input.readBool();
+                    bitField0_ |= 0x00000040;
+                    break;
+                  } // case 56
+                  case 64: {
+                    stateMutability_ = input.readEnum();
+                    bitField0_ |= 0x00000080;
+                    break;
+                  } // case 64
+                  default: {
+                    if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                      done = true; // was an endgroup tag
+                    }
+                    break;
+                  } // default:
+                } // switch (tag)
+              } // while (!done)
             } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-              parsedMessage = (com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry) e.getUnfinishedMessage();
               throw e.unwrapIOException();
             } finally {
-              if (parsedMessage != null) {
-                mergeFrom(parsedMessage);
-              }
-            }
+              onChanged();
+            } // finally
             return this;
           }
           private int bitField0_;
@@ -5956,6 +5718,7 @@ public final class Common {
           public Builder setAnonymous(boolean value) {
             
             anonymous_ = value;
+            bitField0_ |= 0x00000001;
             onChanged();
             return this;
           }
@@ -5964,7 +5727,7 @@ public final class Common {
            * @return This builder for chaining.
            */
           public Builder clearAnonymous() {
-            
+            bitField0_ = (bitField0_ & ~0x00000001);
             anonymous_ = false;
             onChanged();
             return this;
@@ -5987,6 +5750,7 @@ public final class Common {
           public Builder setConstant(boolean value) {
             
             constant_ = value;
+            bitField0_ |= 0x00000002;
             onChanged();
             return this;
           }
@@ -5995,7 +5759,7 @@ public final class Common {
            * @return This builder for chaining.
            */
           public Builder clearConstant() {
-            
+            bitField0_ = (bitField0_ & ~0x00000002);
             constant_ = false;
             onChanged();
             return this;
@@ -6042,11 +5806,9 @@ public final class Common {
            */
           public Builder setName(
               java.lang.String value) {
-            if (value == null) {
-    throw new NullPointerException();
-  }
-  
+            if (value == null) { throw new NullPointerException(); }
             name_ = value;
+            bitField0_ |= 0x00000004;
             onChanged();
             return this;
           }
@@ -6055,8 +5817,8 @@ public final class Common {
            * @return This builder for chaining.
            */
           public Builder clearName() {
-            
             name_ = getDefaultInstance().getName();
+            bitField0_ = (bitField0_ & ~0x00000004);
             onChanged();
             return this;
           }
@@ -6067,12 +5829,10 @@ public final class Common {
            */
           public Builder setNameBytes(
               com.google.protobuf.ByteString value) {
-            if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-            
+            if (value == null) { throw new NullPointerException(); }
+            checkByteStringIsUtf8(value);
             name_ = value;
+            bitField0_ |= 0x00000004;
             onChanged();
             return this;
           }
@@ -6080,9 +5840,9 @@ public final class Common {
           private java.util.List<com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param> inputs_ =
             java.util.Collections.emptyList();
           private void ensureInputsIsMutable() {
-            if (!((bitField0_ & 0x00000001) != 0)) {
+            if (!((bitField0_ & 0x00000008) != 0)) {
               inputs_ = new java.util.ArrayList<com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param>(inputs_);
-              bitField0_ |= 0x00000001;
+              bitField0_ |= 0x00000008;
              }
           }
 
@@ -6232,7 +5992,7 @@ public final class Common {
           public Builder clearInputs() {
             if (inputsBuilder_ == null) {
               inputs_ = java.util.Collections.emptyList();
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000008);
               onChanged();
             } else {
               inputsBuilder_.clear();
@@ -6309,7 +6069,7 @@ public final class Common {
               inputsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
                   com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param, com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param.Builder, com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.ParamOrBuilder>(
                       inputs_,
-                      ((bitField0_ & 0x00000001) != 0),
+                      ((bitField0_ & 0x00000008) != 0),
                       getParentForChildren(),
                       isClean());
               inputs_ = null;
@@ -6320,9 +6080,9 @@ public final class Common {
           private java.util.List<com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param> outputs_ =
             java.util.Collections.emptyList();
           private void ensureOutputsIsMutable() {
-            if (!((bitField0_ & 0x00000002) != 0)) {
+            if (!((bitField0_ & 0x00000010) != 0)) {
               outputs_ = new java.util.ArrayList<com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param>(outputs_);
-              bitField0_ |= 0x00000002;
+              bitField0_ |= 0x00000010;
              }
           }
 
@@ -6472,7 +6232,7 @@ public final class Common {
           public Builder clearOutputs() {
             if (outputsBuilder_ == null) {
               outputs_ = java.util.Collections.emptyList();
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000010);
               onChanged();
             } else {
               outputsBuilder_.clear();
@@ -6549,7 +6309,7 @@ public final class Common {
               outputsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
                   com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param, com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.Param.Builder, com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.ParamOrBuilder>(
                       outputs_,
-                      ((bitField0_ & 0x00000002) != 0),
+                      ((bitField0_ & 0x00000010) != 0),
                       getParentForChildren(),
                       isClean());
               outputs_ = null;
@@ -6571,8 +6331,8 @@ public final class Common {
            * @return This builder for chaining.
            */
           public Builder setTypeValue(int value) {
-            
             type_ = value;
+            bitField0_ |= 0x00000020;
             onChanged();
             return this;
           }
@@ -6582,8 +6342,7 @@ public final class Common {
            */
           @java.lang.Override
           public com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.EntryType getType() {
-            @SuppressWarnings("deprecation")
-            com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.EntryType result = com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.EntryType.valueOf(type_);
+            com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.EntryType result = com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.EntryType.forNumber(type_);
             return result == null ? com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.EntryType.UNRECOGNIZED : result;
           }
           /**
@@ -6595,7 +6354,7 @@ public final class Common {
             if (value == null) {
               throw new NullPointerException();
             }
-            
+            bitField0_ |= 0x00000020;
             type_ = value.getNumber();
             onChanged();
             return this;
@@ -6605,7 +6364,7 @@ public final class Common {
            * @return This builder for chaining.
            */
           public Builder clearType() {
-            
+            bitField0_ = (bitField0_ & ~0x00000020);
             type_ = 0;
             onChanged();
             return this;
@@ -6628,6 +6387,7 @@ public final class Common {
           public Builder setPayable(boolean value) {
             
             payable_ = value;
+            bitField0_ |= 0x00000040;
             onChanged();
             return this;
           }
@@ -6636,7 +6396,7 @@ public final class Common {
            * @return This builder for chaining.
            */
           public Builder clearPayable() {
-            
+            bitField0_ = (bitField0_ & ~0x00000040);
             payable_ = false;
             onChanged();
             return this;
@@ -6656,8 +6416,8 @@ public final class Common {
            * @return This builder for chaining.
            */
           public Builder setStateMutabilityValue(int value) {
-            
             stateMutability_ = value;
+            bitField0_ |= 0x00000080;
             onChanged();
             return this;
           }
@@ -6667,8 +6427,7 @@ public final class Common {
            */
           @java.lang.Override
           public com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.StateMutabilityType getStateMutability() {
-            @SuppressWarnings("deprecation")
-            com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.StateMutabilityType result = com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.StateMutabilityType.valueOf(stateMutability_);
+            com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.StateMutabilityType result = com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.StateMutabilityType.forNumber(stateMutability_);
             return result == null ? com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.StateMutabilityType.UNRECOGNIZED : result;
           }
           /**
@@ -6680,7 +6439,7 @@ public final class Common {
             if (value == null) {
               throw new NullPointerException();
             }
-            
+            bitField0_ |= 0x00000080;
             stateMutability_ = value.getNumber();
             onChanged();
             return this;
@@ -6690,7 +6449,7 @@ public final class Common {
            * @return This builder for chaining.
            */
           public Builder clearStateMutability() {
-            
+            bitField0_ = (bitField0_ & ~0x00000080);
             stateMutability_ = 0;
             onChanged();
             return this;
@@ -6728,7 +6487,18 @@ public final class Common {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-            return new Entry(input, extensionRegistry);
+            Builder builder = newBuilder();
+            try {
+              builder.mergeFrom(input, extensionRegistry);
+            } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+              throw e.setUnfinishedMessage(builder.buildPartial());
+            } catch (com.google.protobuf.UninitializedMessageException e) {
+              throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+            } catch (java.io.IOException e) {
+              throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                  .setUnfinishedMessage(builder.buildPartial());
+            }
+            return builder.buildPartial();
           }
         };
 
@@ -6749,6 +6519,7 @@ public final class Common {
       }
 
       public static final int ENTRYS_FIELD_NUMBER = 1;
+      @SuppressWarnings("serial")
       private java.util.List<com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry> entrys_;
       /**
        * <code>repeated .protocol.SmartContract.ABI.Entry entrys = 1;</code>
@@ -6805,7 +6576,7 @@ public final class Common {
         for (int i = 0; i < entrys_.size(); i++) {
           output.writeMessage(1, entrys_.get(i));
         }
-        unknownFields.writeTo(output);
+        getUnknownFields().writeTo(output);
       }
 
       @java.lang.Override
@@ -6818,7 +6589,7 @@ public final class Common {
           size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(1, entrys_.get(i));
         }
-        size += unknownFields.getSerializedSize();
+        size += getUnknownFields().getSerializedSize();
         memoizedSize = size;
         return size;
       }
@@ -6835,7 +6606,7 @@ public final class Common {
 
         if (!getEntrysList()
             .equals(other.getEntrysList())) return false;
-        if (!unknownFields.equals(other.unknownFields)) return false;
+        if (!getUnknownFields().equals(other.getUnknownFields())) return false;
         return true;
       }
 
@@ -6850,7 +6621,7 @@ public final class Common {
           hash = (37 * hash) + ENTRYS_FIELD_NUMBER;
           hash = (53 * hash) + getEntrysList().hashCode();
         }
-        hash = (29 * hash) + unknownFields.hashCode();
+        hash = (29 * hash) + getUnknownFields().hashCode();
         memoizedHashCode = hash;
         return hash;
       }
@@ -6967,29 +6738,25 @@ public final class Common {
 
         // Construct using com.github.comrada.tron4j.proto.Common.SmartContract.ABI.newBuilder()
         private Builder() {
-          maybeForceBuilderInitialization();
+
         }
 
         private Builder(
             com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
           super(parent);
-          maybeForceBuilderInitialization();
-        }
-        private void maybeForceBuilderInitialization() {
-          if (com.google.protobuf.GeneratedMessageV3
-                  .alwaysUseFieldBuilders) {
-            getEntrysFieldBuilder();
-          }
+
         }
         @java.lang.Override
         public Builder clear() {
           super.clear();
+          bitField0_ = 0;
           if (entrysBuilder_ == null) {
             entrys_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000001);
           } else {
+            entrys_ = null;
             entrysBuilder_.clear();
           }
+          bitField0_ = (bitField0_ & ~0x00000001);
           return this;
         }
 
@@ -7016,7 +6783,13 @@ public final class Common {
         @java.lang.Override
         public com.github.comrada.tron4j.proto.Common.SmartContract.ABI buildPartial() {
           com.github.comrada.tron4j.proto.Common.SmartContract.ABI result = new com.github.comrada.tron4j.proto.Common.SmartContract.ABI(this);
-          int from_bitField0_ = bitField0_;
+          buildPartialRepeatedFields(result);
+          if (bitField0_ != 0) { buildPartial0(result); }
+          onBuilt();
+          return result;
+        }
+
+        private void buildPartialRepeatedFields(com.github.comrada.tron4j.proto.Common.SmartContract.ABI result) {
           if (entrysBuilder_ == null) {
             if (((bitField0_ & 0x00000001) != 0)) {
               entrys_ = java.util.Collections.unmodifiableList(entrys_);
@@ -7026,8 +6799,10 @@ public final class Common {
           } else {
             result.entrys_ = entrysBuilder_.build();
           }
-          onBuilt();
-          return result;
+        }
+
+        private void buildPartial0(com.github.comrada.tron4j.proto.Common.SmartContract.ABI result) {
+          int from_bitField0_ = bitField0_;
         }
 
         @java.lang.Override
@@ -7100,7 +6875,7 @@ public final class Common {
               }
             }
           }
-          this.mergeUnknownFields(other.unknownFields);
+          this.mergeUnknownFields(other.getUnknownFields());
           onChanged();
           return this;
         }
@@ -7115,17 +6890,43 @@ public final class Common {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
-          com.github.comrada.tron4j.proto.Common.SmartContract.ABI parsedMessage = null;
+          if (extensionRegistry == null) {
+            throw new java.lang.NullPointerException();
+          }
           try {
-            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                case 10: {
+                  com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry m =
+                      input.readMessage(
+                          com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Entry.parser(),
+                          extensionRegistry);
+                  if (entrysBuilder_ == null) {
+                    ensureEntrysIsMutable();
+                    entrys_.add(m);
+                  } else {
+                    entrysBuilder_.addMessage(m);
+                  }
+                  break;
+                } // case 10
+                default: {
+                  if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                    done = true; // was an endgroup tag
+                  }
+                  break;
+                } // default:
+              } // switch (tag)
+            } // while (!done)
           } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-            parsedMessage = (com.github.comrada.tron4j.proto.Common.SmartContract.ABI) e.getUnfinishedMessage();
             throw e.unwrapIOException();
           } finally {
-            if (parsedMessage != null) {
-              mergeFrom(parsedMessage);
-            }
-          }
+            onChanged();
+          } // finally
           return this;
         }
         private int bitField0_;
@@ -7402,7 +7203,18 @@ public final class Common {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ABI(input, extensionRegistry);
+          Builder builder = newBuilder();
+          try {
+            builder.mergeFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw e.setUnfinishedMessage(builder.buildPartial());
+          } catch (com.google.protobuf.UninitializedMessageException e) {
+            throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+          } catch (java.io.IOException e) {
+            throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                .setUnfinishedMessage(builder.buildPartial());
+          }
+          return builder.buildPartial();
         }
       };
 
@@ -7423,7 +7235,7 @@ public final class Common {
     }
 
     public static final int ORIGIN_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString originAddress_;
+    private com.google.protobuf.ByteString originAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes origin_address = 1;</code>
      * @return The originAddress.
@@ -7434,7 +7246,7 @@ public final class Common {
     }
 
     public static final int CONTRACT_ADDRESS_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString contractAddress_;
+    private com.google.protobuf.ByteString contractAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes contract_address = 2;</code>
      * @return The contractAddress.
@@ -7467,11 +7279,11 @@ public final class Common {
      */
     @java.lang.Override
     public com.github.comrada.tron4j.proto.Common.SmartContract.ABIOrBuilder getAbiOrBuilder() {
-      return getAbi();
+      return abi_ == null ? com.github.comrada.tron4j.proto.Common.SmartContract.ABI.getDefaultInstance() : abi_;
     }
 
     public static final int BYTECODE_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString bytecode_;
+    private com.google.protobuf.ByteString bytecode_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes bytecode = 4;</code>
      * @return The bytecode.
@@ -7482,7 +7294,7 @@ public final class Common {
     }
 
     public static final int CALL_VALUE_FIELD_NUMBER = 5;
-    private long callValue_;
+    private long callValue_ = 0L;
     /**
      * <code>int64 call_value = 5;</code>
      * @return The callValue.
@@ -7493,7 +7305,7 @@ public final class Common {
     }
 
     public static final int CONSUME_USER_RESOURCE_PERCENT_FIELD_NUMBER = 6;
-    private long consumeUserResourcePercent_;
+    private long consumeUserResourcePercent_ = 0L;
     /**
      * <code>int64 consume_user_resource_percent = 6;</code>
      * @return The consumeUserResourcePercent.
@@ -7504,7 +7316,8 @@ public final class Common {
     }
 
     public static final int NAME_FIELD_NUMBER = 7;
-    private volatile java.lang.Object name_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object name_ = "";
     /**
      * <code>string name = 7;</code>
      * @return The name.
@@ -7542,7 +7355,7 @@ public final class Common {
     }
 
     public static final int ORIGIN_ENERGY_LIMIT_FIELD_NUMBER = 8;
-    private long originEnergyLimit_;
+    private long originEnergyLimit_ = 0L;
     /**
      * <code>int64 origin_energy_limit = 8;</code>
      * @return The originEnergyLimit.
@@ -7553,7 +7366,7 @@ public final class Common {
     }
 
     public static final int CODE_HASH_FIELD_NUMBER = 9;
-    private com.google.protobuf.ByteString codeHash_;
+    private com.google.protobuf.ByteString codeHash_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes code_hash = 9;</code>
      * @return The codeHash.
@@ -7564,7 +7377,7 @@ public final class Common {
     }
 
     public static final int TRX_HASH_FIELD_NUMBER = 10;
-    private com.google.protobuf.ByteString trxHash_;
+    private com.google.protobuf.ByteString trxHash_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes trx_hash = 10;</code>
      * @return The trxHash.
@@ -7618,7 +7431,7 @@ public final class Common {
       if (!trxHash_.isEmpty()) {
         output.writeBytes(10, trxHash_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -7666,7 +7479,7 @@ public final class Common {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(10, trxHash_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -7704,7 +7517,7 @@ public final class Common {
           .equals(other.getCodeHash())) return false;
       if (!getTrxHash()
           .equals(other.getTrxHash())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -7740,7 +7553,7 @@ public final class Common {
       hash = (53 * hash) + getCodeHash().hashCode();
       hash = (37 * hash) + TRX_HASH_FIELD_NUMBER;
       hash = (53 * hash) + getTrxHash().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -7857,46 +7670,32 @@ public final class Common {
 
       // Construct using com.github.comrada.tron4j.proto.Common.SmartContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         originAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         contractAddress_ = com.google.protobuf.ByteString.EMPTY;
-
-        if (abiBuilder_ == null) {
-          abi_ = null;
-        } else {
-          abi_ = null;
+        abi_ = null;
+        if (abiBuilder_ != null) {
+          abiBuilder_.dispose();
           abiBuilder_ = null;
         }
         bytecode_ = com.google.protobuf.ByteString.EMPTY;
-
         callValue_ = 0L;
-
         consumeUserResourcePercent_ = 0L;
-
         name_ = "";
-
         originEnergyLimit_ = 0L;
-
         codeHash_ = com.google.protobuf.ByteString.EMPTY;
-
         trxHash_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -7923,22 +7722,45 @@ public final class Common {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Common.SmartContract buildPartial() {
         com.github.comrada.tron4j.proto.Common.SmartContract result = new com.github.comrada.tron4j.proto.Common.SmartContract(this);
-        result.originAddress_ = originAddress_;
-        result.contractAddress_ = contractAddress_;
-        if (abiBuilder_ == null) {
-          result.abi_ = abi_;
-        } else {
-          result.abi_ = abiBuilder_.build();
-        }
-        result.bytecode_ = bytecode_;
-        result.callValue_ = callValue_;
-        result.consumeUserResourcePercent_ = consumeUserResourcePercent_;
-        result.name_ = name_;
-        result.originEnergyLimit_ = originEnergyLimit_;
-        result.codeHash_ = codeHash_;
-        result.trxHash_ = trxHash_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Common.SmartContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.originAddress_ = originAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.contractAddress_ = contractAddress_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.abi_ = abiBuilder_ == null
+              ? abi_
+              : abiBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.bytecode_ = bytecode_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.callValue_ = callValue_;
+        }
+        if (((from_bitField0_ & 0x00000020) != 0)) {
+          result.consumeUserResourcePercent_ = consumeUserResourcePercent_;
+        }
+        if (((from_bitField0_ & 0x00000040) != 0)) {
+          result.name_ = name_;
+        }
+        if (((from_bitField0_ & 0x00000080) != 0)) {
+          result.originEnergyLimit_ = originEnergyLimit_;
+        }
+        if (((from_bitField0_ & 0x00000100) != 0)) {
+          result.codeHash_ = codeHash_;
+        }
+        if (((from_bitField0_ & 0x00000200) != 0)) {
+          result.trxHash_ = trxHash_;
+        }
       }
 
       @java.lang.Override
@@ -8005,6 +7827,7 @@ public final class Common {
         }
         if (!other.getName().isEmpty()) {
           name_ = other.name_;
+          bitField0_ |= 0x00000040;
           onChanged();
         }
         if (other.getOriginEnergyLimit() != 0L) {
@@ -8016,7 +7839,7 @@ public final class Common {
         if (other.getTrxHash() != com.google.protobuf.ByteString.EMPTY) {
           setTrxHash(other.getTrxHash());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -8031,19 +7854,85 @@ public final class Common {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Common.SmartContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                originAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                contractAddress_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                input.readMessage(
+                    getAbiFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 34: {
+                bytecode_ = input.readBytes();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              case 40: {
+                callValue_ = input.readInt64();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 40
+              case 48: {
+                consumeUserResourcePercent_ = input.readInt64();
+                bitField0_ |= 0x00000020;
+                break;
+              } // case 48
+              case 58: {
+                name_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000040;
+                break;
+              } // case 58
+              case 64: {
+                originEnergyLimit_ = input.readInt64();
+                bitField0_ |= 0x00000080;
+                break;
+              } // case 64
+              case 74: {
+                codeHash_ = input.readBytes();
+                bitField0_ |= 0x00000100;
+                break;
+              } // case 74
+              case 82: {
+                trxHash_ = input.readBytes();
+                bitField0_ |= 0x00000200;
+                break;
+              } // case 82
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Common.SmartContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString originAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -8060,11 +7949,9 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder setOriginAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         originAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -8073,7 +7960,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearOriginAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         originAddress_ = getDefaultInstance().getOriginAddress();
         onChanged();
         return this;
@@ -8094,11 +7981,9 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder setContractAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         contractAddress_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -8107,7 +7992,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearContractAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         contractAddress_ = getDefaultInstance().getContractAddress();
         onChanged();
         return this;
@@ -8121,7 +8006,7 @@ public final class Common {
        * @return Whether the abi field is set.
        */
       public boolean hasAbi() {
-        return abiBuilder_ != null || abi_ != null;
+        return ((bitField0_ & 0x00000004) != 0);
       }
       /**
        * <code>.protocol.SmartContract.ABI abi = 3;</code>
@@ -8143,11 +8028,11 @@ public final class Common {
             throw new NullPointerException();
           }
           abi_ = value;
-          onChanged();
         } else {
           abiBuilder_.setMessage(value);
         }
-
+        bitField0_ |= 0x00000004;
+        onChanged();
         return this;
       }
       /**
@@ -8157,11 +8042,11 @@ public final class Common {
           com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Builder builderForValue) {
         if (abiBuilder_ == null) {
           abi_ = builderForValue.build();
-          onChanged();
         } else {
           abiBuilder_.setMessage(builderForValue.build());
         }
-
+        bitField0_ |= 0x00000004;
+        onChanged();
         return this;
       }
       /**
@@ -8169,38 +8054,38 @@ public final class Common {
        */
       public Builder mergeAbi(com.github.comrada.tron4j.proto.Common.SmartContract.ABI value) {
         if (abiBuilder_ == null) {
-          if (abi_ != null) {
-            abi_ =
-              com.github.comrada.tron4j.proto.Common.SmartContract.ABI.newBuilder(abi_).mergeFrom(value).buildPartial();
+          if (((bitField0_ & 0x00000004) != 0) &&
+            abi_ != null &&
+            abi_ != com.github.comrada.tron4j.proto.Common.SmartContract.ABI.getDefaultInstance()) {
+            getAbiBuilder().mergeFrom(value);
           } else {
             abi_ = value;
           }
-          onChanged();
         } else {
           abiBuilder_.mergeFrom(value);
         }
-
+        bitField0_ |= 0x00000004;
+        onChanged();
         return this;
       }
       /**
        * <code>.protocol.SmartContract.ABI abi = 3;</code>
        */
       public Builder clearAbi() {
-        if (abiBuilder_ == null) {
-          abi_ = null;
-          onChanged();
-        } else {
-          abi_ = null;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        abi_ = null;
+        if (abiBuilder_ != null) {
+          abiBuilder_.dispose();
           abiBuilder_ = null;
         }
-
+        onChanged();
         return this;
       }
       /**
        * <code>.protocol.SmartContract.ABI abi = 3;</code>
        */
       public com.github.comrada.tron4j.proto.Common.SmartContract.ABI.Builder getAbiBuilder() {
-        
+        bitField0_ |= 0x00000004;
         onChanged();
         return getAbiFieldBuilder().getBuilder();
       }
@@ -8247,11 +8132,9 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder setBytecode(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         bytecode_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -8260,7 +8143,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearBytecode() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         bytecode_ = getDefaultInstance().getBytecode();
         onChanged();
         return this;
@@ -8283,6 +8166,7 @@ public final class Common {
       public Builder setCallValue(long value) {
         
         callValue_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -8291,7 +8175,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearCallValue() {
-        
+        bitField0_ = (bitField0_ & ~0x00000010);
         callValue_ = 0L;
         onChanged();
         return this;
@@ -8314,6 +8198,7 @@ public final class Common {
       public Builder setConsumeUserResourcePercent(long value) {
         
         consumeUserResourcePercent_ = value;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
@@ -8322,7 +8207,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearConsumeUserResourcePercent() {
-        
+        bitField0_ = (bitField0_ & ~0x00000020);
         consumeUserResourcePercent_ = 0L;
         onChanged();
         return this;
@@ -8369,11 +8254,9 @@ public final class Common {
        */
       public Builder setName(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         name_ = value;
+        bitField0_ |= 0x00000040;
         onChanged();
         return this;
       }
@@ -8382,8 +8265,8 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearName() {
-        
         name_ = getDefaultInstance().getName();
+        bitField0_ = (bitField0_ & ~0x00000040);
         onChanged();
         return this;
       }
@@ -8394,12 +8277,10 @@ public final class Common {
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         name_ = value;
+        bitField0_ |= 0x00000040;
         onChanged();
         return this;
       }
@@ -8421,6 +8302,7 @@ public final class Common {
       public Builder setOriginEnergyLimit(long value) {
         
         originEnergyLimit_ = value;
+        bitField0_ |= 0x00000080;
         onChanged();
         return this;
       }
@@ -8429,7 +8311,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearOriginEnergyLimit() {
-        
+        bitField0_ = (bitField0_ & ~0x00000080);
         originEnergyLimit_ = 0L;
         onChanged();
         return this;
@@ -8450,11 +8332,9 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder setCodeHash(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         codeHash_ = value;
+        bitField0_ |= 0x00000100;
         onChanged();
         return this;
       }
@@ -8463,7 +8343,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearCodeHash() {
-        
+        bitField0_ = (bitField0_ & ~0x00000100);
         codeHash_ = getDefaultInstance().getCodeHash();
         onChanged();
         return this;
@@ -8484,11 +8364,9 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder setTrxHash(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         trxHash_ = value;
+        bitField0_ |= 0x00000200;
         onChanged();
         return this;
       }
@@ -8497,7 +8375,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearTrxHash() {
-        
+        bitField0_ = (bitField0_ & ~0x00000200);
         trxHash_ = getDefaultInstance().getTrxHash();
         onChanged();
         return this;
@@ -8535,7 +8413,18 @@ public final class Common {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new SmartContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -8599,55 +8488,6 @@ public final class Common {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private Vote(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              voteAddress_ = input.readBytes();
-              break;
-            }
-            case 16: {
-
-              voteCount_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Common.internal_static_protocol_Vote_descriptor;
@@ -8662,7 +8502,7 @@ public final class Common {
     }
 
     public static final int VOTE_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString voteAddress_;
+    private com.google.protobuf.ByteString voteAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes vote_address = 1;</code>
      * @return The voteAddress.
@@ -8673,7 +8513,7 @@ public final class Common {
     }
 
     public static final int VOTE_COUNT_FIELD_NUMBER = 2;
-    private long voteCount_;
+    private long voteCount_ = 0L;
     /**
      * <code>int64 vote_count = 2;</code>
      * @return The voteCount.
@@ -8703,7 +8543,7 @@ public final class Common {
       if (voteCount_ != 0L) {
         output.writeInt64(2, voteCount_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -8720,7 +8560,7 @@ public final class Common {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(2, voteCount_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -8739,7 +8579,7 @@ public final class Common {
           .equals(other.getVoteAddress())) return false;
       if (getVoteCount()
           != other.getVoteCount()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -8755,7 +8595,7 @@ public final class Common {
       hash = (37 * hash) + VOTE_COUNT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getVoteCount());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -8872,26 +8712,20 @@ public final class Common {
 
       // Construct using com.github.comrada.tron4j.proto.Common.Vote.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         voteAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         voteCount_ = 0L;
-
         return this;
       }
 
@@ -8918,10 +8752,19 @@ public final class Common {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Common.Vote buildPartial() {
         com.github.comrada.tron4j.proto.Common.Vote result = new com.github.comrada.tron4j.proto.Common.Vote(this);
-        result.voteAddress_ = voteAddress_;
-        result.voteCount_ = voteCount_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Common.Vote result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.voteAddress_ = voteAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.voteCount_ = voteCount_;
+        }
       }
 
       @java.lang.Override
@@ -8974,7 +8817,7 @@ public final class Common {
         if (other.getVoteCount() != 0L) {
           setVoteCount(other.getVoteCount());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -8989,19 +8832,43 @@ public final class Common {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Common.Vote parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                voteAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 16: {
+                voteCount_ = input.readInt64();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Common.Vote) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString voteAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -9018,11 +8885,9 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder setVoteAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         voteAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -9031,7 +8896,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearVoteAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         voteAddress_ = getDefaultInstance().getVoteAddress();
         onChanged();
         return this;
@@ -9054,6 +8919,7 @@ public final class Common {
       public Builder setVoteCount(long value) {
         
         voteCount_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -9062,7 +8928,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearVoteCount() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         voteCount_ = 0L;
         onChanged();
         return this;
@@ -9100,7 +8966,18 @@ public final class Common {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Vote(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -9188,66 +9065,6 @@ public final class Common {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private Note(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-
-              value_ = input.readInt64();
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              paymentAddress_ = s;
-              break;
-            }
-            case 26: {
-
-              rcm_ = input.readBytes();
-              break;
-            }
-            case 34: {
-
-              memo_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Common.internal_static_protocol_Note_descriptor;
@@ -9262,7 +9079,7 @@ public final class Common {
     }
 
     public static final int VALUE_FIELD_NUMBER = 1;
-    private long value_;
+    private long value_ = 0L;
     /**
      * <code>int64 value = 1;</code>
      * @return The value.
@@ -9273,7 +9090,8 @@ public final class Common {
     }
 
     public static final int PAYMENT_ADDRESS_FIELD_NUMBER = 2;
-    private volatile java.lang.Object paymentAddress_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object paymentAddress_ = "";
     /**
      * <code>string payment_address = 2;</code>
      * @return The paymentAddress.
@@ -9311,7 +9129,7 @@ public final class Common {
     }
 
     public static final int RCM_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString rcm_;
+    private com.google.protobuf.ByteString rcm_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <pre>
      * random 32
@@ -9326,7 +9144,7 @@ public final class Common {
     }
 
     public static final int MEMO_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString memo_;
+    private com.google.protobuf.ByteString memo_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes memo = 4;</code>
      * @return The memo.
@@ -9362,7 +9180,7 @@ public final class Common {
       if (!memo_.isEmpty()) {
         output.writeBytes(4, memo_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -9386,7 +9204,7 @@ public final class Common {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(4, memo_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -9409,7 +9227,7 @@ public final class Common {
           .equals(other.getRcm())) return false;
       if (!getMemo()
           .equals(other.getMemo())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -9429,7 +9247,7 @@ public final class Common {
       hash = (53 * hash) + getRcm().hashCode();
       hash = (37 * hash) + MEMO_FIELD_NUMBER;
       hash = (53 * hash) + getMemo().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -9546,30 +9364,22 @@ public final class Common {
 
       // Construct using com.github.comrada.tron4j.proto.Common.Note.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         value_ = 0L;
-
         paymentAddress_ = "";
-
         rcm_ = com.google.protobuf.ByteString.EMPTY;
-
         memo_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -9596,12 +9406,25 @@ public final class Common {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Common.Note buildPartial() {
         com.github.comrada.tron4j.proto.Common.Note result = new com.github.comrada.tron4j.proto.Common.Note(this);
-        result.value_ = value_;
-        result.paymentAddress_ = paymentAddress_;
-        result.rcm_ = rcm_;
-        result.memo_ = memo_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Common.Note result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.value_ = value_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.paymentAddress_ = paymentAddress_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.rcm_ = rcm_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.memo_ = memo_;
+        }
       }
 
       @java.lang.Override
@@ -9653,6 +9476,7 @@ public final class Common {
         }
         if (!other.getPaymentAddress().isEmpty()) {
           paymentAddress_ = other.paymentAddress_;
+          bitField0_ |= 0x00000002;
           onChanged();
         }
         if (other.getRcm() != com.google.protobuf.ByteString.EMPTY) {
@@ -9661,7 +9485,7 @@ public final class Common {
         if (other.getMemo() != com.google.protobuf.ByteString.EMPTY) {
           setMemo(other.getMemo());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -9676,19 +9500,53 @@ public final class Common {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Common.Note parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 8: {
+                value_ = input.readInt64();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 8
+              case 18: {
+                paymentAddress_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                rcm_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 34: {
+                memo_ = input.readBytes();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Common.Note) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private long value_ ;
       /**
@@ -9707,6 +9565,7 @@ public final class Common {
       public Builder setValue(long value) {
         
         value_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -9715,7 +9574,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearValue() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         value_ = 0L;
         onChanged();
         return this;
@@ -9762,11 +9621,9 @@ public final class Common {
        */
       public Builder setPaymentAddress(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         paymentAddress_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -9775,8 +9632,8 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearPaymentAddress() {
-        
         paymentAddress_ = getDefaultInstance().getPaymentAddress();
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
@@ -9787,12 +9644,10 @@ public final class Common {
        */
       public Builder setPaymentAddressBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         paymentAddress_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -9820,11 +9675,9 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder setRcm(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         rcm_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -9837,7 +9690,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearRcm() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         rcm_ = getDefaultInstance().getRcm();
         onChanged();
         return this;
@@ -9858,11 +9711,9 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder setMemo(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         memo_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -9871,7 +9722,7 @@ public final class Common {
        * @return This builder for chaining.
        */
       public Builder clearMemo() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         memo_ = getDefaultInstance().getMemo();
         onChanged();
         return this;
@@ -9909,7 +9760,18 @@ public final class Common {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Note(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 

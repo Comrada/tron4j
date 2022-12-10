@@ -71,61 +71,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private AccountCreateContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              accountAddress_ = input.readBytes();
-              break;
-            }
-            case 24: {
-              int rawValue = input.readEnum();
-
-              type_ = rawValue;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_AccountCreateContract_descriptor;
@@ -140,7 +85,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -151,7 +96,7 @@ public final class Contract {
     }
 
     public static final int ACCOUNT_ADDRESS_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString accountAddress_;
+    private com.google.protobuf.ByteString accountAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes account_address = 2;</code>
      * @return The accountAddress.
@@ -162,7 +107,7 @@ public final class Contract {
     }
 
     public static final int TYPE_FIELD_NUMBER = 3;
-    private int type_;
+    private int type_ = 0;
     /**
      * <code>.protocol.AccountType type = 3;</code>
      * @return The enum numeric value on the wire for type.
@@ -175,8 +120,7 @@ public final class Contract {
      * @return The type.
      */
     @java.lang.Override public com.github.comrada.tron4j.proto.Common.AccountType getType() {
-      @SuppressWarnings("deprecation")
-      com.github.comrada.tron4j.proto.Common.AccountType result = com.github.comrada.tron4j.proto.Common.AccountType.valueOf(type_);
+      com.github.comrada.tron4j.proto.Common.AccountType result = com.github.comrada.tron4j.proto.Common.AccountType.forNumber(type_);
       return result == null ? com.github.comrada.tron4j.proto.Common.AccountType.UNRECOGNIZED : result;
     }
 
@@ -203,7 +147,7 @@ public final class Contract {
       if (type_ != com.github.comrada.tron4j.proto.Common.AccountType.Normal.getNumber()) {
         output.writeEnum(3, type_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -224,7 +168,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, type_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -244,7 +188,7 @@ public final class Contract {
       if (!getAccountAddress()
           .equals(other.getAccountAddress())) return false;
       if (type_ != other.type_) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -261,7 +205,7 @@ public final class Contract {
       hash = (53 * hash) + getAccountAddress().hashCode();
       hash = (37 * hash) + TYPE_FIELD_NUMBER;
       hash = (53 * hash) + type_;
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -378,28 +322,21 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.AccountCreateContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         accountAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         type_ = 0;
-
         return this;
       }
 
@@ -426,11 +363,22 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.AccountCreateContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.AccountCreateContract result = new com.github.comrada.tron4j.proto.Contract.AccountCreateContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.accountAddress_ = accountAddress_;
-        result.type_ = type_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.AccountCreateContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.accountAddress_ = accountAddress_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.type_ = type_;
+        }
       }
 
       @java.lang.Override
@@ -486,7 +434,7 @@ public final class Contract {
         if (other.type_ != 0) {
           setTypeValue(other.getTypeValue());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -501,19 +449,48 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.AccountCreateContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                accountAddress_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 24: {
+                type_ = input.readEnum();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.AccountCreateContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -530,11 +507,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -543,7 +518,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -564,11 +539,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setAccountAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         accountAddress_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -577,7 +550,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearAccountAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         accountAddress_ = getDefaultInstance().getAccountAddress();
         onChanged();
         return this;
@@ -597,8 +570,8 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setTypeValue(int value) {
-        
         type_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -608,8 +581,7 @@ public final class Contract {
        */
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Common.AccountType getType() {
-        @SuppressWarnings("deprecation")
-        com.github.comrada.tron4j.proto.Common.AccountType result = com.github.comrada.tron4j.proto.Common.AccountType.valueOf(type_);
+        com.github.comrada.tron4j.proto.Common.AccountType result = com.github.comrada.tron4j.proto.Common.AccountType.forNumber(type_);
         return result == null ? com.github.comrada.tron4j.proto.Common.AccountType.UNRECOGNIZED : result;
       }
       /**
@@ -621,7 +593,7 @@ public final class Contract {
         if (value == null) {
           throw new NullPointerException();
         }
-        
+        bitField0_ |= 0x00000004;
         type_ = value.getNumber();
         onChanged();
         return this;
@@ -631,7 +603,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearType() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         type_ = 0;
         onChanged();
         return this;
@@ -669,7 +641,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new AccountCreateContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -738,55 +721,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private AccountUpdateContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              accountName_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_AccountUpdateContract_descriptor;
@@ -801,7 +735,7 @@ public final class Contract {
     }
 
     public static final int ACCOUNT_NAME_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString accountName_;
+    private com.google.protobuf.ByteString accountName_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes account_name = 1;</code>
      * @return The accountName.
@@ -812,7 +746,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 2;</code>
      * @return The ownerAddress.
@@ -842,7 +776,7 @@ public final class Contract {
       if (!ownerAddress_.isEmpty()) {
         output.writeBytes(2, ownerAddress_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -859,7 +793,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, ownerAddress_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -878,7 +812,7 @@ public final class Contract {
           .equals(other.getAccountName())) return false;
       if (!getOwnerAddress()
           .equals(other.getOwnerAddress())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -893,7 +827,7 @@ public final class Contract {
       hash = (53 * hash) + getAccountName().hashCode();
       hash = (37 * hash) + OWNER_ADDRESS_FIELD_NUMBER;
       hash = (53 * hash) + getOwnerAddress().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -1014,26 +948,20 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.AccountUpdateContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         accountName_ = com.google.protobuf.ByteString.EMPTY;
-
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -1060,10 +988,19 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.AccountUpdateContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.AccountUpdateContract result = new com.github.comrada.tron4j.proto.Contract.AccountUpdateContract(this);
-        result.accountName_ = accountName_;
-        result.ownerAddress_ = ownerAddress_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.AccountUpdateContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.accountName_ = accountName_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
       }
 
       @java.lang.Override
@@ -1116,7 +1053,7 @@ public final class Contract {
         if (other.getOwnerAddress() != com.google.protobuf.ByteString.EMPTY) {
           setOwnerAddress(other.getOwnerAddress());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -1131,19 +1068,43 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.AccountUpdateContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                accountName_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.AccountUpdateContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString accountName_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -1160,11 +1121,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setAccountName(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         accountName_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -1173,7 +1132,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearAccountName() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         accountName_ = getDefaultInstance().getAccountName();
         onChanged();
         return this;
@@ -1194,11 +1153,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -1207,7 +1164,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -1245,7 +1202,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new AccountUpdateContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -1315,55 +1283,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private SetAccountIdContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              accountId_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_SetAccountIdContract_descriptor;
@@ -1378,7 +1297,7 @@ public final class Contract {
     }
 
     public static final int ACCOUNT_ID_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString accountId_;
+    private com.google.protobuf.ByteString accountId_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes account_id = 1;</code>
      * @return The accountId.
@@ -1389,7 +1308,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 2;</code>
      * @return The ownerAddress.
@@ -1419,7 +1338,7 @@ public final class Contract {
       if (!ownerAddress_.isEmpty()) {
         output.writeBytes(2, ownerAddress_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -1436,7 +1355,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, ownerAddress_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -1455,7 +1374,7 @@ public final class Contract {
           .equals(other.getAccountId())) return false;
       if (!getOwnerAddress()
           .equals(other.getOwnerAddress())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -1470,7 +1389,7 @@ public final class Contract {
       hash = (53 * hash) + getAccountId().hashCode();
       hash = (37 * hash) + OWNER_ADDRESS_FIELD_NUMBER;
       hash = (53 * hash) + getOwnerAddress().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -1592,26 +1511,20 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.SetAccountIdContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         accountId_ = com.google.protobuf.ByteString.EMPTY;
-
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -1638,10 +1551,19 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.SetAccountIdContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.SetAccountIdContract result = new com.github.comrada.tron4j.proto.Contract.SetAccountIdContract(this);
-        result.accountId_ = accountId_;
-        result.ownerAddress_ = ownerAddress_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.SetAccountIdContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.accountId_ = accountId_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
       }
 
       @java.lang.Override
@@ -1694,7 +1616,7 @@ public final class Contract {
         if (other.getOwnerAddress() != com.google.protobuf.ByteString.EMPTY) {
           setOwnerAddress(other.getOwnerAddress());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -1709,19 +1631,43 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.SetAccountIdContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                accountId_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.SetAccountIdContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString accountId_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -1738,11 +1684,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setAccountId(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         accountId_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -1751,7 +1695,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearAccountId() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         accountId_ = getDefaultInstance().getAccountId();
         onChanged();
         return this;
@@ -1772,11 +1716,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -1785,7 +1727,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -1823,7 +1765,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new SetAccountIdContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -1980,89 +1933,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private AccountPermissionUpdateContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 18: {
-              com.github.comrada.tron4j.proto.Common.Permission.Builder subBuilder = null;
-              if (owner_ != null) {
-                subBuilder = owner_.toBuilder();
-              }
-              owner_ = input.readMessage(com.github.comrada.tron4j.proto.Common.Permission.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(owner_);
-                owner_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 26: {
-              com.github.comrada.tron4j.proto.Common.Permission.Builder subBuilder = null;
-              if (witness_ != null) {
-                subBuilder = witness_.toBuilder();
-              }
-              witness_ = input.readMessage(com.github.comrada.tron4j.proto.Common.Permission.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(witness_);
-                witness_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 34: {
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                actives_ = new java.util.ArrayList<com.github.comrada.tron4j.proto.Common.Permission>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              actives_.add(
-                  input.readMessage(com.github.comrada.tron4j.proto.Common.Permission.parser(), extensionRegistry));
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          actives_ = java.util.Collections.unmodifiableList(actives_);
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_AccountPermissionUpdateContract_descriptor;
@@ -2077,7 +1947,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -2122,7 +1992,7 @@ public final class Contract {
      */
     @java.lang.Override
     public com.github.comrada.tron4j.proto.Common.PermissionOrBuilder getOwnerOrBuilder() {
-      return getOwner();
+      return owner_ == null ? com.github.comrada.tron4j.proto.Common.Permission.getDefaultInstance() : owner_;
     }
 
     public static final int WITNESS_FIELD_NUMBER = 3;
@@ -2160,10 +2030,11 @@ public final class Contract {
      */
     @java.lang.Override
     public com.github.comrada.tron4j.proto.Common.PermissionOrBuilder getWitnessOrBuilder() {
-      return getWitness();
+      return witness_ == null ? com.github.comrada.tron4j.proto.Common.Permission.getDefaultInstance() : witness_;
     }
 
     public static final int ACTIVES_FIELD_NUMBER = 4;
+    @SuppressWarnings("serial")
     private java.util.List<com.github.comrada.tron4j.proto.Common.Permission> actives_;
     /**
      * <pre>
@@ -2249,7 +2120,7 @@ public final class Contract {
       for (int i = 0; i < actives_.size(); i++) {
         output.writeMessage(4, actives_.get(i));
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -2274,7 +2145,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, actives_.get(i));
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -2303,7 +2174,7 @@ public final class Contract {
       }
       if (!getActivesList()
           .equals(other.getActivesList())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -2328,7 +2199,7 @@ public final class Contract {
         hash = (37 * hash) + ACTIVES_FIELD_NUMBER;
         hash = (53 * hash) + getActivesList().hashCode();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -2445,43 +2316,36 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.AccountPermissionUpdateContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-          getActivesFieldBuilder();
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
-        if (ownerBuilder_ == null) {
-          owner_ = null;
-        } else {
-          owner_ = null;
+        owner_ = null;
+        if (ownerBuilder_ != null) {
+          ownerBuilder_.dispose();
           ownerBuilder_ = null;
         }
-        if (witnessBuilder_ == null) {
-          witness_ = null;
-        } else {
-          witness_ = null;
+        witness_ = null;
+        if (witnessBuilder_ != null) {
+          witnessBuilder_.dispose();
           witnessBuilder_ = null;
         }
         if (activesBuilder_ == null) {
           actives_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
+          actives_ = null;
           activesBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -2508,29 +2372,39 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.AccountPermissionUpdateContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.AccountPermissionUpdateContract result = new com.github.comrada.tron4j.proto.Contract.AccountPermissionUpdateContract(this);
-        int from_bitField0_ = bitField0_;
-        result.ownerAddress_ = ownerAddress_;
-        if (ownerBuilder_ == null) {
-          result.owner_ = owner_;
-        } else {
-          result.owner_ = ownerBuilder_.build();
-        }
-        if (witnessBuilder_ == null) {
-          result.witness_ = witness_;
-        } else {
-          result.witness_ = witnessBuilder_.build();
-        }
+        buildPartialRepeatedFields(result);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartialRepeatedFields(com.github.comrada.tron4j.proto.Contract.AccountPermissionUpdateContract result) {
         if (activesBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) != 0)) {
+          if (((bitField0_ & 0x00000008) != 0)) {
             actives_ = java.util.Collections.unmodifiableList(actives_);
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000008);
           }
           result.actives_ = actives_;
         } else {
           result.actives_ = activesBuilder_.build();
         }
-        onBuilt();
-        return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.AccountPermissionUpdateContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.owner_ = ownerBuilder_ == null
+              ? owner_
+              : ownerBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.witness_ = witnessBuilder_ == null
+              ? witness_
+              : witnessBuilder_.build();
+        }
       }
 
       @java.lang.Override
@@ -2590,7 +2464,7 @@ public final class Contract {
           if (!other.actives_.isEmpty()) {
             if (actives_.isEmpty()) {
               actives_ = other.actives_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000008);
             } else {
               ensureActivesIsMutable();
               actives_.addAll(other.actives_);
@@ -2603,7 +2477,7 @@ public final class Contract {
               activesBuilder_.dispose();
               activesBuilder_ = null;
               actives_ = other.actives_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000008);
               activesBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getActivesFieldBuilder() : null;
@@ -2612,7 +2486,7 @@ public final class Contract {
             }
           }
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -2627,17 +2501,62 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.AccountPermissionUpdateContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                input.readMessage(
+                    getOwnerFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                input.readMessage(
+                    getWitnessFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 34: {
+                com.github.comrada.tron4j.proto.Common.Permission m =
+                    input.readMessage(
+                        com.github.comrada.tron4j.proto.Common.Permission.parser(),
+                        extensionRegistry);
+                if (activesBuilder_ == null) {
+                  ensureActivesIsMutable();
+                  actives_.add(m);
+                } else {
+                  activesBuilder_.addMessage(m);
+                }
+                break;
+              } // case 34
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.AccountPermissionUpdateContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
       private int bitField0_;
@@ -2657,11 +2576,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -2670,7 +2587,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -2688,7 +2605,7 @@ public final class Contract {
        * @return Whether the owner field is set.
        */
       public boolean hasOwner() {
-        return ownerBuilder_ != null || owner_ != null;
+        return ((bitField0_ & 0x00000002) != 0);
       }
       /**
        * <pre>
@@ -2718,11 +2635,11 @@ public final class Contract {
             throw new NullPointerException();
           }
           owner_ = value;
-          onChanged();
         } else {
           ownerBuilder_.setMessage(value);
         }
-
+        bitField0_ |= 0x00000002;
+        onChanged();
         return this;
       }
       /**
@@ -2736,11 +2653,11 @@ public final class Contract {
           com.github.comrada.tron4j.proto.Common.Permission.Builder builderForValue) {
         if (ownerBuilder_ == null) {
           owner_ = builderForValue.build();
-          onChanged();
         } else {
           ownerBuilder_.setMessage(builderForValue.build());
         }
-
+        bitField0_ |= 0x00000002;
+        onChanged();
         return this;
       }
       /**
@@ -2752,17 +2669,18 @@ public final class Contract {
        */
       public Builder mergeOwner(com.github.comrada.tron4j.proto.Common.Permission value) {
         if (ownerBuilder_ == null) {
-          if (owner_ != null) {
-            owner_ =
-              com.github.comrada.tron4j.proto.Common.Permission.newBuilder(owner_).mergeFrom(value).buildPartial();
+          if (((bitField0_ & 0x00000002) != 0) &&
+            owner_ != null &&
+            owner_ != com.github.comrada.tron4j.proto.Common.Permission.getDefaultInstance()) {
+            getOwnerBuilder().mergeFrom(value);
           } else {
             owner_ = value;
           }
-          onChanged();
         } else {
           ownerBuilder_.mergeFrom(value);
         }
-
+        bitField0_ |= 0x00000002;
+        onChanged();
         return this;
       }
       /**
@@ -2773,14 +2691,13 @@ public final class Contract {
        * <code>.protocol.Permission owner = 2;</code>
        */
       public Builder clearOwner() {
-        if (ownerBuilder_ == null) {
-          owner_ = null;
-          onChanged();
-        } else {
-          owner_ = null;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        owner_ = null;
+        if (ownerBuilder_ != null) {
+          ownerBuilder_.dispose();
           ownerBuilder_ = null;
         }
-
+        onChanged();
         return this;
       }
       /**
@@ -2791,7 +2708,7 @@ public final class Contract {
        * <code>.protocol.Permission owner = 2;</code>
        */
       public com.github.comrada.tron4j.proto.Common.Permission.Builder getOwnerBuilder() {
-        
+        bitField0_ |= 0x00000002;
         onChanged();
         return getOwnerFieldBuilder().getBuilder();
       }
@@ -2843,7 +2760,7 @@ public final class Contract {
        * @return Whether the witness field is set.
        */
       public boolean hasWitness() {
-        return witnessBuilder_ != null || witness_ != null;
+        return ((bitField0_ & 0x00000004) != 0);
       }
       /**
        * <pre>
@@ -2873,11 +2790,11 @@ public final class Contract {
             throw new NullPointerException();
           }
           witness_ = value;
-          onChanged();
         } else {
           witnessBuilder_.setMessage(value);
         }
-
+        bitField0_ |= 0x00000004;
+        onChanged();
         return this;
       }
       /**
@@ -2891,11 +2808,11 @@ public final class Contract {
           com.github.comrada.tron4j.proto.Common.Permission.Builder builderForValue) {
         if (witnessBuilder_ == null) {
           witness_ = builderForValue.build();
-          onChanged();
         } else {
           witnessBuilder_.setMessage(builderForValue.build());
         }
-
+        bitField0_ |= 0x00000004;
+        onChanged();
         return this;
       }
       /**
@@ -2907,17 +2824,18 @@ public final class Contract {
        */
       public Builder mergeWitness(com.github.comrada.tron4j.proto.Common.Permission value) {
         if (witnessBuilder_ == null) {
-          if (witness_ != null) {
-            witness_ =
-              com.github.comrada.tron4j.proto.Common.Permission.newBuilder(witness_).mergeFrom(value).buildPartial();
+          if (((bitField0_ & 0x00000004) != 0) &&
+            witness_ != null &&
+            witness_ != com.github.comrada.tron4j.proto.Common.Permission.getDefaultInstance()) {
+            getWitnessBuilder().mergeFrom(value);
           } else {
             witness_ = value;
           }
-          onChanged();
         } else {
           witnessBuilder_.mergeFrom(value);
         }
-
+        bitField0_ |= 0x00000004;
+        onChanged();
         return this;
       }
       /**
@@ -2928,14 +2846,13 @@ public final class Contract {
        * <code>.protocol.Permission witness = 3;</code>
        */
       public Builder clearWitness() {
-        if (witnessBuilder_ == null) {
-          witness_ = null;
-          onChanged();
-        } else {
-          witness_ = null;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        witness_ = null;
+        if (witnessBuilder_ != null) {
+          witnessBuilder_.dispose();
           witnessBuilder_ = null;
         }
-
+        onChanged();
         return this;
       }
       /**
@@ -2946,7 +2863,7 @@ public final class Contract {
        * <code>.protocol.Permission witness = 3;</code>
        */
       public com.github.comrada.tron4j.proto.Common.Permission.Builder getWitnessBuilder() {
-        
+        bitField0_ |= 0x00000004;
         onChanged();
         return getWitnessFieldBuilder().getBuilder();
       }
@@ -2989,9 +2906,9 @@ public final class Contract {
       private java.util.List<com.github.comrada.tron4j.proto.Common.Permission> actives_ =
         java.util.Collections.emptyList();
       private void ensureActivesIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
+        if (!((bitField0_ & 0x00000008) != 0)) {
           actives_ = new java.util.ArrayList<com.github.comrada.tron4j.proto.Common.Permission>(actives_);
-          bitField0_ |= 0x00000001;
+          bitField0_ |= 0x00000008;
          }
       }
 
@@ -3185,7 +3102,7 @@ public final class Contract {
       public Builder clearActives() {
         if (activesBuilder_ == null) {
           actives_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+          bitField0_ = (bitField0_ & ~0x00000008);
           onChanged();
         } else {
           activesBuilder_.clear();
@@ -3290,7 +3207,7 @@ public final class Contract {
           activesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.github.comrada.tron4j.proto.Common.Permission, com.github.comrada.tron4j.proto.Common.Permission.Builder, com.github.comrada.tron4j.proto.Common.PermissionOrBuilder>(
                   actives_,
-                  ((bitField0_ & 0x00000001) != 0),
+                  ((bitField0_ & 0x00000008) != 0),
                   getParentForChildren(),
                   isClean());
           actives_ = null;
@@ -3330,7 +3247,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new AccountPermissionUpdateContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -3530,149 +3458,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private AssetIssueContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              name_ = input.readBytes();
-              break;
-            }
-            case 26: {
-
-              abbr_ = input.readBytes();
-              break;
-            }
-            case 32: {
-
-              totalSupply_ = input.readInt64();
-              break;
-            }
-            case 42: {
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                frozenSupply_ = new java.util.ArrayList<com.github.comrada.tron4j.proto.Contract.AssetIssueContract.FrozenSupply>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              frozenSupply_.add(
-                  input.readMessage(com.github.comrada.tron4j.proto.Contract.AssetIssueContract.FrozenSupply.parser(), extensionRegistry));
-              break;
-            }
-            case 48: {
-
-              trxNum_ = input.readInt32();
-              break;
-            }
-            case 56: {
-
-              precision_ = input.readInt32();
-              break;
-            }
-            case 64: {
-
-              num_ = input.readInt32();
-              break;
-            }
-            case 72: {
-
-              startTime_ = input.readInt64();
-              break;
-            }
-            case 80: {
-
-              endTime_ = input.readInt64();
-              break;
-            }
-            case 88: {
-
-              order_ = input.readInt64();
-              break;
-            }
-            case 128: {
-
-              voteScore_ = input.readInt32();
-              break;
-            }
-            case 162: {
-
-              description_ = input.readBytes();
-              break;
-            }
-            case 170: {
-
-              url_ = input.readBytes();
-              break;
-            }
-            case 176: {
-
-              freeAssetNetLimit_ = input.readInt64();
-              break;
-            }
-            case 184: {
-
-              publicFreeAssetNetLimit_ = input.readInt64();
-              break;
-            }
-            case 192: {
-
-              publicFreeAssetNetUsage_ = input.readInt64();
-              break;
-            }
-            case 200: {
-
-              publicLatestFreeNetTime_ = input.readInt64();
-              break;
-            }
-            case 330: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              id_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          frozenSupply_ = java.util.Collections.unmodifiableList(frozenSupply_);
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_AssetIssueContract_descriptor;
@@ -3729,55 +3514,6 @@ public final class Contract {
       getUnknownFields() {
         return this.unknownFields;
       }
-      private FrozenSupply(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        this();
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-            com.google.protobuf.UnknownFieldSet.newBuilder();
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 8: {
-
-                frozenAmount_ = input.readInt64();
-                break;
-              }
-              case 16: {
-
-                frozenDays_ = input.readInt64();
-                break;
-              }
-              default: {
-                if (!parseUnknownField(
-                    input, unknownFields, extensionRegistry, tag)) {
-                  done = true;
-                }
-                break;
-              }
-            }
-          }
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(this);
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(
-              e).setUnfinishedMessage(this);
-        } finally {
-          this.unknownFields = unknownFields.build();
-          makeExtensionsImmutable();
-        }
-      }
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_AssetIssueContract_FrozenSupply_descriptor;
@@ -3792,7 +3528,7 @@ public final class Contract {
       }
 
       public static final int FROZEN_AMOUNT_FIELD_NUMBER = 1;
-      private long frozenAmount_;
+      private long frozenAmount_ = 0L;
       /**
        * <code>int64 frozen_amount = 1;</code>
        * @return The frozenAmount.
@@ -3803,7 +3539,7 @@ public final class Contract {
       }
 
       public static final int FROZEN_DAYS_FIELD_NUMBER = 2;
-      private long frozenDays_;
+      private long frozenDays_ = 0L;
       /**
        * <code>int64 frozen_days = 2;</code>
        * @return The frozenDays.
@@ -3833,7 +3569,7 @@ public final class Contract {
         if (frozenDays_ != 0L) {
           output.writeInt64(2, frozenDays_);
         }
-        unknownFields.writeTo(output);
+        getUnknownFields().writeTo(output);
       }
 
       @java.lang.Override
@@ -3850,7 +3586,7 @@ public final class Contract {
           size += com.google.protobuf.CodedOutputStream
             .computeInt64Size(2, frozenDays_);
         }
-        size += unknownFields.getSerializedSize();
+        size += getUnknownFields().getSerializedSize();
         memoizedSize = size;
         return size;
       }
@@ -3869,7 +3605,7 @@ public final class Contract {
             != other.getFrozenAmount()) return false;
         if (getFrozenDays()
             != other.getFrozenDays()) return false;
-        if (!unknownFields.equals(other.unknownFields)) return false;
+        if (!getUnknownFields().equals(other.getUnknownFields())) return false;
         return true;
       }
 
@@ -3886,7 +3622,7 @@ public final class Contract {
         hash = (37 * hash) + FROZEN_DAYS_FIELD_NUMBER;
         hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
             getFrozenDays());
-        hash = (29 * hash) + unknownFields.hashCode();
+        hash = (29 * hash) + getUnknownFields().hashCode();
         memoizedHashCode = hash;
         return hash;
       }
@@ -4003,26 +3739,20 @@ public final class Contract {
 
         // Construct using com.github.comrada.tron4j.proto.Contract.AssetIssueContract.FrozenSupply.newBuilder()
         private Builder() {
-          maybeForceBuilderInitialization();
+
         }
 
         private Builder(
             com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
           super(parent);
-          maybeForceBuilderInitialization();
-        }
-        private void maybeForceBuilderInitialization() {
-          if (com.google.protobuf.GeneratedMessageV3
-                  .alwaysUseFieldBuilders) {
-          }
+
         }
         @java.lang.Override
         public Builder clear() {
           super.clear();
+          bitField0_ = 0;
           frozenAmount_ = 0L;
-
           frozenDays_ = 0L;
-
           return this;
         }
 
@@ -4049,10 +3779,19 @@ public final class Contract {
         @java.lang.Override
         public com.github.comrada.tron4j.proto.Contract.AssetIssueContract.FrozenSupply buildPartial() {
           com.github.comrada.tron4j.proto.Contract.AssetIssueContract.FrozenSupply result = new com.github.comrada.tron4j.proto.Contract.AssetIssueContract.FrozenSupply(this);
-          result.frozenAmount_ = frozenAmount_;
-          result.frozenDays_ = frozenDays_;
+          if (bitField0_ != 0) { buildPartial0(result); }
           onBuilt();
           return result;
+        }
+
+        private void buildPartial0(com.github.comrada.tron4j.proto.Contract.AssetIssueContract.FrozenSupply result) {
+          int from_bitField0_ = bitField0_;
+          if (((from_bitField0_ & 0x00000001) != 0)) {
+            result.frozenAmount_ = frozenAmount_;
+          }
+          if (((from_bitField0_ & 0x00000002) != 0)) {
+            result.frozenDays_ = frozenDays_;
+          }
         }
 
         @java.lang.Override
@@ -4105,7 +3844,7 @@ public final class Contract {
           if (other.getFrozenDays() != 0L) {
             setFrozenDays(other.getFrozenDays());
           }
-          this.mergeUnknownFields(other.unknownFields);
+          this.mergeUnknownFields(other.getUnknownFields());
           onChanged();
           return this;
         }
@@ -4120,19 +3859,43 @@ public final class Contract {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
-          com.github.comrada.tron4j.proto.Contract.AssetIssueContract.FrozenSupply parsedMessage = null;
+          if (extensionRegistry == null) {
+            throw new java.lang.NullPointerException();
+          }
           try {
-            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                case 8: {
+                  frozenAmount_ = input.readInt64();
+                  bitField0_ |= 0x00000001;
+                  break;
+                } // case 8
+                case 16: {
+                  frozenDays_ = input.readInt64();
+                  bitField0_ |= 0x00000002;
+                  break;
+                } // case 16
+                default: {
+                  if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                    done = true; // was an endgroup tag
+                  }
+                  break;
+                } // default:
+              } // switch (tag)
+            } // while (!done)
           } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-            parsedMessage = (com.github.comrada.tron4j.proto.Contract.AssetIssueContract.FrozenSupply) e.getUnfinishedMessage();
             throw e.unwrapIOException();
           } finally {
-            if (parsedMessage != null) {
-              mergeFrom(parsedMessage);
-            }
-          }
+            onChanged();
+          } // finally
           return this;
         }
+        private int bitField0_;
 
         private long frozenAmount_ ;
         /**
@@ -4151,6 +3914,7 @@ public final class Contract {
         public Builder setFrozenAmount(long value) {
           
           frozenAmount_ = value;
+          bitField0_ |= 0x00000001;
           onChanged();
           return this;
         }
@@ -4159,7 +3923,7 @@ public final class Contract {
          * @return This builder for chaining.
          */
         public Builder clearFrozenAmount() {
-          
+          bitField0_ = (bitField0_ & ~0x00000001);
           frozenAmount_ = 0L;
           onChanged();
           return this;
@@ -4182,6 +3946,7 @@ public final class Contract {
         public Builder setFrozenDays(long value) {
           
           frozenDays_ = value;
+          bitField0_ |= 0x00000002;
           onChanged();
           return this;
         }
@@ -4190,7 +3955,7 @@ public final class Contract {
          * @return This builder for chaining.
          */
         public Builder clearFrozenDays() {
-          
+          bitField0_ = (bitField0_ & ~0x00000002);
           frozenDays_ = 0L;
           onChanged();
           return this;
@@ -4228,7 +3993,18 @@ public final class Contract {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-          return new FrozenSupply(input, extensionRegistry);
+          Builder builder = newBuilder();
+          try {
+            builder.mergeFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw e.setUnfinishedMessage(builder.buildPartial());
+          } catch (com.google.protobuf.UninitializedMessageException e) {
+            throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+          } catch (java.io.IOException e) {
+            throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                .setUnfinishedMessage(builder.buildPartial());
+          }
+          return builder.buildPartial();
         }
       };
 
@@ -4249,7 +4025,8 @@ public final class Contract {
     }
 
     public static final int ID_FIELD_NUMBER = 41;
-    private volatile java.lang.Object id_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object id_ = "";
     /**
      * <code>string id = 41;</code>
      * @return The id.
@@ -4287,7 +4064,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -4298,7 +4075,7 @@ public final class Contract {
     }
 
     public static final int NAME_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString name_;
+    private com.google.protobuf.ByteString name_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes name = 2;</code>
      * @return The name.
@@ -4309,7 +4086,7 @@ public final class Contract {
     }
 
     public static final int ABBR_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString abbr_;
+    private com.google.protobuf.ByteString abbr_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes abbr = 3;</code>
      * @return The abbr.
@@ -4320,7 +4097,7 @@ public final class Contract {
     }
 
     public static final int TOTAL_SUPPLY_FIELD_NUMBER = 4;
-    private long totalSupply_;
+    private long totalSupply_ = 0L;
     /**
      * <code>int64 total_supply = 4;</code>
      * @return The totalSupply.
@@ -4331,6 +4108,7 @@ public final class Contract {
     }
 
     public static final int FROZEN_SUPPLY_FIELD_NUMBER = 5;
+    @SuppressWarnings("serial")
     private java.util.List<com.github.comrada.tron4j.proto.Contract.AssetIssueContract.FrozenSupply> frozenSupply_;
     /**
      * <code>repeated .protocol.AssetIssueContract.FrozenSupply frozen_supply = 5;</code>
@@ -4371,7 +4149,7 @@ public final class Contract {
     }
 
     public static final int TRX_NUM_FIELD_NUMBER = 6;
-    private int trxNum_;
+    private int trxNum_ = 0;
     /**
      * <code>int32 trx_num = 6;</code>
      * @return The trxNum.
@@ -4382,7 +4160,7 @@ public final class Contract {
     }
 
     public static final int PRECISION_FIELD_NUMBER = 7;
-    private int precision_;
+    private int precision_ = 0;
     /**
      * <code>int32 precision = 7;</code>
      * @return The precision.
@@ -4393,7 +4171,7 @@ public final class Contract {
     }
 
     public static final int NUM_FIELD_NUMBER = 8;
-    private int num_;
+    private int num_ = 0;
     /**
      * <code>int32 num = 8;</code>
      * @return The num.
@@ -4404,7 +4182,7 @@ public final class Contract {
     }
 
     public static final int START_TIME_FIELD_NUMBER = 9;
-    private long startTime_;
+    private long startTime_ = 0L;
     /**
      * <code>int64 start_time = 9;</code>
      * @return The startTime.
@@ -4415,7 +4193,7 @@ public final class Contract {
     }
 
     public static final int END_TIME_FIELD_NUMBER = 10;
-    private long endTime_;
+    private long endTime_ = 0L;
     /**
      * <code>int64 end_time = 10;</code>
      * @return The endTime.
@@ -4426,7 +4204,7 @@ public final class Contract {
     }
 
     public static final int ORDER_FIELD_NUMBER = 11;
-    private long order_;
+    private long order_ = 0L;
     /**
      * <pre>
      * useless
@@ -4441,7 +4219,7 @@ public final class Contract {
     }
 
     public static final int VOTE_SCORE_FIELD_NUMBER = 16;
-    private int voteScore_;
+    private int voteScore_ = 0;
     /**
      * <code>int32 vote_score = 16;</code>
      * @return The voteScore.
@@ -4452,7 +4230,7 @@ public final class Contract {
     }
 
     public static final int DESCRIPTION_FIELD_NUMBER = 20;
-    private com.google.protobuf.ByteString description_;
+    private com.google.protobuf.ByteString description_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes description = 20;</code>
      * @return The description.
@@ -4463,7 +4241,7 @@ public final class Contract {
     }
 
     public static final int URL_FIELD_NUMBER = 21;
-    private com.google.protobuf.ByteString url_;
+    private com.google.protobuf.ByteString url_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes url = 21;</code>
      * @return The url.
@@ -4474,7 +4252,7 @@ public final class Contract {
     }
 
     public static final int FREE_ASSET_NET_LIMIT_FIELD_NUMBER = 22;
-    private long freeAssetNetLimit_;
+    private long freeAssetNetLimit_ = 0L;
     /**
      * <code>int64 free_asset_net_limit = 22;</code>
      * @return The freeAssetNetLimit.
@@ -4485,7 +4263,7 @@ public final class Contract {
     }
 
     public static final int PUBLIC_FREE_ASSET_NET_LIMIT_FIELD_NUMBER = 23;
-    private long publicFreeAssetNetLimit_;
+    private long publicFreeAssetNetLimit_ = 0L;
     /**
      * <code>int64 public_free_asset_net_limit = 23;</code>
      * @return The publicFreeAssetNetLimit.
@@ -4496,7 +4274,7 @@ public final class Contract {
     }
 
     public static final int PUBLIC_FREE_ASSET_NET_USAGE_FIELD_NUMBER = 24;
-    private long publicFreeAssetNetUsage_;
+    private long publicFreeAssetNetUsage_ = 0L;
     /**
      * <code>int64 public_free_asset_net_usage = 24;</code>
      * @return The publicFreeAssetNetUsage.
@@ -4507,7 +4285,7 @@ public final class Contract {
     }
 
     public static final int PUBLIC_LATEST_FREE_NET_TIME_FIELD_NUMBER = 25;
-    private long publicLatestFreeNetTime_;
+    private long publicLatestFreeNetTime_ = 0L;
     /**
      * <code>int64 public_latest_free_net_time = 25;</code>
      * @return The publicLatestFreeNetTime.
@@ -4588,7 +4366,7 @@ public final class Contract {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 41, id_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -4672,7 +4450,7 @@ public final class Contract {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(41, id_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -4725,7 +4503,7 @@ public final class Contract {
           != other.getPublicFreeAssetNetUsage()) return false;
       if (getPublicLatestFreeNetTime()
           != other.getPublicLatestFreeNetTime()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -4784,7 +4562,7 @@ public final class Contract {
       hash = (37 * hash) + PUBLIC_LATEST_FREE_NET_TIME_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getPublicLatestFreeNetTime());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -4901,65 +4679,43 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.AssetIssueContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-          getFrozenSupplyFieldBuilder();
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         id_ = "";
-
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         name_ = com.google.protobuf.ByteString.EMPTY;
-
         abbr_ = com.google.protobuf.ByteString.EMPTY;
-
         totalSupply_ = 0L;
-
         if (frozenSupplyBuilder_ == null) {
           frozenSupply_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
+          frozenSupply_ = null;
           frozenSupplyBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000020);
         trxNum_ = 0;
-
         precision_ = 0;
-
         num_ = 0;
-
         startTime_ = 0L;
-
         endTime_ = 0L;
-
         order_ = 0L;
-
         voteScore_ = 0;
-
         description_ = com.google.protobuf.ByteString.EMPTY;
-
         url_ = com.google.protobuf.ByteString.EMPTY;
-
         freeAssetNetLimit_ = 0L;
-
         publicFreeAssetNetLimit_ = 0L;
-
         publicFreeAssetNetUsage_ = 0L;
-
         publicLatestFreeNetTime_ = 0L;
-
         return this;
       }
 
@@ -4986,36 +4742,80 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.AssetIssueContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.AssetIssueContract result = new com.github.comrada.tron4j.proto.Contract.AssetIssueContract(this);
-        int from_bitField0_ = bitField0_;
-        result.id_ = id_;
-        result.ownerAddress_ = ownerAddress_;
-        result.name_ = name_;
-        result.abbr_ = abbr_;
-        result.totalSupply_ = totalSupply_;
+        buildPartialRepeatedFields(result);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartialRepeatedFields(com.github.comrada.tron4j.proto.Contract.AssetIssueContract result) {
         if (frozenSupplyBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) != 0)) {
+          if (((bitField0_ & 0x00000020) != 0)) {
             frozenSupply_ = java.util.Collections.unmodifiableList(frozenSupply_);
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000020);
           }
           result.frozenSupply_ = frozenSupply_;
         } else {
           result.frozenSupply_ = frozenSupplyBuilder_.build();
         }
-        result.trxNum_ = trxNum_;
-        result.precision_ = precision_;
-        result.num_ = num_;
-        result.startTime_ = startTime_;
-        result.endTime_ = endTime_;
-        result.order_ = order_;
-        result.voteScore_ = voteScore_;
-        result.description_ = description_;
-        result.url_ = url_;
-        result.freeAssetNetLimit_ = freeAssetNetLimit_;
-        result.publicFreeAssetNetLimit_ = publicFreeAssetNetLimit_;
-        result.publicFreeAssetNetUsage_ = publicFreeAssetNetUsage_;
-        result.publicLatestFreeNetTime_ = publicLatestFreeNetTime_;
-        onBuilt();
-        return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.AssetIssueContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.id_ = id_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.name_ = name_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.abbr_ = abbr_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.totalSupply_ = totalSupply_;
+        }
+        if (((from_bitField0_ & 0x00000040) != 0)) {
+          result.trxNum_ = trxNum_;
+        }
+        if (((from_bitField0_ & 0x00000080) != 0)) {
+          result.precision_ = precision_;
+        }
+        if (((from_bitField0_ & 0x00000100) != 0)) {
+          result.num_ = num_;
+        }
+        if (((from_bitField0_ & 0x00000200) != 0)) {
+          result.startTime_ = startTime_;
+        }
+        if (((from_bitField0_ & 0x00000400) != 0)) {
+          result.endTime_ = endTime_;
+        }
+        if (((from_bitField0_ & 0x00000800) != 0)) {
+          result.order_ = order_;
+        }
+        if (((from_bitField0_ & 0x00001000) != 0)) {
+          result.voteScore_ = voteScore_;
+        }
+        if (((from_bitField0_ & 0x00002000) != 0)) {
+          result.description_ = description_;
+        }
+        if (((from_bitField0_ & 0x00004000) != 0)) {
+          result.url_ = url_;
+        }
+        if (((from_bitField0_ & 0x00008000) != 0)) {
+          result.freeAssetNetLimit_ = freeAssetNetLimit_;
+        }
+        if (((from_bitField0_ & 0x00010000) != 0)) {
+          result.publicFreeAssetNetLimit_ = publicFreeAssetNetLimit_;
+        }
+        if (((from_bitField0_ & 0x00020000) != 0)) {
+          result.publicFreeAssetNetUsage_ = publicFreeAssetNetUsage_;
+        }
+        if (((from_bitField0_ & 0x00040000) != 0)) {
+          result.publicLatestFreeNetTime_ = publicLatestFreeNetTime_;
+        }
       }
 
       @java.lang.Override
@@ -5064,6 +4864,7 @@ public final class Contract {
         if (other == com.github.comrada.tron4j.proto.Contract.AssetIssueContract.getDefaultInstance()) return this;
         if (!other.getId().isEmpty()) {
           id_ = other.id_;
+          bitField0_ |= 0x00000001;
           onChanged();
         }
         if (other.getOwnerAddress() != com.google.protobuf.ByteString.EMPTY) {
@@ -5082,7 +4883,7 @@ public final class Contract {
           if (!other.frozenSupply_.isEmpty()) {
             if (frozenSupply_.isEmpty()) {
               frozenSupply_ = other.frozenSupply_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000020);
             } else {
               ensureFrozenSupplyIsMutable();
               frozenSupply_.addAll(other.frozenSupply_);
@@ -5095,7 +4896,7 @@ public final class Contract {
               frozenSupplyBuilder_.dispose();
               frozenSupplyBuilder_ = null;
               frozenSupply_ = other.frozenSupply_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000020);
               frozenSupplyBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getFrozenSupplyFieldBuilder() : null;
@@ -5143,7 +4944,7 @@ public final class Contract {
         if (other.getPublicLatestFreeNetTime() != 0L) {
           setPublicLatestFreeNetTime(other.getPublicLatestFreeNetTime());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -5158,17 +4959,133 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.AssetIssueContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 10
+              case 18: {
+                name_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 18
+              case 26: {
+                abbr_ = input.readBytes();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 26
+              case 32: {
+                totalSupply_ = input.readInt64();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 32
+              case 42: {
+                com.github.comrada.tron4j.proto.Contract.AssetIssueContract.FrozenSupply m =
+                    input.readMessage(
+                        com.github.comrada.tron4j.proto.Contract.AssetIssueContract.FrozenSupply.parser(),
+                        extensionRegistry);
+                if (frozenSupplyBuilder_ == null) {
+                  ensureFrozenSupplyIsMutable();
+                  frozenSupply_.add(m);
+                } else {
+                  frozenSupplyBuilder_.addMessage(m);
+                }
+                break;
+              } // case 42
+              case 48: {
+                trxNum_ = input.readInt32();
+                bitField0_ |= 0x00000040;
+                break;
+              } // case 48
+              case 56: {
+                precision_ = input.readInt32();
+                bitField0_ |= 0x00000080;
+                break;
+              } // case 56
+              case 64: {
+                num_ = input.readInt32();
+                bitField0_ |= 0x00000100;
+                break;
+              } // case 64
+              case 72: {
+                startTime_ = input.readInt64();
+                bitField0_ |= 0x00000200;
+                break;
+              } // case 72
+              case 80: {
+                endTime_ = input.readInt64();
+                bitField0_ |= 0x00000400;
+                break;
+              } // case 80
+              case 88: {
+                order_ = input.readInt64();
+                bitField0_ |= 0x00000800;
+                break;
+              } // case 88
+              case 128: {
+                voteScore_ = input.readInt32();
+                bitField0_ |= 0x00001000;
+                break;
+              } // case 128
+              case 162: {
+                description_ = input.readBytes();
+                bitField0_ |= 0x00002000;
+                break;
+              } // case 162
+              case 170: {
+                url_ = input.readBytes();
+                bitField0_ |= 0x00004000;
+                break;
+              } // case 170
+              case 176: {
+                freeAssetNetLimit_ = input.readInt64();
+                bitField0_ |= 0x00008000;
+                break;
+              } // case 176
+              case 184: {
+                publicFreeAssetNetLimit_ = input.readInt64();
+                bitField0_ |= 0x00010000;
+                break;
+              } // case 184
+              case 192: {
+                publicFreeAssetNetUsage_ = input.readInt64();
+                bitField0_ |= 0x00020000;
+                break;
+              } // case 192
+              case 200: {
+                publicLatestFreeNetTime_ = input.readInt64();
+                bitField0_ |= 0x00040000;
+                break;
+              } // case 200
+              case 330: {
+                id_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 330
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.AssetIssueContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
       private int bitField0_;
@@ -5214,11 +5131,9 @@ public final class Contract {
        */
       public Builder setId(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         id_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -5227,8 +5142,8 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearId() {
-        
         id_ = getDefaultInstance().getId();
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
@@ -5239,12 +5154,10 @@ public final class Contract {
        */
       public Builder setIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         id_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -5264,11 +5177,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -5277,7 +5188,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -5298,11 +5209,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setName(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         name_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -5311,7 +5220,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearName() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         name_ = getDefaultInstance().getName();
         onChanged();
         return this;
@@ -5332,11 +5241,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setAbbr(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         abbr_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -5345,7 +5252,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearAbbr() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         abbr_ = getDefaultInstance().getAbbr();
         onChanged();
         return this;
@@ -5368,6 +5275,7 @@ public final class Contract {
       public Builder setTotalSupply(long value) {
         
         totalSupply_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -5376,7 +5284,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearTotalSupply() {
-        
+        bitField0_ = (bitField0_ & ~0x00000010);
         totalSupply_ = 0L;
         onChanged();
         return this;
@@ -5385,9 +5293,9 @@ public final class Contract {
       private java.util.List<com.github.comrada.tron4j.proto.Contract.AssetIssueContract.FrozenSupply> frozenSupply_ =
         java.util.Collections.emptyList();
       private void ensureFrozenSupplyIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
+        if (!((bitField0_ & 0x00000020) != 0)) {
           frozenSupply_ = new java.util.ArrayList<com.github.comrada.tron4j.proto.Contract.AssetIssueContract.FrozenSupply>(frozenSupply_);
-          bitField0_ |= 0x00000001;
+          bitField0_ |= 0x00000020;
          }
       }
 
@@ -5537,7 +5445,7 @@ public final class Contract {
       public Builder clearFrozenSupply() {
         if (frozenSupplyBuilder_ == null) {
           frozenSupply_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+          bitField0_ = (bitField0_ & ~0x00000020);
           onChanged();
         } else {
           frozenSupplyBuilder_.clear();
@@ -5614,7 +5522,7 @@ public final class Contract {
           frozenSupplyBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.github.comrada.tron4j.proto.Contract.AssetIssueContract.FrozenSupply, com.github.comrada.tron4j.proto.Contract.AssetIssueContract.FrozenSupply.Builder, com.github.comrada.tron4j.proto.Contract.AssetIssueContract.FrozenSupplyOrBuilder>(
                   frozenSupply_,
-                  ((bitField0_ & 0x00000001) != 0),
+                  ((bitField0_ & 0x00000020) != 0),
                   getParentForChildren(),
                   isClean());
           frozenSupply_ = null;
@@ -5639,6 +5547,7 @@ public final class Contract {
       public Builder setTrxNum(int value) {
         
         trxNum_ = value;
+        bitField0_ |= 0x00000040;
         onChanged();
         return this;
       }
@@ -5647,7 +5556,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearTrxNum() {
-        
+        bitField0_ = (bitField0_ & ~0x00000040);
         trxNum_ = 0;
         onChanged();
         return this;
@@ -5670,6 +5579,7 @@ public final class Contract {
       public Builder setPrecision(int value) {
         
         precision_ = value;
+        bitField0_ |= 0x00000080;
         onChanged();
         return this;
       }
@@ -5678,7 +5588,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearPrecision() {
-        
+        bitField0_ = (bitField0_ & ~0x00000080);
         precision_ = 0;
         onChanged();
         return this;
@@ -5701,6 +5611,7 @@ public final class Contract {
       public Builder setNum(int value) {
         
         num_ = value;
+        bitField0_ |= 0x00000100;
         onChanged();
         return this;
       }
@@ -5709,7 +5620,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearNum() {
-        
+        bitField0_ = (bitField0_ & ~0x00000100);
         num_ = 0;
         onChanged();
         return this;
@@ -5732,6 +5643,7 @@ public final class Contract {
       public Builder setStartTime(long value) {
         
         startTime_ = value;
+        bitField0_ |= 0x00000200;
         onChanged();
         return this;
       }
@@ -5740,7 +5652,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearStartTime() {
-        
+        bitField0_ = (bitField0_ & ~0x00000200);
         startTime_ = 0L;
         onChanged();
         return this;
@@ -5763,6 +5675,7 @@ public final class Contract {
       public Builder setEndTime(long value) {
         
         endTime_ = value;
+        bitField0_ |= 0x00000400;
         onChanged();
         return this;
       }
@@ -5771,7 +5684,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearEndTime() {
-        
+        bitField0_ = (bitField0_ & ~0x00000400);
         endTime_ = 0L;
         onChanged();
         return this;
@@ -5802,6 +5715,7 @@ public final class Contract {
       public Builder setOrder(long value) {
         
         order_ = value;
+        bitField0_ |= 0x00000800;
         onChanged();
         return this;
       }
@@ -5814,7 +5728,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOrder() {
-        
+        bitField0_ = (bitField0_ & ~0x00000800);
         order_ = 0L;
         onChanged();
         return this;
@@ -5837,6 +5751,7 @@ public final class Contract {
       public Builder setVoteScore(int value) {
         
         voteScore_ = value;
+        bitField0_ |= 0x00001000;
         onChanged();
         return this;
       }
@@ -5845,7 +5760,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearVoteScore() {
-        
+        bitField0_ = (bitField0_ & ~0x00001000);
         voteScore_ = 0;
         onChanged();
         return this;
@@ -5866,11 +5781,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setDescription(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         description_ = value;
+        bitField0_ |= 0x00002000;
         onChanged();
         return this;
       }
@@ -5879,7 +5792,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearDescription() {
-        
+        bitField0_ = (bitField0_ & ~0x00002000);
         description_ = getDefaultInstance().getDescription();
         onChanged();
         return this;
@@ -5900,11 +5813,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setUrl(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         url_ = value;
+        bitField0_ |= 0x00004000;
         onChanged();
         return this;
       }
@@ -5913,7 +5824,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearUrl() {
-        
+        bitField0_ = (bitField0_ & ~0x00004000);
         url_ = getDefaultInstance().getUrl();
         onChanged();
         return this;
@@ -5936,6 +5847,7 @@ public final class Contract {
       public Builder setFreeAssetNetLimit(long value) {
         
         freeAssetNetLimit_ = value;
+        bitField0_ |= 0x00008000;
         onChanged();
         return this;
       }
@@ -5944,7 +5856,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearFreeAssetNetLimit() {
-        
+        bitField0_ = (bitField0_ & ~0x00008000);
         freeAssetNetLimit_ = 0L;
         onChanged();
         return this;
@@ -5967,6 +5879,7 @@ public final class Contract {
       public Builder setPublicFreeAssetNetLimit(long value) {
         
         publicFreeAssetNetLimit_ = value;
+        bitField0_ |= 0x00010000;
         onChanged();
         return this;
       }
@@ -5975,7 +5888,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearPublicFreeAssetNetLimit() {
-        
+        bitField0_ = (bitField0_ & ~0x00010000);
         publicFreeAssetNetLimit_ = 0L;
         onChanged();
         return this;
@@ -5998,6 +5911,7 @@ public final class Contract {
       public Builder setPublicFreeAssetNetUsage(long value) {
         
         publicFreeAssetNetUsage_ = value;
+        bitField0_ |= 0x00020000;
         onChanged();
         return this;
       }
@@ -6006,7 +5920,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearPublicFreeAssetNetUsage() {
-        
+        bitField0_ = (bitField0_ & ~0x00020000);
         publicFreeAssetNetUsage_ = 0L;
         onChanged();
         return this;
@@ -6029,6 +5943,7 @@ public final class Contract {
       public Builder setPublicLatestFreeNetTime(long value) {
         
         publicLatestFreeNetTime_ = value;
+        bitField0_ |= 0x00040000;
         onChanged();
         return this;
       }
@@ -6037,7 +5952,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearPublicLatestFreeNetTime() {
-        
+        bitField0_ = (bitField0_ & ~0x00040000);
         publicLatestFreeNetTime_ = 0L;
         onChanged();
         return this;
@@ -6075,7 +5990,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new AssetIssueContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -6162,65 +6088,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private TransferAssetContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              assetName_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 26: {
-
-              toAddress_ = input.readBytes();
-              break;
-            }
-            case 32: {
-
-              amount_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_TransferAssetContract_descriptor;
@@ -6235,7 +6102,7 @@ public final class Contract {
     }
 
     public static final int ASSET_NAME_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString assetName_;
+    private com.google.protobuf.ByteString assetName_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <pre>
      * this field is token name before the proposal
@@ -6250,7 +6117,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <pre>
      * ALLOW_SAME_TOKEN_NAME is active, otherwise it is
@@ -6266,7 +6133,7 @@ public final class Contract {
     }
 
     public static final int TO_ADDRESS_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString toAddress_;
+    private com.google.protobuf.ByteString toAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes to_address = 3;</code>
      * @return The toAddress.
@@ -6277,7 +6144,7 @@ public final class Contract {
     }
 
     public static final int AMOUNT_FIELD_NUMBER = 4;
-    private long amount_;
+    private long amount_ = 0L;
     /**
      * <code>int64 amount = 4;</code>
      * @return The amount.
@@ -6313,7 +6180,7 @@ public final class Contract {
       if (amount_ != 0L) {
         output.writeInt64(4, amount_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -6338,7 +6205,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(4, amount_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -6361,7 +6228,7 @@ public final class Contract {
           .equals(other.getToAddress())) return false;
       if (getAmount()
           != other.getAmount()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -6381,7 +6248,7 @@ public final class Contract {
       hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getAmount());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -6498,30 +6365,22 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.TransferAssetContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         assetName_ = com.google.protobuf.ByteString.EMPTY;
-
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         toAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         amount_ = 0L;
-
         return this;
       }
 
@@ -6548,12 +6407,25 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.TransferAssetContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.TransferAssetContract result = new com.github.comrada.tron4j.proto.Contract.TransferAssetContract(this);
-        result.assetName_ = assetName_;
-        result.ownerAddress_ = ownerAddress_;
-        result.toAddress_ = toAddress_;
-        result.amount_ = amount_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.TransferAssetContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.assetName_ = assetName_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.toAddress_ = toAddress_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.amount_ = amount_;
+        }
       }
 
       @java.lang.Override
@@ -6612,7 +6484,7 @@ public final class Contract {
         if (other.getAmount() != 0L) {
           setAmount(other.getAmount());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -6627,19 +6499,53 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.TransferAssetContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                assetName_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                toAddress_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 32: {
+                amount_ = input.readInt64();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 32
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.TransferAssetContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString assetName_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -6664,11 +6570,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setAssetName(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         assetName_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -6681,7 +6585,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearAssetName() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         assetName_ = getDefaultInstance().getAssetName();
         onChanged();
         return this;
@@ -6712,11 +6616,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -6730,7 +6632,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -6751,11 +6653,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setToAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         toAddress_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -6764,7 +6664,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearToAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         toAddress_ = getDefaultInstance().getToAddress();
         onChanged();
         return this;
@@ -6787,6 +6687,7 @@ public final class Contract {
       public Builder setAmount(long value) {
         
         amount_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -6795,7 +6696,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearAmount() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         amount_ = 0L;
         onChanged();
         return this;
@@ -6833,7 +6734,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new TransferAssetContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -6891,50 +6803,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private UnfreezeAssetContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_UnfreezeAssetContract_descriptor;
@@ -6949,7 +6817,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -6976,7 +6844,7 @@ public final class Contract {
       if (!ownerAddress_.isEmpty()) {
         output.writeBytes(1, ownerAddress_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -6989,7 +6857,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(1, ownerAddress_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -7006,7 +6874,7 @@ public final class Contract {
 
       if (!getOwnerAddress()
           .equals(other.getOwnerAddress())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -7019,7 +6887,7 @@ public final class Contract {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + OWNER_ADDRESS_FIELD_NUMBER;
       hash = (53 * hash) + getOwnerAddress().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -7136,24 +7004,19 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.UnfreezeAssetContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -7180,9 +7043,16 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.UnfreezeAssetContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.UnfreezeAssetContract result = new com.github.comrada.tron4j.proto.Contract.UnfreezeAssetContract(this);
-        result.ownerAddress_ = ownerAddress_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.UnfreezeAssetContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
       }
 
       @java.lang.Override
@@ -7232,7 +7102,7 @@ public final class Contract {
         if (other.getOwnerAddress() != com.google.protobuf.ByteString.EMPTY) {
           setOwnerAddress(other.getOwnerAddress());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -7247,19 +7117,38 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.UnfreezeAssetContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.UnfreezeAssetContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -7276,11 +7165,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -7289,7 +7176,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -7327,7 +7214,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new UnfreezeAssetContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -7411,70 +7309,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private UpdateAssetContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              description_ = input.readBytes();
-              break;
-            }
-            case 26: {
-
-              url_ = input.readBytes();
-              break;
-            }
-            case 32: {
-
-              newLimit_ = input.readInt64();
-              break;
-            }
-            case 40: {
-
-              newPublicLimit_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_UpdateAssetContract_descriptor;
@@ -7489,7 +7323,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -7500,7 +7334,7 @@ public final class Contract {
     }
 
     public static final int DESCRIPTION_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString description_;
+    private com.google.protobuf.ByteString description_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes description = 2;</code>
      * @return The description.
@@ -7511,7 +7345,7 @@ public final class Contract {
     }
 
     public static final int URL_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString url_;
+    private com.google.protobuf.ByteString url_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes url = 3;</code>
      * @return The url.
@@ -7522,7 +7356,7 @@ public final class Contract {
     }
 
     public static final int NEW_LIMIT_FIELD_NUMBER = 4;
-    private long newLimit_;
+    private long newLimit_ = 0L;
     /**
      * <code>int64 new_limit = 4;</code>
      * @return The newLimit.
@@ -7533,7 +7367,7 @@ public final class Contract {
     }
 
     public static final int NEW_PUBLIC_LIMIT_FIELD_NUMBER = 5;
-    private long newPublicLimit_;
+    private long newPublicLimit_ = 0L;
     /**
      * <code>int64 new_public_limit = 5;</code>
      * @return The newPublicLimit.
@@ -7572,7 +7406,7 @@ public final class Contract {
       if (newPublicLimit_ != 0L) {
         output.writeInt64(5, newPublicLimit_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -7601,7 +7435,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(5, newPublicLimit_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -7626,7 +7460,7 @@ public final class Contract {
           != other.getNewLimit()) return false;
       if (getNewPublicLimit()
           != other.getNewPublicLimit()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -7649,7 +7483,7 @@ public final class Contract {
       hash = (37 * hash) + NEW_PUBLIC_LIMIT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getNewPublicLimit());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -7766,32 +7600,23 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.UpdateAssetContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         description_ = com.google.protobuf.ByteString.EMPTY;
-
         url_ = com.google.protobuf.ByteString.EMPTY;
-
         newLimit_ = 0L;
-
         newPublicLimit_ = 0L;
-
         return this;
       }
 
@@ -7818,13 +7643,28 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.UpdateAssetContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.UpdateAssetContract result = new com.github.comrada.tron4j.proto.Contract.UpdateAssetContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.description_ = description_;
-        result.url_ = url_;
-        result.newLimit_ = newLimit_;
-        result.newPublicLimit_ = newPublicLimit_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.UpdateAssetContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.description_ = description_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.url_ = url_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.newLimit_ = newLimit_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.newPublicLimit_ = newPublicLimit_;
+        }
       }
 
       @java.lang.Override
@@ -7886,7 +7726,7 @@ public final class Contract {
         if (other.getNewPublicLimit() != 0L) {
           setNewPublicLimit(other.getNewPublicLimit());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -7901,19 +7741,58 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.UpdateAssetContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                description_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                url_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 32: {
+                newLimit_ = input.readInt64();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 32
+              case 40: {
+                newPublicLimit_ = input.readInt64();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 40
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.UpdateAssetContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -7930,11 +7809,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -7943,7 +7820,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -7964,11 +7841,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setDescription(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         description_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -7977,7 +7852,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearDescription() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         description_ = getDefaultInstance().getDescription();
         onChanged();
         return this;
@@ -7998,11 +7873,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setUrl(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         url_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -8011,7 +7884,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearUrl() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         url_ = getDefaultInstance().getUrl();
         onChanged();
         return this;
@@ -8034,6 +7907,7 @@ public final class Contract {
       public Builder setNewLimit(long value) {
         
         newLimit_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -8042,7 +7916,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearNewLimit() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         newLimit_ = 0L;
         onChanged();
         return this;
@@ -8065,6 +7939,7 @@ public final class Contract {
       public Builder setNewPublicLimit(long value) {
         
         newPublicLimit_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -8073,7 +7948,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearNewPublicLimit() {
-        
+        bitField0_ = (bitField0_ & ~0x00000010);
         newPublicLimit_ = 0L;
         onChanged();
         return this;
@@ -8111,7 +7986,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new UpdateAssetContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -8198,65 +8084,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ParticipateAssetIssueContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              toAddress_ = input.readBytes();
-              break;
-            }
-            case 26: {
-
-              assetName_ = input.readBytes();
-              break;
-            }
-            case 32: {
-
-              amount_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_ParticipateAssetIssueContract_descriptor;
@@ -8271,7 +8098,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -8282,7 +8109,7 @@ public final class Contract {
     }
 
     public static final int TO_ADDRESS_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString toAddress_;
+    private com.google.protobuf.ByteString toAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes to_address = 2;</code>
      * @return The toAddress.
@@ -8293,7 +8120,7 @@ public final class Contract {
     }
 
     public static final int ASSET_NAME_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString assetName_;
+    private com.google.protobuf.ByteString assetName_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <pre>
      * this field is token name before the proposal
@@ -8308,7 +8135,7 @@ public final class Contract {
     }
 
     public static final int AMOUNT_FIELD_NUMBER = 4;
-    private long amount_;
+    private long amount_ = 0L;
     /**
      * <pre>
      * ALLOW_SAME_TOKEN_NAME is active, otherwise it is
@@ -8349,7 +8176,7 @@ public final class Contract {
       if (amount_ != 0L) {
         output.writeInt64(4, amount_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -8374,7 +8201,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(4, amount_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -8397,7 +8224,7 @@ public final class Contract {
           .equals(other.getAssetName())) return false;
       if (getAmount()
           != other.getAmount()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -8417,7 +8244,7 @@ public final class Contract {
       hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getAmount());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -8534,30 +8361,22 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.ParticipateAssetIssueContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         toAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         assetName_ = com.google.protobuf.ByteString.EMPTY;
-
         amount_ = 0L;
-
         return this;
       }
 
@@ -8584,12 +8403,25 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.ParticipateAssetIssueContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.ParticipateAssetIssueContract result = new com.github.comrada.tron4j.proto.Contract.ParticipateAssetIssueContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.toAddress_ = toAddress_;
-        result.assetName_ = assetName_;
-        result.amount_ = amount_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.ParticipateAssetIssueContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.toAddress_ = toAddress_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.assetName_ = assetName_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.amount_ = amount_;
+        }
       }
 
       @java.lang.Override
@@ -8648,7 +8480,7 @@ public final class Contract {
         if (other.getAmount() != 0L) {
           setAmount(other.getAmount());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -8663,19 +8495,53 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.ParticipateAssetIssueContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                toAddress_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                assetName_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 32: {
+                amount_ = input.readInt64();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 32
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.ParticipateAssetIssueContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -8692,11 +8558,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -8705,7 +8569,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -8726,11 +8590,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setToAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         toAddress_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -8739,7 +8601,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearToAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         toAddress_ = getDefaultInstance().getToAddress();
         onChanged();
         return this;
@@ -8768,11 +8630,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setAssetName(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         assetName_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -8785,7 +8645,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearAssetName() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         assetName_ = getDefaultInstance().getAssetName();
         onChanged();
         return this;
@@ -8818,6 +8678,7 @@ public final class Contract {
       public Builder setAmount(long value) {
         
         amount_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -8831,7 +8692,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearAmount() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         amount_ = 0L;
         onChanged();
         return this;
@@ -8869,7 +8730,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ParticipateAssetIssueContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -8958,71 +8830,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private FreezeBalanceContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 16: {
-
-              frozenBalance_ = input.readInt64();
-              break;
-            }
-            case 24: {
-
-              frozenDuration_ = input.readInt64();
-              break;
-            }
-            case 80: {
-              int rawValue = input.readEnum();
-
-              resource_ = rawValue;
-              break;
-            }
-            case 122: {
-
-              receiverAddress_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_FreezeBalanceContract_descriptor;
@@ -9037,7 +8844,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -9048,7 +8855,7 @@ public final class Contract {
     }
 
     public static final int FROZEN_BALANCE_FIELD_NUMBER = 2;
-    private long frozenBalance_;
+    private long frozenBalance_ = 0L;
     /**
      * <code>int64 frozen_balance = 2;</code>
      * @return The frozenBalance.
@@ -9059,7 +8866,7 @@ public final class Contract {
     }
 
     public static final int FROZEN_DURATION_FIELD_NUMBER = 3;
-    private long frozenDuration_;
+    private long frozenDuration_ = 0L;
     /**
      * <code>int64 frozen_duration = 3;</code>
      * @return The frozenDuration.
@@ -9070,7 +8877,7 @@ public final class Contract {
     }
 
     public static final int RESOURCE_FIELD_NUMBER = 10;
-    private int resource_;
+    private int resource_ = 0;
     /**
      * <code>.protocol.ResourceCode resource = 10;</code>
      * @return The enum numeric value on the wire for resource.
@@ -9083,13 +8890,12 @@ public final class Contract {
      * @return The resource.
      */
     @java.lang.Override public com.github.comrada.tron4j.proto.Common.ResourceCode getResource() {
-      @SuppressWarnings("deprecation")
-      com.github.comrada.tron4j.proto.Common.ResourceCode result = com.github.comrada.tron4j.proto.Common.ResourceCode.valueOf(resource_);
+      com.github.comrada.tron4j.proto.Common.ResourceCode result = com.github.comrada.tron4j.proto.Common.ResourceCode.forNumber(resource_);
       return result == null ? com.github.comrada.tron4j.proto.Common.ResourceCode.UNRECOGNIZED : result;
     }
 
     public static final int RECEIVER_ADDRESS_FIELD_NUMBER = 15;
-    private com.google.protobuf.ByteString receiverAddress_;
+    private com.google.protobuf.ByteString receiverAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes receiver_address = 15;</code>
      * @return The receiverAddress.
@@ -9128,7 +8934,7 @@ public final class Contract {
       if (!receiverAddress_.isEmpty()) {
         output.writeBytes(15, receiverAddress_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -9157,7 +8963,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(15, receiverAddress_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -9181,7 +8987,7 @@ public final class Contract {
       if (resource_ != other.resource_) return false;
       if (!getReceiverAddress()
           .equals(other.getReceiverAddress())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -9204,7 +9010,7 @@ public final class Contract {
       hash = (53 * hash) + resource_;
       hash = (37 * hash) + RECEIVER_ADDRESS_FIELD_NUMBER;
       hash = (53 * hash) + getReceiverAddress().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -9321,32 +9127,23 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.FreezeBalanceContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         frozenBalance_ = 0L;
-
         frozenDuration_ = 0L;
-
         resource_ = 0;
-
         receiverAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -9373,13 +9170,28 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.FreezeBalanceContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.FreezeBalanceContract result = new com.github.comrada.tron4j.proto.Contract.FreezeBalanceContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.frozenBalance_ = frozenBalance_;
-        result.frozenDuration_ = frozenDuration_;
-        result.resource_ = resource_;
-        result.receiverAddress_ = receiverAddress_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.FreezeBalanceContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.frozenBalance_ = frozenBalance_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.frozenDuration_ = frozenDuration_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.resource_ = resource_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.receiverAddress_ = receiverAddress_;
+        }
       }
 
       @java.lang.Override
@@ -9441,7 +9253,7 @@ public final class Contract {
         if (other.getReceiverAddress() != com.google.protobuf.ByteString.EMPTY) {
           setReceiverAddress(other.getReceiverAddress());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -9456,19 +9268,58 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.FreezeBalanceContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 16: {
+                frozenBalance_ = input.readInt64();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              case 24: {
+                frozenDuration_ = input.readInt64();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              case 80: {
+                resource_ = input.readEnum();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 80
+              case 122: {
+                receiverAddress_ = input.readBytes();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 122
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.FreezeBalanceContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -9485,11 +9336,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -9498,7 +9347,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -9521,6 +9370,7 @@ public final class Contract {
       public Builder setFrozenBalance(long value) {
         
         frozenBalance_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -9529,7 +9379,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearFrozenBalance() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         frozenBalance_ = 0L;
         onChanged();
         return this;
@@ -9552,6 +9402,7 @@ public final class Contract {
       public Builder setFrozenDuration(long value) {
         
         frozenDuration_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -9560,7 +9411,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearFrozenDuration() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         frozenDuration_ = 0L;
         onChanged();
         return this;
@@ -9580,8 +9431,8 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setResourceValue(int value) {
-        
         resource_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -9591,8 +9442,7 @@ public final class Contract {
        */
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Common.ResourceCode getResource() {
-        @SuppressWarnings("deprecation")
-        com.github.comrada.tron4j.proto.Common.ResourceCode result = com.github.comrada.tron4j.proto.Common.ResourceCode.valueOf(resource_);
+        com.github.comrada.tron4j.proto.Common.ResourceCode result = com.github.comrada.tron4j.proto.Common.ResourceCode.forNumber(resource_);
         return result == null ? com.github.comrada.tron4j.proto.Common.ResourceCode.UNRECOGNIZED : result;
       }
       /**
@@ -9604,7 +9454,7 @@ public final class Contract {
         if (value == null) {
           throw new NullPointerException();
         }
-        
+        bitField0_ |= 0x00000008;
         resource_ = value.getNumber();
         onChanged();
         return this;
@@ -9614,7 +9464,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearResource() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         resource_ = 0;
         onChanged();
         return this;
@@ -9635,11 +9485,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setReceiverAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         receiverAddress_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -9648,7 +9496,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearReceiverAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000010);
         receiverAddress_ = getDefaultInstance().getReceiverAddress();
         onChanged();
         return this;
@@ -9686,7 +9534,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new FreezeBalanceContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -9763,61 +9622,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private UnfreezeBalanceContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 80: {
-              int rawValue = input.readEnum();
-
-              resource_ = rawValue;
-              break;
-            }
-            case 122: {
-
-              receiverAddress_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_UnfreezeBalanceContract_descriptor;
@@ -9832,7 +9636,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -9843,7 +9647,7 @@ public final class Contract {
     }
 
     public static final int RESOURCE_FIELD_NUMBER = 10;
-    private int resource_;
+    private int resource_ = 0;
     /**
      * <code>.protocol.ResourceCode resource = 10;</code>
      * @return The enum numeric value on the wire for resource.
@@ -9856,13 +9660,12 @@ public final class Contract {
      * @return The resource.
      */
     @java.lang.Override public com.github.comrada.tron4j.proto.Common.ResourceCode getResource() {
-      @SuppressWarnings("deprecation")
-      com.github.comrada.tron4j.proto.Common.ResourceCode result = com.github.comrada.tron4j.proto.Common.ResourceCode.valueOf(resource_);
+      com.github.comrada.tron4j.proto.Common.ResourceCode result = com.github.comrada.tron4j.proto.Common.ResourceCode.forNumber(resource_);
       return result == null ? com.github.comrada.tron4j.proto.Common.ResourceCode.UNRECOGNIZED : result;
     }
 
     public static final int RECEIVER_ADDRESS_FIELD_NUMBER = 15;
-    private com.google.protobuf.ByteString receiverAddress_;
+    private com.google.protobuf.ByteString receiverAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes receiver_address = 15;</code>
      * @return The receiverAddress.
@@ -9895,7 +9698,7 @@ public final class Contract {
       if (!receiverAddress_.isEmpty()) {
         output.writeBytes(15, receiverAddress_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -9916,7 +9719,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(15, receiverAddress_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -9936,7 +9739,7 @@ public final class Contract {
       if (resource_ != other.resource_) return false;
       if (!getReceiverAddress()
           .equals(other.getReceiverAddress())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -9953,7 +9756,7 @@ public final class Contract {
       hash = (53 * hash) + resource_;
       hash = (37 * hash) + RECEIVER_ADDRESS_FIELD_NUMBER;
       hash = (53 * hash) + getReceiverAddress().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -10070,28 +9873,21 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.UnfreezeBalanceContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         resource_ = 0;
-
         receiverAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -10118,11 +9914,22 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.UnfreezeBalanceContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.UnfreezeBalanceContract result = new com.github.comrada.tron4j.proto.Contract.UnfreezeBalanceContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.resource_ = resource_;
-        result.receiverAddress_ = receiverAddress_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.UnfreezeBalanceContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.resource_ = resource_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.receiverAddress_ = receiverAddress_;
+        }
       }
 
       @java.lang.Override
@@ -10178,7 +9985,7 @@ public final class Contract {
         if (other.getReceiverAddress() != com.google.protobuf.ByteString.EMPTY) {
           setReceiverAddress(other.getReceiverAddress());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -10193,19 +10000,48 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.UnfreezeBalanceContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 80: {
+                resource_ = input.readEnum();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 80
+              case 122: {
+                receiverAddress_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 122
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.UnfreezeBalanceContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -10222,11 +10058,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -10235,7 +10069,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -10255,8 +10089,8 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setResourceValue(int value) {
-        
         resource_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -10266,8 +10100,7 @@ public final class Contract {
        */
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Common.ResourceCode getResource() {
-        @SuppressWarnings("deprecation")
-        com.github.comrada.tron4j.proto.Common.ResourceCode result = com.github.comrada.tron4j.proto.Common.ResourceCode.valueOf(resource_);
+        com.github.comrada.tron4j.proto.Common.ResourceCode result = com.github.comrada.tron4j.proto.Common.ResourceCode.forNumber(resource_);
         return result == null ? com.github.comrada.tron4j.proto.Common.ResourceCode.UNRECOGNIZED : result;
       }
       /**
@@ -10279,7 +10112,7 @@ public final class Contract {
         if (value == null) {
           throw new NullPointerException();
         }
-        
+        bitField0_ |= 0x00000002;
         resource_ = value.getNumber();
         onChanged();
         return this;
@@ -10289,7 +10122,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearResource() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         resource_ = 0;
         onChanged();
         return this;
@@ -10310,11 +10143,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setReceiverAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         receiverAddress_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -10323,7 +10154,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearReceiverAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         receiverAddress_ = getDefaultInstance().getReceiverAddress();
         onChanged();
         return this;
@@ -10361,7 +10192,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new UnfreezeBalanceContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -10419,50 +10261,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private WithdrawBalanceContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_WithdrawBalanceContract_descriptor;
@@ -10477,7 +10275,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -10504,7 +10302,7 @@ public final class Contract {
       if (!ownerAddress_.isEmpty()) {
         output.writeBytes(1, ownerAddress_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -10517,7 +10315,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(1, ownerAddress_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -10534,7 +10332,7 @@ public final class Contract {
 
       if (!getOwnerAddress()
           .equals(other.getOwnerAddress())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -10547,7 +10345,7 @@ public final class Contract {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + OWNER_ADDRESS_FIELD_NUMBER;
       hash = (53 * hash) + getOwnerAddress().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -10664,24 +10462,19 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.WithdrawBalanceContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -10708,9 +10501,16 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.WithdrawBalanceContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.WithdrawBalanceContract result = new com.github.comrada.tron4j.proto.Contract.WithdrawBalanceContract(this);
-        result.ownerAddress_ = ownerAddress_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.WithdrawBalanceContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
       }
 
       @java.lang.Override
@@ -10760,7 +10560,7 @@ public final class Contract {
         if (other.getOwnerAddress() != com.google.protobuf.ByteString.EMPTY) {
           setOwnerAddress(other.getOwnerAddress());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -10775,19 +10575,38 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.WithdrawBalanceContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.WithdrawBalanceContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -10804,11 +10623,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -10817,7 +10634,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -10855,7 +10672,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new WithdrawBalanceContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -10926,60 +10754,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private TransferContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              toAddress_ = input.readBytes();
-              break;
-            }
-            case 24: {
-
-              amount_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_TransferContract_descriptor;
@@ -10994,7 +10768,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -11005,7 +10779,7 @@ public final class Contract {
     }
 
     public static final int TO_ADDRESS_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString toAddress_;
+    private com.google.protobuf.ByteString toAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes to_address = 2;</code>
      * @return The toAddress.
@@ -11016,7 +10790,7 @@ public final class Contract {
     }
 
     public static final int AMOUNT_FIELD_NUMBER = 3;
-    private long amount_;
+    private long amount_ = 0L;
     /**
      * <code>int64 amount = 3;</code>
      * @return The amount.
@@ -11049,7 +10823,7 @@ public final class Contract {
       if (amount_ != 0L) {
         output.writeInt64(3, amount_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -11070,7 +10844,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(3, amount_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -11091,7 +10865,7 @@ public final class Contract {
           .equals(other.getToAddress())) return false;
       if (getAmount()
           != other.getAmount()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -11109,7 +10883,7 @@ public final class Contract {
       hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getAmount());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -11226,28 +11000,21 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.TransferContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         toAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         amount_ = 0L;
-
         return this;
       }
 
@@ -11274,11 +11041,22 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.TransferContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.TransferContract result = new com.github.comrada.tron4j.proto.Contract.TransferContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.toAddress_ = toAddress_;
-        result.amount_ = amount_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.TransferContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.toAddress_ = toAddress_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.amount_ = amount_;
+        }
       }
 
       @java.lang.Override
@@ -11334,7 +11112,7 @@ public final class Contract {
         if (other.getAmount() != 0L) {
           setAmount(other.getAmount());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -11349,19 +11127,48 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.TransferContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                toAddress_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 24: {
+                amount_ = input.readInt64();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.TransferContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -11378,11 +11185,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -11391,7 +11196,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -11412,11 +11217,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setToAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         toAddress_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -11425,7 +11228,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearToAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         toAddress_ = getDefaultInstance().getToAddress();
         onChanged();
         return this;
@@ -11448,6 +11251,7 @@ public final class Contract {
       public Builder setAmount(long value) {
         
         amount_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -11456,7 +11260,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearAmount() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         amount_ = 0L;
         onChanged();
         return this;
@@ -11494,7 +11298,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new TransferContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -11593,75 +11408,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private MarketSellAssetContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              sellTokenId_ = input.readBytes();
-              break;
-            }
-            case 24: {
-
-              sellTokenQuantity_ = input.readInt64();
-              break;
-            }
-            case 34: {
-
-              buyTokenId_ = input.readBytes();
-              break;
-            }
-            case 40: {
-
-              buyTokenQuantity_ = input.readInt64();
-              break;
-            }
-            case 50: {
-
-              prePriceKey_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_MarketSellAssetContract_descriptor;
@@ -11676,7 +11422,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -11687,7 +11433,7 @@ public final class Contract {
     }
 
     public static final int SELL_TOKEN_ID_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString sellTokenId_;
+    private com.google.protobuf.ByteString sellTokenId_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes sell_token_id = 2;</code>
      * @return The sellTokenId.
@@ -11698,7 +11444,7 @@ public final class Contract {
     }
 
     public static final int SELL_TOKEN_QUANTITY_FIELD_NUMBER = 3;
-    private long sellTokenQuantity_;
+    private long sellTokenQuantity_ = 0L;
     /**
      * <code>int64 sell_token_quantity = 3;</code>
      * @return The sellTokenQuantity.
@@ -11709,7 +11455,7 @@ public final class Contract {
     }
 
     public static final int BUY_TOKEN_ID_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString buyTokenId_;
+    private com.google.protobuf.ByteString buyTokenId_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes buy_token_id = 4;</code>
      * @return The buyTokenId.
@@ -11720,7 +11466,7 @@ public final class Contract {
     }
 
     public static final int BUY_TOKEN_QUANTITY_FIELD_NUMBER = 5;
-    private long buyTokenQuantity_;
+    private long buyTokenQuantity_ = 0L;
     /**
      * <pre>
      * min to receive
@@ -11735,7 +11481,7 @@ public final class Contract {
     }
 
     public static final int PRE_PRICE_KEY_FIELD_NUMBER = 6;
-    private com.google.protobuf.ByteString prePriceKey_;
+    private com.google.protobuf.ByteString prePriceKey_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <pre>
      * order price position
@@ -11781,7 +11527,7 @@ public final class Contract {
       if (!prePriceKey_.isEmpty()) {
         output.writeBytes(6, prePriceKey_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -11814,7 +11560,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(6, prePriceKey_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -11841,7 +11587,7 @@ public final class Contract {
           != other.getBuyTokenQuantity()) return false;
       if (!getPrePriceKey()
           .equals(other.getPrePriceKey())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -11866,7 +11612,7 @@ public final class Contract {
           getBuyTokenQuantity());
       hash = (37 * hash) + PRE_PRICE_KEY_FIELD_NUMBER;
       hash = (53 * hash) + getPrePriceKey().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -11983,34 +11729,24 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.MarketSellAssetContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         sellTokenId_ = com.google.protobuf.ByteString.EMPTY;
-
         sellTokenQuantity_ = 0L;
-
         buyTokenId_ = com.google.protobuf.ByteString.EMPTY;
-
         buyTokenQuantity_ = 0L;
-
         prePriceKey_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -12037,14 +11773,31 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.MarketSellAssetContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.MarketSellAssetContract result = new com.github.comrada.tron4j.proto.Contract.MarketSellAssetContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.sellTokenId_ = sellTokenId_;
-        result.sellTokenQuantity_ = sellTokenQuantity_;
-        result.buyTokenId_ = buyTokenId_;
-        result.buyTokenQuantity_ = buyTokenQuantity_;
-        result.prePriceKey_ = prePriceKey_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.MarketSellAssetContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.sellTokenId_ = sellTokenId_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.sellTokenQuantity_ = sellTokenQuantity_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.buyTokenId_ = buyTokenId_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.buyTokenQuantity_ = buyTokenQuantity_;
+        }
+        if (((from_bitField0_ & 0x00000020) != 0)) {
+          result.prePriceKey_ = prePriceKey_;
+        }
       }
 
       @java.lang.Override
@@ -12109,7 +11862,7 @@ public final class Contract {
         if (other.getPrePriceKey() != com.google.protobuf.ByteString.EMPTY) {
           setPrePriceKey(other.getPrePriceKey());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -12124,19 +11877,63 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.MarketSellAssetContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                sellTokenId_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 24: {
+                sellTokenQuantity_ = input.readInt64();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              case 34: {
+                buyTokenId_ = input.readBytes();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              case 40: {
+                buyTokenQuantity_ = input.readInt64();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 40
+              case 50: {
+                prePriceKey_ = input.readBytes();
+                bitField0_ |= 0x00000020;
+                break;
+              } // case 50
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.MarketSellAssetContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -12153,11 +11950,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -12166,7 +11961,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -12187,11 +11982,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setSellTokenId(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         sellTokenId_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -12200,7 +11993,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearSellTokenId() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         sellTokenId_ = getDefaultInstance().getSellTokenId();
         onChanged();
         return this;
@@ -12223,6 +12016,7 @@ public final class Contract {
       public Builder setSellTokenQuantity(long value) {
         
         sellTokenQuantity_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -12231,7 +12025,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearSellTokenQuantity() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         sellTokenQuantity_ = 0L;
         onChanged();
         return this;
@@ -12252,11 +12046,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setBuyTokenId(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         buyTokenId_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -12265,7 +12057,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearBuyTokenId() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         buyTokenId_ = getDefaultInstance().getBuyTokenId();
         onChanged();
         return this;
@@ -12296,6 +12088,7 @@ public final class Contract {
       public Builder setBuyTokenQuantity(long value) {
         
         buyTokenQuantity_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -12308,7 +12101,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearBuyTokenQuantity() {
-        
+        bitField0_ = (bitField0_ & ~0x00000010);
         buyTokenQuantity_ = 0L;
         onChanged();
         return this;
@@ -12337,11 +12130,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setPrePriceKey(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         prePriceKey_ = value;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
@@ -12354,7 +12145,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearPrePriceKey() {
-        
+        bitField0_ = (bitField0_ & ~0x00000020);
         prePriceKey_ = getDefaultInstance().getPrePriceKey();
         onChanged();
         return this;
@@ -12392,7 +12183,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new MarketSellAssetContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -12457,55 +12259,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private MarketCancelOrderContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              orderId_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_MarketCancelOrderContract_descriptor;
@@ -12520,7 +12273,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -12531,7 +12284,7 @@ public final class Contract {
     }
 
     public static final int ORDER_ID_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString orderId_;
+    private com.google.protobuf.ByteString orderId_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes order_id = 2;</code>
      * @return The orderId.
@@ -12561,7 +12314,7 @@ public final class Contract {
       if (!orderId_.isEmpty()) {
         output.writeBytes(2, orderId_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -12578,7 +12331,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, orderId_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -12597,7 +12350,7 @@ public final class Contract {
           .equals(other.getOwnerAddress())) return false;
       if (!getOrderId()
           .equals(other.getOrderId())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -12612,7 +12365,7 @@ public final class Contract {
       hash = (53 * hash) + getOwnerAddress().hashCode();
       hash = (37 * hash) + ORDER_ID_FIELD_NUMBER;
       hash = (53 * hash) + getOrderId().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -12729,26 +12482,20 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.MarketCancelOrderContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         orderId_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -12775,10 +12522,19 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.MarketCancelOrderContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.MarketCancelOrderContract result = new com.github.comrada.tron4j.proto.Contract.MarketCancelOrderContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.orderId_ = orderId_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.MarketCancelOrderContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.orderId_ = orderId_;
+        }
       }
 
       @java.lang.Override
@@ -12831,7 +12587,7 @@ public final class Contract {
         if (other.getOrderId() != com.google.protobuf.ByteString.EMPTY) {
           setOrderId(other.getOrderId());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -12846,19 +12602,43 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.MarketCancelOrderContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                orderId_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.MarketCancelOrderContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -12875,11 +12655,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -12888,7 +12666,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -12909,11 +12687,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOrderId(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         orderId_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -12922,7 +12698,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOrderId() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         orderId_ = getDefaultInstance().getOrderId();
         onChanged();
         return this;
@@ -12960,7 +12736,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new MarketCancelOrderContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -13034,60 +12821,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ProposalApproveContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 16: {
-
-              proposalId_ = input.readInt64();
-              break;
-            }
-            case 24: {
-
-              isAddApproval_ = input.readBool();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_ProposalApproveContract_descriptor;
@@ -13102,7 +12835,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -13113,7 +12846,7 @@ public final class Contract {
     }
 
     public static final int PROPOSAL_ID_FIELD_NUMBER = 2;
-    private long proposalId_;
+    private long proposalId_ = 0L;
     /**
      * <code>int64 proposal_id = 2;</code>
      * @return The proposalId.
@@ -13124,7 +12857,7 @@ public final class Contract {
     }
 
     public static final int IS_ADD_APPROVAL_FIELD_NUMBER = 3;
-    private boolean isAddApproval_;
+    private boolean isAddApproval_ = false;
     /**
      * <pre>
      * add or remove approval
@@ -13161,7 +12894,7 @@ public final class Contract {
       if (isAddApproval_ != false) {
         output.writeBool(3, isAddApproval_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -13182,7 +12915,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(3, isAddApproval_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -13203,7 +12936,7 @@ public final class Contract {
           != other.getProposalId()) return false;
       if (getIsAddApproval()
           != other.getIsAddApproval()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -13222,7 +12955,7 @@ public final class Contract {
       hash = (37 * hash) + IS_ADD_APPROVAL_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getIsAddApproval());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -13339,28 +13072,21 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.ProposalApproveContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         proposalId_ = 0L;
-
         isAddApproval_ = false;
-
         return this;
       }
 
@@ -13387,11 +13113,22 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.ProposalApproveContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.ProposalApproveContract result = new com.github.comrada.tron4j.proto.Contract.ProposalApproveContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.proposalId_ = proposalId_;
-        result.isAddApproval_ = isAddApproval_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.ProposalApproveContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.proposalId_ = proposalId_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.isAddApproval_ = isAddApproval_;
+        }
       }
 
       @java.lang.Override
@@ -13447,7 +13184,7 @@ public final class Contract {
         if (other.getIsAddApproval() != false) {
           setIsAddApproval(other.getIsAddApproval());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -13462,19 +13199,48 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.ProposalApproveContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 16: {
+                proposalId_ = input.readInt64();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              case 24: {
+                isAddApproval_ = input.readBool();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.ProposalApproveContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -13491,11 +13257,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -13504,7 +13268,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -13527,6 +13291,7 @@ public final class Contract {
       public Builder setProposalId(long value) {
         
         proposalId_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -13535,7 +13300,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearProposalId() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         proposalId_ = 0L;
         onChanged();
         return this;
@@ -13566,6 +13331,7 @@ public final class Contract {
       public Builder setIsAddApproval(boolean value) {
         
         isAddApproval_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -13578,7 +13344,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearIsAddApproval() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         isAddApproval_ = false;
         onChanged();
         return this;
@@ -13616,7 +13382,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ProposalApproveContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -13669,14 +13446,12 @@ public final class Contract {
     /**
      * <code>map&lt;int64, int64&gt; parameters = 2;</code>
      */
-
     long getParametersOrDefault(
         long key,
         long defaultValue);
     /**
      * <code>map&lt;int64, int64&gt; parameters = 2;</code>
      */
-
     long getParametersOrThrow(
         long key);
   }
@@ -13708,64 +13483,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ProposalCreateContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 18: {
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                parameters_ = com.google.protobuf.MapField.newMapField(
-                    ParametersDefaultEntryHolder.defaultEntry);
-                mutable_bitField0_ |= 0x00000001;
-              }
-              com.google.protobuf.MapEntry<java.lang.Long, java.lang.Long>
-              parameters__ = input.readMessage(
-                  ParametersDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              parameters_.getMutableMap().put(
-                  parameters__.getKey(), parameters__.getValue());
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_ProposalCreateContract_descriptor;
@@ -13792,7 +13509,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -13814,6 +13531,7 @@ public final class Contract {
                   com.google.protobuf.WireFormat.FieldType.INT64,
                   0L);
     }
+    @SuppressWarnings("serial")
     private com.google.protobuf.MapField<
         java.lang.Long, java.lang.Long> parameters_;
     private com.google.protobuf.MapField<java.lang.Long, java.lang.Long>
@@ -13824,14 +13542,12 @@ public final class Contract {
       }
       return parameters_;
     }
-
     public int getParametersCount() {
       return internalGetParameters().getMap().size();
     }
     /**
      * <code>map&lt;int64, int64&gt; parameters = 2;</code>
      */
-
     @java.lang.Override
     public boolean containsParameters(
         long key) {
@@ -13850,7 +13566,6 @@ public final class Contract {
      * <code>map&lt;int64, int64&gt; parameters = 2;</code>
      */
     @java.lang.Override
-
     public java.util.Map<java.lang.Long, java.lang.Long> getParametersMap() {
       return internalGetParameters().getMap();
     }
@@ -13858,7 +13573,6 @@ public final class Contract {
      * <code>map&lt;int64, int64&gt; parameters = 2;</code>
      */
     @java.lang.Override
-
     public long getParametersOrDefault(
         long key,
         long defaultValue) {
@@ -13871,7 +13585,6 @@ public final class Contract {
      * <code>map&lt;int64, int64&gt; parameters = 2;</code>
      */
     @java.lang.Override
-
     public long getParametersOrThrow(
         long key) {
       
@@ -13906,7 +13619,7 @@ public final class Contract {
           internalGetParameters(),
           ParametersDefaultEntryHolder.defaultEntry,
           2);
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -13929,7 +13642,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(2, parameters__);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -13948,7 +13661,7 @@ public final class Contract {
           .equals(other.getOwnerAddress())) return false;
       if (!internalGetParameters().equals(
           other.internalGetParameters())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -13965,7 +13678,7 @@ public final class Contract {
         hash = (37 * hash) + PARAMETERS_FIELD_NUMBER;
         hash = (53 * hash) + internalGetParameters().hashCode();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -14104,24 +13817,19 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.ProposalCreateContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         internalGetMutableParameters().clear();
         return this;
       }
@@ -14149,12 +13857,20 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.ProposalCreateContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.ProposalCreateContract result = new com.github.comrada.tron4j.proto.Contract.ProposalCreateContract(this);
-        int from_bitField0_ = bitField0_;
-        result.ownerAddress_ = ownerAddress_;
-        result.parameters_ = internalGetParameters();
-        result.parameters_.makeImmutable();
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.ProposalCreateContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.parameters_ = internalGetParameters();
+          result.parameters_.makeImmutable();
+        }
       }
 
       @java.lang.Override
@@ -14206,7 +13922,8 @@ public final class Contract {
         }
         internalGetMutableParameters().mergeFrom(
             other.internalGetParameters());
-        this.mergeUnknownFields(other.unknownFields);
+        bitField0_ |= 0x00000002;
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -14221,17 +13938,44 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.ProposalCreateContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                com.google.protobuf.MapEntry<java.lang.Long, java.lang.Long>
+                parameters__ = input.readMessage(
+                    ParametersDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+                internalGetMutableParameters().getMutableMap().put(
+                    parameters__.getKey(), parameters__.getValue());
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.ProposalCreateContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
       private int bitField0_;
@@ -14251,11 +13995,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -14264,7 +14006,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -14273,7 +14015,7 @@ public final class Contract {
       private com.google.protobuf.MapField<
           java.lang.Long, java.lang.Long> parameters_;
       private com.google.protobuf.MapField<java.lang.Long, java.lang.Long>
-      internalGetParameters() {
+          internalGetParameters() {
         if (parameters_ == null) {
           return com.google.protobuf.MapField.emptyMapField(
               ParametersDefaultEntryHolder.defaultEntry);
@@ -14281,8 +14023,7 @@ public final class Contract {
         return parameters_;
       }
       private com.google.protobuf.MapField<java.lang.Long, java.lang.Long>
-      internalGetMutableParameters() {
-        onChanged();;
+          internalGetMutableParameters() {
         if (parameters_ == null) {
           parameters_ = com.google.protobuf.MapField.newMapField(
               ParametersDefaultEntryHolder.defaultEntry);
@@ -14290,16 +14031,16 @@ public final class Contract {
         if (!parameters_.isMutable()) {
           parameters_ = parameters_.copy();
         }
+        bitField0_ |= 0x00000002;
+        onChanged();
         return parameters_;
       }
-
       public int getParametersCount() {
         return internalGetParameters().getMap().size();
       }
       /**
        * <code>map&lt;int64, int64&gt; parameters = 2;</code>
        */
-
       @java.lang.Override
       public boolean containsParameters(
           long key) {
@@ -14318,7 +14059,6 @@ public final class Contract {
        * <code>map&lt;int64, int64&gt; parameters = 2;</code>
        */
       @java.lang.Override
-
       public java.util.Map<java.lang.Long, java.lang.Long> getParametersMap() {
         return internalGetParameters().getMap();
       }
@@ -14326,7 +14066,6 @@ public final class Contract {
        * <code>map&lt;int64, int64&gt; parameters = 2;</code>
        */
       @java.lang.Override
-
       public long getParametersOrDefault(
           long key,
           long defaultValue) {
@@ -14339,7 +14078,6 @@ public final class Contract {
        * <code>map&lt;int64, int64&gt; parameters = 2;</code>
        */
       @java.lang.Override
-
       public long getParametersOrThrow(
           long key) {
         
@@ -14350,8 +14088,8 @@ public final class Contract {
         }
         return map.get(key);
       }
-
       public Builder clearParameters() {
+        bitField0_ = (bitField0_ & ~0x00000002);
         internalGetMutableParameters().getMutableMap()
             .clear();
         return this;
@@ -14359,7 +14097,6 @@ public final class Contract {
       /**
        * <code>map&lt;int64, int64&gt; parameters = 2;</code>
        */
-
       public Builder removeParameters(
           long key) {
         
@@ -14372,7 +14109,8 @@ public final class Contract {
        */
       @java.lang.Deprecated
       public java.util.Map<java.lang.Long, java.lang.Long>
-      getMutableParameters() {
+          getMutableParameters() {
+        bitField0_ |= 0x00000002;
         return internalGetMutableParameters().getMutableMap();
       }
       /**
@@ -14385,16 +14123,17 @@ public final class Contract {
         
         internalGetMutableParameters().getMutableMap()
             .put(key, value);
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
        * <code>map&lt;int64, int64&gt; parameters = 2;</code>
        */
-
       public Builder putAllParameters(
           java.util.Map<java.lang.Long, java.lang.Long> values) {
         internalGetMutableParameters().getMutableMap()
             .putAll(values);
+        bitField0_ |= 0x00000002;
         return this;
       }
       @java.lang.Override
@@ -14430,7 +14169,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ProposalCreateContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -14494,55 +14244,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ProposalDeleteContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 16: {
-
-              proposalId_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_ProposalDeleteContract_descriptor;
@@ -14557,7 +14258,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -14568,7 +14269,7 @@ public final class Contract {
     }
 
     public static final int PROPOSAL_ID_FIELD_NUMBER = 2;
-    private long proposalId_;
+    private long proposalId_ = 0L;
     /**
      * <code>int64 proposal_id = 2;</code>
      * @return The proposalId.
@@ -14598,7 +14299,7 @@ public final class Contract {
       if (proposalId_ != 0L) {
         output.writeInt64(2, proposalId_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -14615,7 +14316,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(2, proposalId_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -14634,7 +14335,7 @@ public final class Contract {
           .equals(other.getOwnerAddress())) return false;
       if (getProposalId()
           != other.getProposalId()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -14650,7 +14351,7 @@ public final class Contract {
       hash = (37 * hash) + PROPOSAL_ID_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getProposalId());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -14767,26 +14468,20 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.ProposalDeleteContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         proposalId_ = 0L;
-
         return this;
       }
 
@@ -14813,10 +14508,19 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.ProposalDeleteContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.ProposalDeleteContract result = new com.github.comrada.tron4j.proto.Contract.ProposalDeleteContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.proposalId_ = proposalId_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.ProposalDeleteContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.proposalId_ = proposalId_;
+        }
       }
 
       @java.lang.Override
@@ -14869,7 +14573,7 @@ public final class Contract {
         if (other.getProposalId() != 0L) {
           setProposalId(other.getProposalId());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -14884,19 +14588,43 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.ProposalDeleteContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 16: {
+                proposalId_ = input.readInt64();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.ProposalDeleteContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -14913,11 +14641,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -14926,7 +14652,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -14949,6 +14675,7 @@ public final class Contract {
       public Builder setProposalId(long value) {
         
         proposalId_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -14957,7 +14684,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearProposalId() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         proposalId_ = 0L;
         onChanged();
         return this;
@@ -14995,7 +14722,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ProposalDeleteContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -15080,73 +14818,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private CreateSmartContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 18: {
-              com.github.comrada.tron4j.proto.Common.SmartContract.Builder subBuilder = null;
-              if (newContract_ != null) {
-                subBuilder = newContract_.toBuilder();
-              }
-              newContract_ = input.readMessage(com.github.comrada.tron4j.proto.Common.SmartContract.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(newContract_);
-                newContract_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 24: {
-
-              callTokenValue_ = input.readInt64();
-              break;
-            }
-            case 32: {
-
-              tokenId_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_CreateSmartContract_descriptor;
@@ -15161,7 +14832,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -15194,11 +14865,11 @@ public final class Contract {
      */
     @java.lang.Override
     public com.github.comrada.tron4j.proto.Common.SmartContractOrBuilder getNewContractOrBuilder() {
-      return getNewContract();
+      return newContract_ == null ? com.github.comrada.tron4j.proto.Common.SmartContract.getDefaultInstance() : newContract_;
     }
 
     public static final int CALL_TOKEN_VALUE_FIELD_NUMBER = 3;
-    private long callTokenValue_;
+    private long callTokenValue_ = 0L;
     /**
      * <code>int64 call_token_value = 3;</code>
      * @return The callTokenValue.
@@ -15209,7 +14880,7 @@ public final class Contract {
     }
 
     public static final int TOKEN_ID_FIELD_NUMBER = 4;
-    private long tokenId_;
+    private long tokenId_ = 0L;
     /**
      * <code>int64 token_id = 4;</code>
      * @return The tokenId.
@@ -15245,7 +14916,7 @@ public final class Contract {
       if (tokenId_ != 0L) {
         output.writeInt64(4, tokenId_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -15270,7 +14941,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(4, tokenId_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -15296,7 +14967,7 @@ public final class Contract {
           != other.getCallTokenValue()) return false;
       if (getTokenId()
           != other.getTokenId()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -15319,7 +14990,7 @@ public final class Contract {
       hash = (37 * hash) + TOKEN_ID_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getTokenId());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -15436,34 +15107,26 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.CreateSmartContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
-        if (newContractBuilder_ == null) {
-          newContract_ = null;
-        } else {
-          newContract_ = null;
+        newContract_ = null;
+        if (newContractBuilder_ != null) {
+          newContractBuilder_.dispose();
           newContractBuilder_ = null;
         }
         callTokenValue_ = 0L;
-
         tokenId_ = 0L;
-
         return this;
       }
 
@@ -15490,16 +15153,27 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.CreateSmartContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.CreateSmartContract result = new com.github.comrada.tron4j.proto.Contract.CreateSmartContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        if (newContractBuilder_ == null) {
-          result.newContract_ = newContract_;
-        } else {
-          result.newContract_ = newContractBuilder_.build();
-        }
-        result.callTokenValue_ = callTokenValue_;
-        result.tokenId_ = tokenId_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.CreateSmartContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.newContract_ = newContractBuilder_ == null
+              ? newContract_
+              : newContractBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.callTokenValue_ = callTokenValue_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.tokenId_ = tokenId_;
+        }
       }
 
       @java.lang.Override
@@ -15558,7 +15232,7 @@ public final class Contract {
         if (other.getTokenId() != 0L) {
           setTokenId(other.getTokenId());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -15573,19 +15247,55 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.CreateSmartContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                input.readMessage(
+                    getNewContractFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 24: {
+                callTokenValue_ = input.readInt64();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              case 32: {
+                tokenId_ = input.readInt64();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 32
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.CreateSmartContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -15602,11 +15312,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -15615,7 +15323,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -15629,7 +15337,7 @@ public final class Contract {
        * @return Whether the newContract field is set.
        */
       public boolean hasNewContract() {
-        return newContractBuilder_ != null || newContract_ != null;
+        return ((bitField0_ & 0x00000002) != 0);
       }
       /**
        * <code>.protocol.SmartContract new_contract = 2;</code>
@@ -15651,11 +15359,11 @@ public final class Contract {
             throw new NullPointerException();
           }
           newContract_ = value;
-          onChanged();
         } else {
           newContractBuilder_.setMessage(value);
         }
-
+        bitField0_ |= 0x00000002;
+        onChanged();
         return this;
       }
       /**
@@ -15665,11 +15373,11 @@ public final class Contract {
           com.github.comrada.tron4j.proto.Common.SmartContract.Builder builderForValue) {
         if (newContractBuilder_ == null) {
           newContract_ = builderForValue.build();
-          onChanged();
         } else {
           newContractBuilder_.setMessage(builderForValue.build());
         }
-
+        bitField0_ |= 0x00000002;
+        onChanged();
         return this;
       }
       /**
@@ -15677,38 +15385,38 @@ public final class Contract {
        */
       public Builder mergeNewContract(com.github.comrada.tron4j.proto.Common.SmartContract value) {
         if (newContractBuilder_ == null) {
-          if (newContract_ != null) {
-            newContract_ =
-              com.github.comrada.tron4j.proto.Common.SmartContract.newBuilder(newContract_).mergeFrom(value).buildPartial();
+          if (((bitField0_ & 0x00000002) != 0) &&
+            newContract_ != null &&
+            newContract_ != com.github.comrada.tron4j.proto.Common.SmartContract.getDefaultInstance()) {
+            getNewContractBuilder().mergeFrom(value);
           } else {
             newContract_ = value;
           }
-          onChanged();
         } else {
           newContractBuilder_.mergeFrom(value);
         }
-
+        bitField0_ |= 0x00000002;
+        onChanged();
         return this;
       }
       /**
        * <code>.protocol.SmartContract new_contract = 2;</code>
        */
       public Builder clearNewContract() {
-        if (newContractBuilder_ == null) {
-          newContract_ = null;
-          onChanged();
-        } else {
-          newContract_ = null;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        newContract_ = null;
+        if (newContractBuilder_ != null) {
+          newContractBuilder_.dispose();
           newContractBuilder_ = null;
         }
-
+        onChanged();
         return this;
       }
       /**
        * <code>.protocol.SmartContract new_contract = 2;</code>
        */
       public com.github.comrada.tron4j.proto.Common.SmartContract.Builder getNewContractBuilder() {
-        
+        bitField0_ |= 0x00000002;
         onChanged();
         return getNewContractFieldBuilder().getBuilder();
       }
@@ -15757,6 +15465,7 @@ public final class Contract {
       public Builder setCallTokenValue(long value) {
         
         callTokenValue_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -15765,7 +15474,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearCallTokenValue() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         callTokenValue_ = 0L;
         onChanged();
         return this;
@@ -15788,6 +15497,7 @@ public final class Contract {
       public Builder setTokenId(long value) {
         
         tokenId_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -15796,7 +15506,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearTokenId() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         tokenId_ = 0L;
         onChanged();
         return this;
@@ -15834,7 +15544,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new CreateSmartContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -15924,75 +15645,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private TriggerSmartContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              contractAddress_ = input.readBytes();
-              break;
-            }
-            case 24: {
-
-              callValue_ = input.readInt64();
-              break;
-            }
-            case 34: {
-
-              data_ = input.readBytes();
-              break;
-            }
-            case 40: {
-
-              callTokenValue_ = input.readInt64();
-              break;
-            }
-            case 48: {
-
-              tokenId_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_TriggerSmartContract_descriptor;
@@ -16007,7 +15659,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -16018,7 +15670,7 @@ public final class Contract {
     }
 
     public static final int CONTRACT_ADDRESS_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString contractAddress_;
+    private com.google.protobuf.ByteString contractAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes contract_address = 2;</code>
      * @return The contractAddress.
@@ -16029,7 +15681,7 @@ public final class Contract {
     }
 
     public static final int CALL_VALUE_FIELD_NUMBER = 3;
-    private long callValue_;
+    private long callValue_ = 0L;
     /**
      * <code>int64 call_value = 3;</code>
      * @return The callValue.
@@ -16040,7 +15692,7 @@ public final class Contract {
     }
 
     public static final int DATA_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString data_;
+    private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes data = 4;</code>
      * @return The data.
@@ -16051,7 +15703,7 @@ public final class Contract {
     }
 
     public static final int CALL_TOKEN_VALUE_FIELD_NUMBER = 5;
-    private long callTokenValue_;
+    private long callTokenValue_ = 0L;
     /**
      * <code>int64 call_token_value = 5;</code>
      * @return The callTokenValue.
@@ -16062,7 +15714,7 @@ public final class Contract {
     }
 
     public static final int TOKEN_ID_FIELD_NUMBER = 6;
-    private long tokenId_;
+    private long tokenId_ = 0L;
     /**
      * <code>int64 token_id = 6;</code>
      * @return The tokenId.
@@ -16104,7 +15756,7 @@ public final class Contract {
       if (tokenId_ != 0L) {
         output.writeInt64(6, tokenId_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -16137,7 +15789,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(6, tokenId_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -16164,7 +15816,7 @@ public final class Contract {
           != other.getCallTokenValue()) return false;
       if (getTokenId()
           != other.getTokenId()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -16190,7 +15842,7 @@ public final class Contract {
       hash = (37 * hash) + TOKEN_ID_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getTokenId());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -16307,34 +15959,24 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.TriggerSmartContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         contractAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         callValue_ = 0L;
-
         data_ = com.google.protobuf.ByteString.EMPTY;
-
         callTokenValue_ = 0L;
-
         tokenId_ = 0L;
-
         return this;
       }
 
@@ -16361,14 +16003,31 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.TriggerSmartContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.TriggerSmartContract result = new com.github.comrada.tron4j.proto.Contract.TriggerSmartContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.contractAddress_ = contractAddress_;
-        result.callValue_ = callValue_;
-        result.data_ = data_;
-        result.callTokenValue_ = callTokenValue_;
-        result.tokenId_ = tokenId_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.TriggerSmartContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.contractAddress_ = contractAddress_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.callValue_ = callValue_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.data_ = data_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.callTokenValue_ = callTokenValue_;
+        }
+        if (((from_bitField0_ & 0x00000020) != 0)) {
+          result.tokenId_ = tokenId_;
+        }
       }
 
       @java.lang.Override
@@ -16433,7 +16092,7 @@ public final class Contract {
         if (other.getTokenId() != 0L) {
           setTokenId(other.getTokenId());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -16448,19 +16107,63 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.TriggerSmartContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                contractAddress_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 24: {
+                callValue_ = input.readInt64();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              case 34: {
+                data_ = input.readBytes();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              case 40: {
+                callTokenValue_ = input.readInt64();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 40
+              case 48: {
+                tokenId_ = input.readInt64();
+                bitField0_ |= 0x00000020;
+                break;
+              } // case 48
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.TriggerSmartContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -16477,11 +16180,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -16490,7 +16191,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -16511,11 +16212,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setContractAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         contractAddress_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -16524,7 +16223,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearContractAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         contractAddress_ = getDefaultInstance().getContractAddress();
         onChanged();
         return this;
@@ -16547,6 +16246,7 @@ public final class Contract {
       public Builder setCallValue(long value) {
         
         callValue_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -16555,7 +16255,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearCallValue() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         callValue_ = 0L;
         onChanged();
         return this;
@@ -16576,11 +16276,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setData(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         data_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -16589,7 +16287,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearData() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         data_ = getDefaultInstance().getData();
         onChanged();
         return this;
@@ -16612,6 +16310,7 @@ public final class Contract {
       public Builder setCallTokenValue(long value) {
         
         callTokenValue_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -16620,7 +16319,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearCallTokenValue() {
-        
+        bitField0_ = (bitField0_ & ~0x00000010);
         callTokenValue_ = 0L;
         onChanged();
         return this;
@@ -16643,6 +16342,7 @@ public final class Contract {
       public Builder setTokenId(long value) {
         
         tokenId_ = value;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
@@ -16651,7 +16351,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearTokenId() {
-        
+        bitField0_ = (bitField0_ & ~0x00000020);
         tokenId_ = 0L;
         onChanged();
         return this;
@@ -16689,7 +16389,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new TriggerSmartContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -16754,55 +16465,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ClearABIContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              contractAddress_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_ClearABIContract_descriptor;
@@ -16817,7 +16479,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -16828,7 +16490,7 @@ public final class Contract {
     }
 
     public static final int CONTRACT_ADDRESS_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString contractAddress_;
+    private com.google.protobuf.ByteString contractAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes contract_address = 2;</code>
      * @return The contractAddress.
@@ -16858,7 +16520,7 @@ public final class Contract {
       if (!contractAddress_.isEmpty()) {
         output.writeBytes(2, contractAddress_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -16875,7 +16537,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, contractAddress_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -16894,7 +16556,7 @@ public final class Contract {
           .equals(other.getOwnerAddress())) return false;
       if (!getContractAddress()
           .equals(other.getContractAddress())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -16909,7 +16571,7 @@ public final class Contract {
       hash = (53 * hash) + getOwnerAddress().hashCode();
       hash = (37 * hash) + CONTRACT_ADDRESS_FIELD_NUMBER;
       hash = (53 * hash) + getContractAddress().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -17026,26 +16688,20 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.ClearABIContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         contractAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -17072,10 +16728,19 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.ClearABIContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.ClearABIContract result = new com.github.comrada.tron4j.proto.Contract.ClearABIContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.contractAddress_ = contractAddress_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.ClearABIContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.contractAddress_ = contractAddress_;
+        }
       }
 
       @java.lang.Override
@@ -17128,7 +16793,7 @@ public final class Contract {
         if (other.getContractAddress() != com.google.protobuf.ByteString.EMPTY) {
           setContractAddress(other.getContractAddress());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -17143,19 +16808,43 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.ClearABIContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                contractAddress_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.ClearABIContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -17172,11 +16861,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -17185,7 +16872,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -17206,11 +16893,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setContractAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         contractAddress_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -17219,7 +16904,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearContractAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         contractAddress_ = getDefaultInstance().getContractAddress();
         onChanged();
         return this;
@@ -17257,7 +16942,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ClearABIContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -17328,60 +17024,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private UpdateSettingContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              contractAddress_ = input.readBytes();
-              break;
-            }
-            case 24: {
-
-              consumeUserResourcePercent_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_UpdateSettingContract_descriptor;
@@ -17396,7 +17038,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -17407,7 +17049,7 @@ public final class Contract {
     }
 
     public static final int CONTRACT_ADDRESS_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString contractAddress_;
+    private com.google.protobuf.ByteString contractAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes contract_address = 2;</code>
      * @return The contractAddress.
@@ -17418,7 +17060,7 @@ public final class Contract {
     }
 
     public static final int CONSUME_USER_RESOURCE_PERCENT_FIELD_NUMBER = 3;
-    private long consumeUserResourcePercent_;
+    private long consumeUserResourcePercent_ = 0L;
     /**
      * <code>int64 consume_user_resource_percent = 3;</code>
      * @return The consumeUserResourcePercent.
@@ -17451,7 +17093,7 @@ public final class Contract {
       if (consumeUserResourcePercent_ != 0L) {
         output.writeInt64(3, consumeUserResourcePercent_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -17472,7 +17114,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(3, consumeUserResourcePercent_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -17493,7 +17135,7 @@ public final class Contract {
           .equals(other.getContractAddress())) return false;
       if (getConsumeUserResourcePercent()
           != other.getConsumeUserResourcePercent()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -17511,7 +17153,7 @@ public final class Contract {
       hash = (37 * hash) + CONSUME_USER_RESOURCE_PERCENT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getConsumeUserResourcePercent());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -17628,28 +17270,21 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.UpdateSettingContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         contractAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         consumeUserResourcePercent_ = 0L;
-
         return this;
       }
 
@@ -17676,11 +17311,22 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.UpdateSettingContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.UpdateSettingContract result = new com.github.comrada.tron4j.proto.Contract.UpdateSettingContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.contractAddress_ = contractAddress_;
-        result.consumeUserResourcePercent_ = consumeUserResourcePercent_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.UpdateSettingContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.contractAddress_ = contractAddress_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.consumeUserResourcePercent_ = consumeUserResourcePercent_;
+        }
       }
 
       @java.lang.Override
@@ -17736,7 +17382,7 @@ public final class Contract {
         if (other.getConsumeUserResourcePercent() != 0L) {
           setConsumeUserResourcePercent(other.getConsumeUserResourcePercent());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -17751,19 +17397,48 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.UpdateSettingContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                contractAddress_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 24: {
+                consumeUserResourcePercent_ = input.readInt64();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.UpdateSettingContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -17780,11 +17455,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -17793,7 +17466,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -17814,11 +17487,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setContractAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         contractAddress_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -17827,7 +17498,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearContractAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         contractAddress_ = getDefaultInstance().getContractAddress();
         onChanged();
         return this;
@@ -17850,6 +17521,7 @@ public final class Contract {
       public Builder setConsumeUserResourcePercent(long value) {
         
         consumeUserResourcePercent_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -17858,7 +17530,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearConsumeUserResourcePercent() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         consumeUserResourcePercent_ = 0L;
         onChanged();
         return this;
@@ -17896,7 +17568,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new UpdateSettingContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -17967,60 +17650,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private UpdateEnergyLimitContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              contractAddress_ = input.readBytes();
-              break;
-            }
-            case 24: {
-
-              originEnergyLimit_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_UpdateEnergyLimitContract_descriptor;
@@ -18035,7 +17664,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -18046,7 +17675,7 @@ public final class Contract {
     }
 
     public static final int CONTRACT_ADDRESS_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString contractAddress_;
+    private com.google.protobuf.ByteString contractAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes contract_address = 2;</code>
      * @return The contractAddress.
@@ -18057,7 +17686,7 @@ public final class Contract {
     }
 
     public static final int ORIGIN_ENERGY_LIMIT_FIELD_NUMBER = 3;
-    private long originEnergyLimit_;
+    private long originEnergyLimit_ = 0L;
     /**
      * <code>int64 origin_energy_limit = 3;</code>
      * @return The originEnergyLimit.
@@ -18090,7 +17719,7 @@ public final class Contract {
       if (originEnergyLimit_ != 0L) {
         output.writeInt64(3, originEnergyLimit_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -18111,7 +17740,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(3, originEnergyLimit_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -18132,7 +17761,7 @@ public final class Contract {
           .equals(other.getContractAddress())) return false;
       if (getOriginEnergyLimit()
           != other.getOriginEnergyLimit()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -18150,7 +17779,7 @@ public final class Contract {
       hash = (37 * hash) + ORIGIN_ENERGY_LIMIT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getOriginEnergyLimit());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -18267,28 +17896,21 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.UpdateEnergyLimitContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         contractAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         originEnergyLimit_ = 0L;
-
         return this;
       }
 
@@ -18315,11 +17937,22 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.UpdateEnergyLimitContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.UpdateEnergyLimitContract result = new com.github.comrada.tron4j.proto.Contract.UpdateEnergyLimitContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.contractAddress_ = contractAddress_;
-        result.originEnergyLimit_ = originEnergyLimit_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.UpdateEnergyLimitContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.contractAddress_ = contractAddress_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.originEnergyLimit_ = originEnergyLimit_;
+        }
       }
 
       @java.lang.Override
@@ -18375,7 +18008,7 @@ public final class Contract {
         if (other.getOriginEnergyLimit() != 0L) {
           setOriginEnergyLimit(other.getOriginEnergyLimit());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -18390,19 +18023,48 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.UpdateEnergyLimitContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                contractAddress_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 24: {
+                originEnergyLimit_ = input.readInt64();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.UpdateEnergyLimitContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -18419,11 +18081,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -18432,7 +18092,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -18453,11 +18113,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setContractAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         contractAddress_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -18466,7 +18124,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearContractAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         contractAddress_ = getDefaultInstance().getContractAddress();
         onChanged();
         return this;
@@ -18489,6 +18147,7 @@ public final class Contract {
       public Builder setOriginEnergyLimit(long value) {
         
         originEnergyLimit_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -18497,7 +18156,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOriginEnergyLimit() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         originEnergyLimit_ = 0L;
         onChanged();
         return this;
@@ -18535,7 +18194,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new UpdateEnergyLimitContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -18603,55 +18273,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private UpdateBrokerageContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 16: {
-
-              brokerage_ = input.readInt32();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_UpdateBrokerageContract_descriptor;
@@ -18666,7 +18287,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -18677,7 +18298,7 @@ public final class Contract {
     }
 
     public static final int BROKERAGE_FIELD_NUMBER = 2;
-    private int brokerage_;
+    private int brokerage_ = 0;
     /**
      * <pre>
      * 1 mean 1%
@@ -18711,7 +18332,7 @@ public final class Contract {
       if (brokerage_ != 0) {
         output.writeInt32(2, brokerage_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -18728,7 +18349,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, brokerage_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -18747,7 +18368,7 @@ public final class Contract {
           .equals(other.getOwnerAddress())) return false;
       if (getBrokerage()
           != other.getBrokerage()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -18762,7 +18383,7 @@ public final class Contract {
       hash = (53 * hash) + getOwnerAddress().hashCode();
       hash = (37 * hash) + BROKERAGE_FIELD_NUMBER;
       hash = (53 * hash) + getBrokerage();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -18879,26 +18500,20 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.UpdateBrokerageContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         brokerage_ = 0;
-
         return this;
       }
 
@@ -18925,10 +18540,19 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.UpdateBrokerageContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.UpdateBrokerageContract result = new com.github.comrada.tron4j.proto.Contract.UpdateBrokerageContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.brokerage_ = brokerage_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.UpdateBrokerageContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.brokerage_ = brokerage_;
+        }
       }
 
       @java.lang.Override
@@ -18981,7 +18605,7 @@ public final class Contract {
         if (other.getBrokerage() != 0) {
           setBrokerage(other.getBrokerage());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -18996,19 +18620,43 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.UpdateBrokerageContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 16: {
+                brokerage_ = input.readInt32();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.UpdateBrokerageContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -19025,11 +18673,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -19038,7 +18684,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -19069,6 +18715,7 @@ public final class Contract {
       public Builder setBrokerage(int value) {
         
         brokerage_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -19081,7 +18728,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearBrokerage() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         brokerage_ = 0;
         onChanged();
         return this;
@@ -19119,7 +18766,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new UpdateBrokerageContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -19207,72 +18865,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private VoteAssetContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 18: {
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                voteAddress_ = new java.util.ArrayList<com.google.protobuf.ByteString>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              voteAddress_.add(input.readBytes());
-              break;
-            }
-            case 24: {
-
-              support_ = input.readBool();
-              break;
-            }
-            case 40: {
-
-              count_ = input.readInt32();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          voteAddress_ = java.util.Collections.unmodifiableList(voteAddress_); // C
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_VoteAssetContract_descriptor;
@@ -19287,7 +18879,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -19298,6 +18890,7 @@ public final class Contract {
     }
 
     public static final int VOTE_ADDRESS_FIELD_NUMBER = 2;
+    @SuppressWarnings("serial")
     private java.util.List<com.google.protobuf.ByteString> voteAddress_;
     /**
      * <code>repeated bytes vote_address = 2;</code>
@@ -19325,7 +18918,7 @@ public final class Contract {
     }
 
     public static final int SUPPORT_FIELD_NUMBER = 3;
-    private boolean support_;
+    private boolean support_ = false;
     /**
      * <code>bool support = 3;</code>
      * @return The support.
@@ -19336,7 +18929,7 @@ public final class Contract {
     }
 
     public static final int COUNT_FIELD_NUMBER = 5;
-    private int count_;
+    private int count_ = 0;
     /**
      * <code>int32 count = 5;</code>
      * @return The count.
@@ -19372,7 +18965,7 @@ public final class Contract {
       if (count_ != 0) {
         output.writeInt32(5, count_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -19402,7 +18995,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(5, count_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -19425,7 +19018,7 @@ public final class Contract {
           != other.getSupport()) return false;
       if (getCount()
           != other.getCount()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -19447,7 +19040,7 @@ public final class Contract {
           getSupport());
       hash = (37 * hash) + COUNT_FIELD_NUMBER;
       hash = (53 * hash) + getCount();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -19564,30 +19157,22 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.VoteAssetContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         voteAddress_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
         support_ = false;
-
         count_ = 0;
-
         return this;
       }
 
@@ -19614,17 +19199,31 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.VoteAssetContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.VoteAssetContract result = new com.github.comrada.tron4j.proto.Contract.VoteAssetContract(this);
-        int from_bitField0_ = bitField0_;
-        result.ownerAddress_ = ownerAddress_;
-        if (((bitField0_ & 0x00000001) != 0)) {
-          voteAddress_ = java.util.Collections.unmodifiableList(voteAddress_);
-          bitField0_ = (bitField0_ & ~0x00000001);
-        }
-        result.voteAddress_ = voteAddress_;
-        result.support_ = support_;
-        result.count_ = count_;
+        buildPartialRepeatedFields(result);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartialRepeatedFields(com.github.comrada.tron4j.proto.Contract.VoteAssetContract result) {
+        if (((bitField0_ & 0x00000002) != 0)) {
+          voteAddress_ = java.util.Collections.unmodifiableList(voteAddress_);
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.voteAddress_ = voteAddress_;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.VoteAssetContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.support_ = support_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.count_ = count_;
+        }
       }
 
       @java.lang.Override
@@ -19677,7 +19276,7 @@ public final class Contract {
         if (!other.voteAddress_.isEmpty()) {
           if (voteAddress_.isEmpty()) {
             voteAddress_ = other.voteAddress_;
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000002);
           } else {
             ensureVoteAddressIsMutable();
             voteAddress_.addAll(other.voteAddress_);
@@ -19690,7 +19289,7 @@ public final class Contract {
         if (other.getCount() != 0) {
           setCount(other.getCount());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -19705,17 +19304,51 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.VoteAssetContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                com.google.protobuf.ByteString v = input.readBytes();
+                ensureVoteAddressIsMutable();
+                voteAddress_.add(v);
+                break;
+              } // case 18
+              case 24: {
+                support_ = input.readBool();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              case 40: {
+                count_ = input.readInt32();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 40
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.VoteAssetContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
       private int bitField0_;
@@ -19735,11 +19368,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -19748,7 +19379,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -19756,10 +19387,10 @@ public final class Contract {
 
       private java.util.List<com.google.protobuf.ByteString> voteAddress_ = java.util.Collections.emptyList();
       private void ensureVoteAddressIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
+        if (!((bitField0_ & 0x00000002) != 0)) {
           voteAddress_ = new java.util.ArrayList<com.google.protobuf.ByteString>(voteAddress_);
-          bitField0_ |= 0x00000001;
-         }
+          bitField0_ |= 0x00000002;
+        }
       }
       /**
        * <code>repeated bytes vote_address = 2;</code>
@@ -19767,7 +19398,7 @@ public final class Contract {
        */
       public java.util.List<com.google.protobuf.ByteString>
           getVoteAddressList() {
-        return ((bitField0_ & 0x00000001) != 0) ?
+        return ((bitField0_ & 0x00000002) != 0) ?
                  java.util.Collections.unmodifiableList(voteAddress_) : voteAddress_;
       }
       /**
@@ -19793,10 +19424,8 @@ public final class Contract {
        */
       public Builder setVoteAddress(
           int index, com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureVoteAddressIsMutable();
+        if (value == null) { throw new NullPointerException(); }
+        ensureVoteAddressIsMutable();
         voteAddress_.set(index, value);
         onChanged();
         return this;
@@ -19807,10 +19436,8 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder addVoteAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureVoteAddressIsMutable();
+        if (value == null) { throw new NullPointerException(); }
+        ensureVoteAddressIsMutable();
         voteAddress_.add(value);
         onChanged();
         return this;
@@ -19834,7 +19461,7 @@ public final class Contract {
        */
       public Builder clearVoteAddress() {
         voteAddress_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
@@ -19856,6 +19483,7 @@ public final class Contract {
       public Builder setSupport(boolean value) {
         
         support_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -19864,7 +19492,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearSupport() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         support_ = false;
         onChanged();
         return this;
@@ -19887,6 +19515,7 @@ public final class Contract {
       public Builder setCount(int value) {
         
         count_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -19895,7 +19524,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearCount() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         count_ = 0;
         onChanged();
         return this;
@@ -19933,7 +19562,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new VoteAssetContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -19998,55 +19638,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private WitnessCreateContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              url_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_WitnessCreateContract_descriptor;
@@ -20061,7 +19652,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -20072,7 +19663,7 @@ public final class Contract {
     }
 
     public static final int URL_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString url_;
+    private com.google.protobuf.ByteString url_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes url = 2;</code>
      * @return The url.
@@ -20102,7 +19693,7 @@ public final class Contract {
       if (!url_.isEmpty()) {
         output.writeBytes(2, url_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -20119,7 +19710,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, url_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -20138,7 +19729,7 @@ public final class Contract {
           .equals(other.getOwnerAddress())) return false;
       if (!getUrl()
           .equals(other.getUrl())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -20153,7 +19744,7 @@ public final class Contract {
       hash = (53 * hash) + getOwnerAddress().hashCode();
       hash = (37 * hash) + URL_FIELD_NUMBER;
       hash = (53 * hash) + getUrl().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -20270,26 +19861,20 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.WitnessCreateContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         url_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -20316,10 +19901,19 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.WitnessCreateContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.WitnessCreateContract result = new com.github.comrada.tron4j.proto.Contract.WitnessCreateContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.url_ = url_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.WitnessCreateContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.url_ = url_;
+        }
       }
 
       @java.lang.Override
@@ -20372,7 +19966,7 @@ public final class Contract {
         if (other.getUrl() != com.google.protobuf.ByteString.EMPTY) {
           setUrl(other.getUrl());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -20387,19 +19981,43 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.WitnessCreateContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                url_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.WitnessCreateContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -20416,11 +20034,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -20429,7 +20045,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -20450,11 +20066,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setUrl(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         url_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -20463,7 +20077,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearUrl() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         url_ = getDefaultInstance().getUrl();
         onChanged();
         return this;
@@ -20501,7 +20115,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new WitnessCreateContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -20566,55 +20191,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private WitnessUpdateContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 98: {
-
-              updateUrl_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_WitnessUpdateContract_descriptor;
@@ -20629,7 +20205,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -20640,7 +20216,7 @@ public final class Contract {
     }
 
     public static final int UPDATE_URL_FIELD_NUMBER = 12;
-    private com.google.protobuf.ByteString updateUrl_;
+    private com.google.protobuf.ByteString updateUrl_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes update_url = 12;</code>
      * @return The updateUrl.
@@ -20670,7 +20246,7 @@ public final class Contract {
       if (!updateUrl_.isEmpty()) {
         output.writeBytes(12, updateUrl_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -20687,7 +20263,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(12, updateUrl_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -20706,7 +20282,7 @@ public final class Contract {
           .equals(other.getOwnerAddress())) return false;
       if (!getUpdateUrl()
           .equals(other.getUpdateUrl())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -20721,7 +20297,7 @@ public final class Contract {
       hash = (53 * hash) + getOwnerAddress().hashCode();
       hash = (37 * hash) + UPDATE_URL_FIELD_NUMBER;
       hash = (53 * hash) + getUpdateUrl().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -20838,26 +20414,20 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.WitnessUpdateContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         updateUrl_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
@@ -20884,10 +20454,19 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.WitnessUpdateContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.WitnessUpdateContract result = new com.github.comrada.tron4j.proto.Contract.WitnessUpdateContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.updateUrl_ = updateUrl_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.WitnessUpdateContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.updateUrl_ = updateUrl_;
+        }
       }
 
       @java.lang.Override
@@ -20940,7 +20519,7 @@ public final class Contract {
         if (other.getUpdateUrl() != com.google.protobuf.ByteString.EMPTY) {
           setUpdateUrl(other.getUpdateUrl());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -20955,19 +20534,43 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.WitnessUpdateContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 98: {
+                updateUrl_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 98
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.WitnessUpdateContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -20984,11 +20587,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -20997,7 +20598,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -21018,11 +20619,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setUpdateUrl(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         updateUrl_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -21031,7 +20630,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearUpdateUrl() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         updateUrl_ = getDefaultInstance().getUpdateUrl();
         onChanged();
         return this;
@@ -21069,7 +20668,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new WitnessUpdateContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -21158,68 +20768,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private VoteWitnessContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 18: {
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                votes_ = new java.util.ArrayList<com.github.comrada.tron4j.proto.Contract.VoteWitnessContract.Vote>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              votes_.add(
-                  input.readMessage(com.github.comrada.tron4j.proto.Contract.VoteWitnessContract.Vote.parser(), extensionRegistry));
-              break;
-            }
-            case 24: {
-
-              support_ = input.readBool();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          votes_ = java.util.Collections.unmodifiableList(votes_);
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_VoteWitnessContract_descriptor;
@@ -21277,55 +20825,6 @@ public final class Contract {
       getUnknownFields() {
         return this.unknownFields;
       }
-      private Vote(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        this();
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-            com.google.protobuf.UnknownFieldSet.newBuilder();
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 10: {
-
-                voteAddress_ = input.readBytes();
-                break;
-              }
-              case 16: {
-
-                voteCount_ = input.readInt64();
-                break;
-              }
-              default: {
-                if (!parseUnknownField(
-                    input, unknownFields, extensionRegistry, tag)) {
-                  done = true;
-                }
-                break;
-              }
-            }
-          }
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(this);
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(
-              e).setUnfinishedMessage(this);
-        } finally {
-          this.unknownFields = unknownFields.build();
-          makeExtensionsImmutable();
-        }
-      }
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_VoteWitnessContract_Vote_descriptor;
@@ -21340,7 +20839,7 @@ public final class Contract {
       }
 
       public static final int VOTE_ADDRESS_FIELD_NUMBER = 1;
-      private com.google.protobuf.ByteString voteAddress_;
+      private com.google.protobuf.ByteString voteAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>bytes vote_address = 1;</code>
        * @return The voteAddress.
@@ -21351,7 +20850,7 @@ public final class Contract {
       }
 
       public static final int VOTE_COUNT_FIELD_NUMBER = 2;
-      private long voteCount_;
+      private long voteCount_ = 0L;
       /**
        * <code>int64 vote_count = 2;</code>
        * @return The voteCount.
@@ -21381,7 +20880,7 @@ public final class Contract {
         if (voteCount_ != 0L) {
           output.writeInt64(2, voteCount_);
         }
-        unknownFields.writeTo(output);
+        getUnknownFields().writeTo(output);
       }
 
       @java.lang.Override
@@ -21398,7 +20897,7 @@ public final class Contract {
           size += com.google.protobuf.CodedOutputStream
             .computeInt64Size(2, voteCount_);
         }
-        size += unknownFields.getSerializedSize();
+        size += getUnknownFields().getSerializedSize();
         memoizedSize = size;
         return size;
       }
@@ -21417,7 +20916,7 @@ public final class Contract {
             .equals(other.getVoteAddress())) return false;
         if (getVoteCount()
             != other.getVoteCount()) return false;
-        if (!unknownFields.equals(other.unknownFields)) return false;
+        if (!getUnknownFields().equals(other.getUnknownFields())) return false;
         return true;
       }
 
@@ -21433,7 +20932,7 @@ public final class Contract {
         hash = (37 * hash) + VOTE_COUNT_FIELD_NUMBER;
         hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
             getVoteCount());
-        hash = (29 * hash) + unknownFields.hashCode();
+        hash = (29 * hash) + getUnknownFields().hashCode();
         memoizedHashCode = hash;
         return hash;
       }
@@ -21550,26 +21049,20 @@ public final class Contract {
 
         // Construct using com.github.comrada.tron4j.proto.Contract.VoteWitnessContract.Vote.newBuilder()
         private Builder() {
-          maybeForceBuilderInitialization();
+
         }
 
         private Builder(
             com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
           super(parent);
-          maybeForceBuilderInitialization();
-        }
-        private void maybeForceBuilderInitialization() {
-          if (com.google.protobuf.GeneratedMessageV3
-                  .alwaysUseFieldBuilders) {
-          }
+
         }
         @java.lang.Override
         public Builder clear() {
           super.clear();
+          bitField0_ = 0;
           voteAddress_ = com.google.protobuf.ByteString.EMPTY;
-
           voteCount_ = 0L;
-
           return this;
         }
 
@@ -21596,10 +21089,19 @@ public final class Contract {
         @java.lang.Override
         public com.github.comrada.tron4j.proto.Contract.VoteWitnessContract.Vote buildPartial() {
           com.github.comrada.tron4j.proto.Contract.VoteWitnessContract.Vote result = new com.github.comrada.tron4j.proto.Contract.VoteWitnessContract.Vote(this);
-          result.voteAddress_ = voteAddress_;
-          result.voteCount_ = voteCount_;
+          if (bitField0_ != 0) { buildPartial0(result); }
           onBuilt();
           return result;
+        }
+
+        private void buildPartial0(com.github.comrada.tron4j.proto.Contract.VoteWitnessContract.Vote result) {
+          int from_bitField0_ = bitField0_;
+          if (((from_bitField0_ & 0x00000001) != 0)) {
+            result.voteAddress_ = voteAddress_;
+          }
+          if (((from_bitField0_ & 0x00000002) != 0)) {
+            result.voteCount_ = voteCount_;
+          }
         }
 
         @java.lang.Override
@@ -21652,7 +21154,7 @@ public final class Contract {
           if (other.getVoteCount() != 0L) {
             setVoteCount(other.getVoteCount());
           }
-          this.mergeUnknownFields(other.unknownFields);
+          this.mergeUnknownFields(other.getUnknownFields());
           onChanged();
           return this;
         }
@@ -21667,19 +21169,43 @@ public final class Contract {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
-          com.github.comrada.tron4j.proto.Contract.VoteWitnessContract.Vote parsedMessage = null;
+          if (extensionRegistry == null) {
+            throw new java.lang.NullPointerException();
+          }
           try {
-            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                case 10: {
+                  voteAddress_ = input.readBytes();
+                  bitField0_ |= 0x00000001;
+                  break;
+                } // case 10
+                case 16: {
+                  voteCount_ = input.readInt64();
+                  bitField0_ |= 0x00000002;
+                  break;
+                } // case 16
+                default: {
+                  if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                    done = true; // was an endgroup tag
+                  }
+                  break;
+                } // default:
+              } // switch (tag)
+            } // while (!done)
           } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-            parsedMessage = (com.github.comrada.tron4j.proto.Contract.VoteWitnessContract.Vote) e.getUnfinishedMessage();
             throw e.unwrapIOException();
           } finally {
-            if (parsedMessage != null) {
-              mergeFrom(parsedMessage);
-            }
-          }
+            onChanged();
+          } // finally
           return this;
         }
+        private int bitField0_;
 
         private com.google.protobuf.ByteString voteAddress_ = com.google.protobuf.ByteString.EMPTY;
         /**
@@ -21696,11 +21222,9 @@ public final class Contract {
          * @return This builder for chaining.
          */
         public Builder setVoteAddress(com.google.protobuf.ByteString value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          if (value == null) { throw new NullPointerException(); }
           voteAddress_ = value;
+          bitField0_ |= 0x00000001;
           onChanged();
           return this;
         }
@@ -21709,7 +21233,7 @@ public final class Contract {
          * @return This builder for chaining.
          */
         public Builder clearVoteAddress() {
-          
+          bitField0_ = (bitField0_ & ~0x00000001);
           voteAddress_ = getDefaultInstance().getVoteAddress();
           onChanged();
           return this;
@@ -21732,6 +21256,7 @@ public final class Contract {
         public Builder setVoteCount(long value) {
           
           voteCount_ = value;
+          bitField0_ |= 0x00000002;
           onChanged();
           return this;
         }
@@ -21740,7 +21265,7 @@ public final class Contract {
          * @return This builder for chaining.
          */
         public Builder clearVoteCount() {
-          
+          bitField0_ = (bitField0_ & ~0x00000002);
           voteCount_ = 0L;
           onChanged();
           return this;
@@ -21778,7 +21303,18 @@ public final class Contract {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Vote(input, extensionRegistry);
+          Builder builder = newBuilder();
+          try {
+            builder.mergeFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw e.setUnfinishedMessage(builder.buildPartial());
+          } catch (com.google.protobuf.UninitializedMessageException e) {
+            throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+          } catch (java.io.IOException e) {
+            throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                .setUnfinishedMessage(builder.buildPartial());
+          }
+          return builder.buildPartial();
         }
       };
 
@@ -21799,7 +21335,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -21810,6 +21346,7 @@ public final class Contract {
     }
 
     public static final int VOTES_FIELD_NUMBER = 2;
+    @SuppressWarnings("serial")
     private java.util.List<com.github.comrada.tron4j.proto.Contract.VoteWitnessContract.Vote> votes_;
     /**
      * <code>repeated .protocol.VoteWitnessContract.Vote votes = 2;</code>
@@ -21850,7 +21387,7 @@ public final class Contract {
     }
 
     public static final int SUPPORT_FIELD_NUMBER = 3;
-    private boolean support_;
+    private boolean support_ = false;
     /**
      * <code>bool support = 3;</code>
      * @return The support.
@@ -21883,7 +21420,7 @@ public final class Contract {
       if (support_ != false) {
         output.writeBool(3, support_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -21904,7 +21441,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(3, support_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -21925,7 +21462,7 @@ public final class Contract {
           .equals(other.getVotesList())) return false;
       if (getSupport()
           != other.getSupport()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -21945,7 +21482,7 @@ public final class Contract {
       hash = (37 * hash) + SUPPORT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getSupport());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -22062,33 +21599,27 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.VoteWitnessContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-          getVotesFieldBuilder();
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         if (votesBuilder_ == null) {
           votes_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
+          votes_ = null;
           votesBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000002);
         support_ = false;
-
         return this;
       }
 
@@ -22115,20 +21646,32 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.VoteWitnessContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.VoteWitnessContract result = new com.github.comrada.tron4j.proto.Contract.VoteWitnessContract(this);
-        int from_bitField0_ = bitField0_;
-        result.ownerAddress_ = ownerAddress_;
+        buildPartialRepeatedFields(result);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartialRepeatedFields(com.github.comrada.tron4j.proto.Contract.VoteWitnessContract result) {
         if (votesBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) != 0)) {
+          if (((bitField0_ & 0x00000002) != 0)) {
             votes_ = java.util.Collections.unmodifiableList(votes_);
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.votes_ = votes_;
         } else {
           result.votes_ = votesBuilder_.build();
         }
-        result.support_ = support_;
-        onBuilt();
-        return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.VoteWitnessContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.support_ = support_;
+        }
       }
 
       @java.lang.Override
@@ -22182,7 +21725,7 @@ public final class Contract {
           if (!other.votes_.isEmpty()) {
             if (votes_.isEmpty()) {
               votes_ = other.votes_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureVotesIsMutable();
               votes_.addAll(other.votes_);
@@ -22195,7 +21738,7 @@ public final class Contract {
               votesBuilder_.dispose();
               votesBuilder_ = null;
               votes_ = other.votes_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000002);
               votesBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getVotesFieldBuilder() : null;
@@ -22207,7 +21750,7 @@ public final class Contract {
         if (other.getSupport() != false) {
           setSupport(other.getSupport());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -22222,17 +21765,53 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.VoteWitnessContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                com.github.comrada.tron4j.proto.Contract.VoteWitnessContract.Vote m =
+                    input.readMessage(
+                        com.github.comrada.tron4j.proto.Contract.VoteWitnessContract.Vote.parser(),
+                        extensionRegistry);
+                if (votesBuilder_ == null) {
+                  ensureVotesIsMutable();
+                  votes_.add(m);
+                } else {
+                  votesBuilder_.addMessage(m);
+                }
+                break;
+              } // case 18
+              case 24: {
+                support_ = input.readBool();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.VoteWitnessContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
       private int bitField0_;
@@ -22252,11 +21831,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -22265,7 +21842,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -22274,9 +21851,9 @@ public final class Contract {
       private java.util.List<com.github.comrada.tron4j.proto.Contract.VoteWitnessContract.Vote> votes_ =
         java.util.Collections.emptyList();
       private void ensureVotesIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
+        if (!((bitField0_ & 0x00000002) != 0)) {
           votes_ = new java.util.ArrayList<com.github.comrada.tron4j.proto.Contract.VoteWitnessContract.Vote>(votes_);
-          bitField0_ |= 0x00000001;
+          bitField0_ |= 0x00000002;
          }
       }
 
@@ -22426,7 +22003,7 @@ public final class Contract {
       public Builder clearVotes() {
         if (votesBuilder_ == null) {
           votes_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           votesBuilder_.clear();
@@ -22503,7 +22080,7 @@ public final class Contract {
           votesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.github.comrada.tron4j.proto.Contract.VoteWitnessContract.Vote, com.github.comrada.tron4j.proto.Contract.VoteWitnessContract.Vote.Builder, com.github.comrada.tron4j.proto.Contract.VoteWitnessContract.VoteOrBuilder>(
                   votes_,
-                  ((bitField0_ & 0x00000001) != 0),
+                  ((bitField0_ & 0x00000002) != 0),
                   getParentForChildren(),
                   isClean());
           votes_ = null;
@@ -22528,6 +22105,7 @@ public final class Contract {
       public Builder setSupport(boolean value) {
         
         support_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -22536,7 +22114,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearSupport() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         support_ = false;
         onChanged();
         return this;
@@ -22574,7 +22152,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new VoteWitnessContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -22658,70 +22247,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ExchangeCreateContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              firstTokenId_ = input.readBytes();
-              break;
-            }
-            case 24: {
-
-              firstTokenBalance_ = input.readInt64();
-              break;
-            }
-            case 34: {
-
-              secondTokenId_ = input.readBytes();
-              break;
-            }
-            case 40: {
-
-              secondTokenBalance_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_ExchangeCreateContract_descriptor;
@@ -22736,7 +22261,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -22747,7 +22272,7 @@ public final class Contract {
     }
 
     public static final int FIRST_TOKEN_ID_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString firstTokenId_;
+    private com.google.protobuf.ByteString firstTokenId_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes first_token_id = 2;</code>
      * @return The firstTokenId.
@@ -22758,7 +22283,7 @@ public final class Contract {
     }
 
     public static final int FIRST_TOKEN_BALANCE_FIELD_NUMBER = 3;
-    private long firstTokenBalance_;
+    private long firstTokenBalance_ = 0L;
     /**
      * <code>int64 first_token_balance = 3;</code>
      * @return The firstTokenBalance.
@@ -22769,7 +22294,7 @@ public final class Contract {
     }
 
     public static final int SECOND_TOKEN_ID_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString secondTokenId_;
+    private com.google.protobuf.ByteString secondTokenId_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes second_token_id = 4;</code>
      * @return The secondTokenId.
@@ -22780,7 +22305,7 @@ public final class Contract {
     }
 
     public static final int SECOND_TOKEN_BALANCE_FIELD_NUMBER = 5;
-    private long secondTokenBalance_;
+    private long secondTokenBalance_ = 0L;
     /**
      * <code>int64 second_token_balance = 5;</code>
      * @return The secondTokenBalance.
@@ -22819,7 +22344,7 @@ public final class Contract {
       if (secondTokenBalance_ != 0L) {
         output.writeInt64(5, secondTokenBalance_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -22848,7 +22373,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(5, secondTokenBalance_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -22873,7 +22398,7 @@ public final class Contract {
           .equals(other.getSecondTokenId())) return false;
       if (getSecondTokenBalance()
           != other.getSecondTokenBalance()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -22896,7 +22421,7 @@ public final class Contract {
       hash = (37 * hash) + SECOND_TOKEN_BALANCE_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getSecondTokenBalance());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -23013,32 +22538,23 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.ExchangeCreateContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         firstTokenId_ = com.google.protobuf.ByteString.EMPTY;
-
         firstTokenBalance_ = 0L;
-
         secondTokenId_ = com.google.protobuf.ByteString.EMPTY;
-
         secondTokenBalance_ = 0L;
-
         return this;
       }
 
@@ -23065,13 +22581,28 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.ExchangeCreateContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.ExchangeCreateContract result = new com.github.comrada.tron4j.proto.Contract.ExchangeCreateContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.firstTokenId_ = firstTokenId_;
-        result.firstTokenBalance_ = firstTokenBalance_;
-        result.secondTokenId_ = secondTokenId_;
-        result.secondTokenBalance_ = secondTokenBalance_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.ExchangeCreateContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.firstTokenId_ = firstTokenId_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.firstTokenBalance_ = firstTokenBalance_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.secondTokenId_ = secondTokenId_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.secondTokenBalance_ = secondTokenBalance_;
+        }
       }
 
       @java.lang.Override
@@ -23133,7 +22664,7 @@ public final class Contract {
         if (other.getSecondTokenBalance() != 0L) {
           setSecondTokenBalance(other.getSecondTokenBalance());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -23148,19 +22679,58 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.ExchangeCreateContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                firstTokenId_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 24: {
+                firstTokenBalance_ = input.readInt64();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              case 34: {
+                secondTokenId_ = input.readBytes();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              case 40: {
+                secondTokenBalance_ = input.readInt64();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 40
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.ExchangeCreateContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -23177,11 +22747,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -23190,7 +22758,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -23211,11 +22779,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setFirstTokenId(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         firstTokenId_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -23224,7 +22790,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearFirstTokenId() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         firstTokenId_ = getDefaultInstance().getFirstTokenId();
         onChanged();
         return this;
@@ -23247,6 +22813,7 @@ public final class Contract {
       public Builder setFirstTokenBalance(long value) {
         
         firstTokenBalance_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -23255,7 +22822,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearFirstTokenBalance() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         firstTokenBalance_ = 0L;
         onChanged();
         return this;
@@ -23276,11 +22843,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setSecondTokenId(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         secondTokenId_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -23289,7 +22854,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearSecondTokenId() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         secondTokenId_ = getDefaultInstance().getSecondTokenId();
         onChanged();
         return this;
@@ -23312,6 +22877,7 @@ public final class Contract {
       public Builder setSecondTokenBalance(long value) {
         
         secondTokenBalance_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -23320,7 +22886,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearSecondTokenBalance() {
-        
+        bitField0_ = (bitField0_ & ~0x00000010);
         secondTokenBalance_ = 0L;
         onChanged();
         return this;
@@ -23358,7 +22924,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ExchangeCreateContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -23435,65 +23012,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ExchangeInjectContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 16: {
-
-              exchangeId_ = input.readInt64();
-              break;
-            }
-            case 26: {
-
-              tokenId_ = input.readBytes();
-              break;
-            }
-            case 32: {
-
-              quant_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_ExchangeInjectContract_descriptor;
@@ -23508,7 +23026,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -23519,7 +23037,7 @@ public final class Contract {
     }
 
     public static final int EXCHANGE_ID_FIELD_NUMBER = 2;
-    private long exchangeId_;
+    private long exchangeId_ = 0L;
     /**
      * <code>int64 exchange_id = 2;</code>
      * @return The exchangeId.
@@ -23530,7 +23048,7 @@ public final class Contract {
     }
 
     public static final int TOKEN_ID_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString tokenId_;
+    private com.google.protobuf.ByteString tokenId_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes token_id = 3;</code>
      * @return The tokenId.
@@ -23541,7 +23059,7 @@ public final class Contract {
     }
 
     public static final int QUANT_FIELD_NUMBER = 4;
-    private long quant_;
+    private long quant_ = 0L;
     /**
      * <code>int64 quant = 4;</code>
      * @return The quant.
@@ -23577,7 +23095,7 @@ public final class Contract {
       if (quant_ != 0L) {
         output.writeInt64(4, quant_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -23602,7 +23120,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(4, quant_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -23625,7 +23143,7 @@ public final class Contract {
           .equals(other.getTokenId())) return false;
       if (getQuant()
           != other.getQuant()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -23646,7 +23164,7 @@ public final class Contract {
       hash = (37 * hash) + QUANT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getQuant());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -23763,30 +23281,22 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.ExchangeInjectContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         exchangeId_ = 0L;
-
         tokenId_ = com.google.protobuf.ByteString.EMPTY;
-
         quant_ = 0L;
-
         return this;
       }
 
@@ -23813,12 +23323,25 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.ExchangeInjectContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.ExchangeInjectContract result = new com.github.comrada.tron4j.proto.Contract.ExchangeInjectContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.exchangeId_ = exchangeId_;
-        result.tokenId_ = tokenId_;
-        result.quant_ = quant_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.ExchangeInjectContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.exchangeId_ = exchangeId_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.tokenId_ = tokenId_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.quant_ = quant_;
+        }
       }
 
       @java.lang.Override
@@ -23877,7 +23400,7 @@ public final class Contract {
         if (other.getQuant() != 0L) {
           setQuant(other.getQuant());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -23892,19 +23415,53 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.ExchangeInjectContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 16: {
+                exchangeId_ = input.readInt64();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              case 26: {
+                tokenId_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 32: {
+                quant_ = input.readInt64();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 32
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.ExchangeInjectContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -23921,11 +23478,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -23934,7 +23489,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -23957,6 +23512,7 @@ public final class Contract {
       public Builder setExchangeId(long value) {
         
         exchangeId_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -23965,7 +23521,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearExchangeId() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         exchangeId_ = 0L;
         onChanged();
         return this;
@@ -23986,11 +23542,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setTokenId(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         tokenId_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -23999,7 +23553,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearTokenId() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         tokenId_ = getDefaultInstance().getTokenId();
         onChanged();
         return this;
@@ -24022,6 +23576,7 @@ public final class Contract {
       public Builder setQuant(long value) {
         
         quant_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -24030,7 +23585,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearQuant() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         quant_ = 0L;
         onChanged();
         return this;
@@ -24068,7 +23623,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ExchangeInjectContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -24145,65 +23711,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ExchangeWithdrawContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 16: {
-
-              exchangeId_ = input.readInt64();
-              break;
-            }
-            case 26: {
-
-              tokenId_ = input.readBytes();
-              break;
-            }
-            case 32: {
-
-              quant_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_ExchangeWithdrawContract_descriptor;
@@ -24218,7 +23725,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -24229,7 +23736,7 @@ public final class Contract {
     }
 
     public static final int EXCHANGE_ID_FIELD_NUMBER = 2;
-    private long exchangeId_;
+    private long exchangeId_ = 0L;
     /**
      * <code>int64 exchange_id = 2;</code>
      * @return The exchangeId.
@@ -24240,7 +23747,7 @@ public final class Contract {
     }
 
     public static final int TOKEN_ID_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString tokenId_;
+    private com.google.protobuf.ByteString tokenId_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes token_id = 3;</code>
      * @return The tokenId.
@@ -24251,7 +23758,7 @@ public final class Contract {
     }
 
     public static final int QUANT_FIELD_NUMBER = 4;
-    private long quant_;
+    private long quant_ = 0L;
     /**
      * <code>int64 quant = 4;</code>
      * @return The quant.
@@ -24287,7 +23794,7 @@ public final class Contract {
       if (quant_ != 0L) {
         output.writeInt64(4, quant_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -24312,7 +23819,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(4, quant_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -24335,7 +23842,7 @@ public final class Contract {
           .equals(other.getTokenId())) return false;
       if (getQuant()
           != other.getQuant()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -24356,7 +23863,7 @@ public final class Contract {
       hash = (37 * hash) + QUANT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getQuant());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -24473,30 +23980,22 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.ExchangeWithdrawContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         exchangeId_ = 0L;
-
         tokenId_ = com.google.protobuf.ByteString.EMPTY;
-
         quant_ = 0L;
-
         return this;
       }
 
@@ -24523,12 +24022,25 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.ExchangeWithdrawContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.ExchangeWithdrawContract result = new com.github.comrada.tron4j.proto.Contract.ExchangeWithdrawContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.exchangeId_ = exchangeId_;
-        result.tokenId_ = tokenId_;
-        result.quant_ = quant_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.ExchangeWithdrawContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.exchangeId_ = exchangeId_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.tokenId_ = tokenId_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.quant_ = quant_;
+        }
       }
 
       @java.lang.Override
@@ -24587,7 +24099,7 @@ public final class Contract {
         if (other.getQuant() != 0L) {
           setQuant(other.getQuant());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -24602,19 +24114,53 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.ExchangeWithdrawContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 16: {
+                exchangeId_ = input.readInt64();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              case 26: {
+                tokenId_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 32: {
+                quant_ = input.readInt64();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 32
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.ExchangeWithdrawContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -24631,11 +24177,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -24644,7 +24188,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -24667,6 +24211,7 @@ public final class Contract {
       public Builder setExchangeId(long value) {
         
         exchangeId_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -24675,7 +24220,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearExchangeId() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         exchangeId_ = 0L;
         onChanged();
         return this;
@@ -24696,11 +24241,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setTokenId(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         tokenId_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -24709,7 +24252,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearTokenId() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         tokenId_ = getDefaultInstance().getTokenId();
         onChanged();
         return this;
@@ -24732,6 +24275,7 @@ public final class Contract {
       public Builder setQuant(long value) {
         
         quant_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -24740,7 +24284,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearQuant() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         quant_ = 0L;
         onChanged();
         return this;
@@ -24778,7 +24322,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ExchangeWithdrawContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -24861,70 +24416,6 @@ public final class Contract {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ExchangeTransactionContract(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ownerAddress_ = input.readBytes();
-              break;
-            }
-            case 16: {
-
-              exchangeId_ = input.readInt64();
-              break;
-            }
-            case 26: {
-
-              tokenId_ = input.readBytes();
-              break;
-            }
-            case 32: {
-
-              quant_ = input.readInt64();
-              break;
-            }
-            case 40: {
-
-              expected_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.github.comrada.tron4j.proto.Contract.internal_static_protocol_ExchangeTransactionContract_descriptor;
@@ -24939,7 +24430,7 @@ public final class Contract {
     }
 
     public static final int OWNER_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ownerAddress_;
+    private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes owner_address = 1;</code>
      * @return The ownerAddress.
@@ -24950,7 +24441,7 @@ public final class Contract {
     }
 
     public static final int EXCHANGE_ID_FIELD_NUMBER = 2;
-    private long exchangeId_;
+    private long exchangeId_ = 0L;
     /**
      * <code>int64 exchange_id = 2;</code>
      * @return The exchangeId.
@@ -24961,7 +24452,7 @@ public final class Contract {
     }
 
     public static final int TOKEN_ID_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString tokenId_;
+    private com.google.protobuf.ByteString tokenId_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes token_id = 3;</code>
      * @return The tokenId.
@@ -24972,7 +24463,7 @@ public final class Contract {
     }
 
     public static final int QUANT_FIELD_NUMBER = 4;
-    private long quant_;
+    private long quant_ = 0L;
     /**
      * <code>int64 quant = 4;</code>
      * @return The quant.
@@ -24983,7 +24474,7 @@ public final class Contract {
     }
 
     public static final int EXPECTED_FIELD_NUMBER = 5;
-    private long expected_;
+    private long expected_ = 0L;
     /**
      * <code>int64 expected = 5;</code>
      * @return The expected.
@@ -25022,7 +24513,7 @@ public final class Contract {
       if (expected_ != 0L) {
         output.writeInt64(5, expected_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -25051,7 +24542,7 @@ public final class Contract {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(5, expected_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -25076,7 +24567,7 @@ public final class Contract {
           != other.getQuant()) return false;
       if (getExpected()
           != other.getExpected()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -25100,7 +24591,7 @@ public final class Contract {
       hash = (37 * hash) + EXPECTED_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getExpected());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -25217,32 +24708,23 @@ public final class Contract {
 
       // Construct using com.github.comrada.tron4j.proto.Contract.ExchangeTransactionContract.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
-
         exchangeId_ = 0L;
-
         tokenId_ = com.google.protobuf.ByteString.EMPTY;
-
         quant_ = 0L;
-
         expected_ = 0L;
-
         return this;
       }
 
@@ -25269,13 +24751,28 @@ public final class Contract {
       @java.lang.Override
       public com.github.comrada.tron4j.proto.Contract.ExchangeTransactionContract buildPartial() {
         com.github.comrada.tron4j.proto.Contract.ExchangeTransactionContract result = new com.github.comrada.tron4j.proto.Contract.ExchangeTransactionContract(this);
-        result.ownerAddress_ = ownerAddress_;
-        result.exchangeId_ = exchangeId_;
-        result.tokenId_ = tokenId_;
-        result.quant_ = quant_;
-        result.expected_ = expected_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.github.comrada.tron4j.proto.Contract.ExchangeTransactionContract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ownerAddress_ = ownerAddress_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.exchangeId_ = exchangeId_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.tokenId_ = tokenId_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.quant_ = quant_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.expected_ = expected_;
+        }
       }
 
       @java.lang.Override
@@ -25337,7 +24834,7 @@ public final class Contract {
         if (other.getExpected() != 0L) {
           setExpected(other.getExpected());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -25352,19 +24849,58 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.github.comrada.tron4j.proto.Contract.ExchangeTransactionContract parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ownerAddress_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 16: {
+                exchangeId_ = input.readInt64();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              case 26: {
+                tokenId_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 32: {
+                quant_ = input.readInt64();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 32
+              case 40: {
+                expected_ = input.readInt64();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 40
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.github.comrada.tron4j.proto.Contract.ExchangeTransactionContract) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ownerAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -25381,11 +24917,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setOwnerAddress(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         ownerAddress_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -25394,7 +24928,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearOwnerAddress() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         ownerAddress_ = getDefaultInstance().getOwnerAddress();
         onChanged();
         return this;
@@ -25417,6 +24951,7 @@ public final class Contract {
       public Builder setExchangeId(long value) {
         
         exchangeId_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -25425,7 +24960,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearExchangeId() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         exchangeId_ = 0L;
         onChanged();
         return this;
@@ -25446,11 +24981,9 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder setTokenId(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         tokenId_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -25459,7 +24992,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearTokenId() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         tokenId_ = getDefaultInstance().getTokenId();
         onChanged();
         return this;
@@ -25482,6 +25015,7 @@ public final class Contract {
       public Builder setQuant(long value) {
         
         quant_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -25490,7 +25024,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearQuant() {
-        
+        bitField0_ = (bitField0_ & ~0x00000008);
         quant_ = 0L;
         onChanged();
         return this;
@@ -25513,6 +25047,7 @@ public final class Contract {
       public Builder setExpected(long value) {
         
         expected_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -25521,7 +25056,7 @@ public final class Contract {
        * @return This builder for chaining.
        */
       public Builder clearExpected() {
-        
+        bitField0_ = (bitField0_ & ~0x00000010);
         expected_ = 0L;
         onChanged();
         return this;
@@ -25559,7 +25094,18 @@ public final class Contract {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ExchangeTransactionContract(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
